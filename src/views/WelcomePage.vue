@@ -8,7 +8,7 @@
         <div class="WelcomePage_Text">
         </div>
         <div v-if="showLoginForm">
-          <LoginForm/>
+          <LoginForm @redirectToMemoRoom="redirectToMemoRoom"/>
           <div class="WelcomePage_Text">
             <p class="change-form">
               <span @click="showLoginForm = false"
@@ -18,7 +18,7 @@
           </div>
         </div>
         <div v-if="!showLoginForm">
-          <SignupForm/>
+          <SignupForm @redirectToMemoRoom="redirectToMemoRoom"/>
           <div class="WelcomePage_Text">
             <p class="change-form">
               <span @click="showLoginForm = true"
