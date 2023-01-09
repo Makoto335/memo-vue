@@ -73,7 +73,7 @@
 import dayjs from "dayjs";
 import axios from "axios";
 import setItem from "../plugins/auth/setItem";
-import SelectDate from "../modules/SelectDate.vue";
+import SelectDate from "./modules/SelectDate.vue";
 
 export default {
   components: { SelectDate },
