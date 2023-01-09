@@ -71,8 +71,12 @@
 
 <script>
 import dayjs from "dayjs";
+import axios from "axios";
+import setItem from "../plugins/auth/setItem";
+import SelectDate from "../modules/SelectDate.vue";
 
 export default {
+  components: { SelectDate },
   data() {
     const defaultDate = dayjs().toDate();
     return {
@@ -85,6 +89,32 @@ export default {
       dateOfBirth: defaultDate,
       termsChk: false,
     };
+  },
+    methods: {
+    async signUp() {
+      this.error = null;
+      try {
+        const res = await axios.post("http://localhost:3000/auth", {
+          name: this.name,
+          email: this.email,
+          password: this.password,
+          password_confirmation: this.passwordConfirmation,
+          gender: this.gender,
+          date_of_birth: this.dateOfBirth,
+        });
+        if (!res) {
+          throw new Error("アカウントを登録できませんでした");
+        }
+        if (!this.error) {
+          setItem(res.headers, res.data.data.name);
+          this.$emit("redirectToMemoRoom");
+        }
+        console.log({ res });
+        return res;
+      } catch (error) {
+        this.error = "アカウントを登録できませんでした";
+      }
+    },
   },
 };
 </script>
