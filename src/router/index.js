@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import WelcomePage from "../views/WelcomePage";
+import MemoRoom from "../views/MemoRoom";
 
 const routes = [
   {
@@ -8,7 +9,9 @@ const routes = [
     component: WelcomePage,
   },
   {
-
+    path: "/memo",
+    name: "MemoRoom",
+    component: MemoRoom,
   },
 ];
 
