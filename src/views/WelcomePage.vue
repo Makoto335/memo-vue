@@ -44,6 +44,11 @@ export default {
       showLoginForm: false,
     };
   },
+    methods: {
+    redirectToMemoRoom() {
+      this.$router.push({ name: "MemoRoom" });
+    },
+  },
 };
 </script>
 
