@@ -77,6 +77,7 @@ import SelectDate from "./modules/SelectDate.vue";
 
 export default {
   components: { SelectDate },
+  emits: ["redirectToMemoRoom"],
   data() {
     const defaultDate = dayjs().toDate();
     return {
@@ -90,7 +91,7 @@ export default {
       termsChk: false,
     };
   },
-    methods: {
+  methods: {
     async signUp() {
       this.error = null;
       try {
