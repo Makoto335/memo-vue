@@ -42,7 +42,7 @@ export default {
         if (!this.error) {
           console.log("ログアウトしました");
           removeItem();
-          this.$router.push({ name: "Welcome" });
+          this.$router.push({ name: "WelcomePage" });
         }
 
         return res;

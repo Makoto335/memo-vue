@@ -12,14 +12,14 @@ const requireAuth = async (to, from, next) => {
 
   if (!uid || !client || !accessToken) {
     console.log("ログインしていません");
-    next({ name: "Welcome" });
+    next({ name: "WelcomePage" });
     return;
   }
 
   await validate();
   if (error.value) {
     console.log("認証に失敗しました");
-    next({ name: "Welcome" });
+    next({ name: "WelcomePage" });
   } else {
     next();
   }
@@ -38,7 +38,7 @@ const noRequireAuth = async (to, from, next) => {
   await validate()
 
   if (!error.value) {
-    next({ name: 'Chatroom' })
+    next({ name: 'MemoRoom' })
   } else {
     next()
   }
@@ -47,7 +47,7 @@ const noRequireAuth = async (to, from, next) => {
 const routes = [
   {
     path: "/",
-    name: "Welcome",
+    name: "WelcomePage",
     component: WelcomePage,
     beforeEnter: noRequireAuth
   },
