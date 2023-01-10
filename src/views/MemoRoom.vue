@@ -1,9 +1,11 @@
 <template>
-<div>メモルーム</div>
+<div><Navbar /></div>
 </template>
 
 <script>
-export default {};
+import Navbar from "../components/NavBar";
+
+export default {components: { Navbar},};
 </script>
 
 <style scoped lang="scss"></style>
