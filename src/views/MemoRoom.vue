@@ -1,14 +1,16 @@
 <template>
-  <div><Navbar /></div>
+  <div><Navbar /><MemoForm @getMessages="getMessages" /></div>
+
   {{ memos }}
 </template>
 
 <script>
 import Navbar from "../components/NavBar";
+import MemoForm from "../components/MemoForm";
 import axios from "axios";
 
 export default {
-  components: { Navbar },
+  components: { Navbar, MemoForm },
   data() {
     return {
       memos: [],
@@ -33,7 +35,7 @@ export default {
       }
     },
   },
-    mounted() {
+  mounted() {
     this.getMessages();
   },
 };
