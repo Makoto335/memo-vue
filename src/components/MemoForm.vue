@@ -3,11 +3,11 @@
     <form @submit.prevent="handleCreate">
       <label>
         <span>Title</span>
-        <input type="text" v-model="title" />
+        <input class="MemoForm_Title" type="text" v-model="title" />
       </label>
       <label>
         <span>Content</span>
-        <input type="textarea" v-model="content" />
+        <textarea v-model="content"></textarea>
       </label>
       <input type="submit" value="保存する" />
       <div class="error">{{ error }}</div>
@@ -42,7 +42,7 @@ export default {
               uid: window.localStorage.getItem("uid"),
               "access-token": window.localStorage.getItem("access-token"),
               client: window.localStorage.getItem("client"),
-              "Content-type": "application/json" ,
+              "Content-type": "application/json",
             },
           }
         );
@@ -65,4 +65,25 @@ export default {
 };
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.MemoForm {
+  form {
+    width: 300px;
+    margin: 1.5rem;
+    label {
+      display: block;
+    }
+    textarea {
+      display: block;
+      padding: 0.5rem 1rem 0.5rem 1rem;
+      width: 100%;
+      height: 80px;
+    }
+  }
+  &_Title {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+  }
+}
+</style>
