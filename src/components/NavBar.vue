@@ -56,7 +56,7 @@ export default {
 
 <style scoped lang="scss">
 nav {
-  padding: 20px;
+  padding: 10px;
   border-bottom: 1px solid #eee;
   display: flex;
   justify-content: space-between;
