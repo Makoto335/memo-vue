@@ -14,15 +14,16 @@
       >
     </paginate>
     <div class="MemoRoom_Grid">
-       <MemoForm @getMessages="getMessages" />
+      <MemoForm @getMemos="getMemos" />
       <div
         v-for="(memo, index) in getItems"
         :key="index"
         class="MemoRoom_Memos"
       >
         <div class="MemoRoom_BtnWrapper">
+           {{memo.id}}
           <button>edit</button>
-          <button>delete</button>
+          <button @click="deleteMemo(`${memo.id}`)">delete</button>
         </div>
         <h3>{{ memo.title }}</h3>
         <p>{{ memo.content }}</p>
@@ -47,6 +48,7 @@ export default {
       memos: [],
       currentPage: 1,
       perPage: 11,
+      error: "",
     };
   },
   methods: {
@@ -67,16 +69,40 @@ export default {
         console.log(err);
       }
     },
-    // reverseMemos() {
-    //   return this.memos.slice().reverse();
-    // },
+    async deleteMemo(id) {
+      this.error = null;
+      // this.$refs.cfModal.disableButton();
+      // this.isDisabled = true;
+      // this.$refs.cfModal.loadSubmit();
+      try {
+        const res = await axios.delete(`http://localhost:3000/api/memos/${id}`, {
+          headers: {
+            uid: window.localStorage.getItem("uid"),
+            "access-token": window.localStorage.getItem("access-token"),
+            client: window.localStorage.getItem("client"),
+          },
+        });
+        if (!res) {
+          new Error("メッセージ一覧を取得できませんでした");
+        }
+        if (!this.error) {
+          this.getMemos();
+        }
+
+        console.log({ res });
+        return res;
+      } catch (error) {
+        console.log({ error });
+        this.error = "メモを保存できませんでした";
+      }
+    },
     clickCallback(pageNum) {
       this.currentPage = Number(pageNum);
     },
   },
   computed: {
     getItems: function () {
-      let reversedMemos = this.memos.slice().reverse()
+      let reversedMemos = this.memos.slice().reverse();
       let start = (this.currentPage - 1) * this.perPage;
       let end = this.currentPage * this.perPage;
       return reversedMemos.slice(start, end);
