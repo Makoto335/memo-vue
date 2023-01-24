@@ -52,7 +52,7 @@ export default {
     };
   },
   methods: {
-    async getMessages() {
+    async getMemos() {
       try {
         const res = await axios.get("http://localhost:3000/user", {
           headers: {
@@ -112,7 +112,7 @@ export default {
     },
   },
   mounted() {
-    this.getMessages();
+    this.getMemos();
   },
 };
 </script>
