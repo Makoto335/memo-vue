@@ -32,7 +32,7 @@ export default {
         this.error = null;
 
         const res = await axios.post(
-          "http://localhost:3000/memos",
+          "http://localhost:3000/api/memos",
           {
             title: this.title,
             content: this.content,
@@ -51,7 +51,7 @@ export default {
           throw new Error("メモを保存できませんでした");
         }
         if (!this.error) {
-          this.$emit("getMessages");
+          this.$emit("getMemos");
         }
 
         console.log({ res });
