@@ -15,20 +15,26 @@
     </paginate>
     <div class="MemoRoom_Grid">
       <MemoForm @getMemos="getMemos" />
-      <div
-        v-for="(memo, index) in getItems"
-        :key="index"
-        class="MemoRoom_Memos"
-      >
+      <div v-for="memo in getItems" :key="memo.id" class="MemoRoom_Memos">
         <div class="MemoRoom_BtnWrapper">
-           {{memo.id}}
-          <button>edit</button>
+          {{ memo.id }}
+          <button
+            @click="
+              shouldShowModal = true;
+              idBeingEdited = `${memo.id}`;
+            "
+          >
+            edit
+          </button>
           <button @click="deleteMemo(`${memo.id}`)">delete</button>
         </div>
         <h3>{{ memo.title }}</h3>
         <p>{{ memo.content }}</p>
         <div class="MemoRoom_CreateAt">
           {{ memo.created_at }}
+        </div>
+        <div v-if="shouldShowModal">
+          <EditForm :idBeingEdited="idBeingEdited" />
         </div>
       </div>
     </div>
@@ -40,15 +46,18 @@ import Navbar from "../components/NavBar";
 import MemoForm from "../components/MemoForm";
 import axios from "axios";
 import Paginate from "vuejs-paginate-next";
+import EditForm from "../components/modules/EditForm.vue";
 
 export default {
-  components: { Navbar, MemoForm, Paginate },
+  components: { Navbar, MemoForm, Paginate, EditForm },
   data() {
     return {
       memos: [],
       currentPage: 1,
       perPage: 11,
       error: "",
+      shouldShowModal: false,
+      idBeingEdited: "",
     };
   },
   methods: {
@@ -75,13 +84,16 @@ export default {
       // this.isDisabled = true;
       // this.$refs.cfModal.loadSubmit();
       try {
-        const res = await axios.delete(`http://localhost:3000/api/memos/${id}`, {
-          headers: {
-            uid: window.localStorage.getItem("uid"),
-            "access-token": window.localStorage.getItem("access-token"),
-            client: window.localStorage.getItem("client"),
-          },
-        });
+        const res = await axios.delete(
+          `http://localhost:3000/api/memos/${id}`,
+          {
+            headers: {
+              uid: window.localStorage.getItem("uid"),
+              "access-token": window.localStorage.getItem("access-token"),
+              client: window.localStorage.getItem("client"),
+            },
+          }
+        );
         if (!res) {
           new Error("メッセージ一覧を取得できませんでした");
         }
