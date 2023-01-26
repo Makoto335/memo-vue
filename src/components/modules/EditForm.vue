@@ -48,7 +48,7 @@ export default {
       this.error = null;
       try {
         const res = await axios.put(
-          `http://localhost:3000/api/memos/${this.memoIdBeingEdited}`,
+          `http://localhost:3000/api/memos/${this.id}`,
           {
             title: this.title,
             content: this.content,
