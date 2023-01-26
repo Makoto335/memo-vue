@@ -21,7 +21,9 @@
           <button
             @click="
               shouldShowModal = true;
-              idBeingEdited = `${memo.id}`;
+              memoIdBeingEdited = `${memo.id}`;
+              memoTitleBeingEdited = `${memo.title}`;
+              memoContentBeingEdited = `${memo.content}`;
             "
           >
             edit
@@ -34,7 +36,13 @@
           {{ memo.created_at }}
         </div>
         <div v-if="shouldShowModal">
-          <EditForm :idBeingEdited="idBeingEdited" />
+          <EditForm
+            :memoIdBeingEdited="memoIdBeingEdited"
+            :memoTitleBeingEdited="memoTitleBeingEdited"
+            :memoContentBeingEdited="memoContentBeingEdited"
+            @closeEditForm="closeEditForm"
+            @getMemos="getMemos"
+          />
         </div>
       </div>
     </div>
@@ -57,10 +65,15 @@ export default {
       perPage: 11,
       error: "",
       shouldShowModal: false,
-      idBeingEdited: "",
+      memoIdBeingEdited: "",
+      memoTitleBeingEdited: "",
+      memoContentBeingEdited: "",
     };
   },
   methods: {
+    closeEditForm() {
+      this.shouldShowModal = false;
+    },
     async getMemos() {
       try {
         const res = await axios.get("http://localhost:3000/user", {
