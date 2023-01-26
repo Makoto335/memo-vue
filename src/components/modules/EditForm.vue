@@ -2,7 +2,7 @@
   <div class="EditForm">
     <div class="EditForm_Overlay"></div>
     <div class="EditForm_Wrapper">
-      <form @submit.prevent="handleCreate">
+      <form @submit.prevent="editMemo()">
         <label>
           <span>Title</span>
           <input class="EditForm_Title" type="text" v-model="title" />
@@ -12,6 +12,16 @@
           <textarea v-model="content"></textarea>
         </label>
         <input type="submit" value="保存する" />
+        <div class="ConfirmationModal_Action">
+          <button
+            class="ConfirmationModal_Btn"
+            :disabled="isDisabled"
+            @click="onClickCancel"
+            :class="{ _disabledBtn: isDisabled }"
+          >
+            戻る
+          </button>
+        </div>
         <div class="error">{{ error }}</div>
       </form>
     </div>
@@ -19,15 +29,53 @@
 </template>
 
 <script>
+import axios from "axios";
 
 export default {
-
-  props: ["idBeingEdited"],
+  props: ["memoIdBeingEdited", "memoTitleBeingEdited", "memoContentBeingEdited"],
   data() {
     return {
+      title: this.memoTitleBeingEdited,
+      content: this.memoContentBeingEdited,
+      id: this.memoIdBeingEdited
     };
   },
   methods: {
+    onClickCancel() {
+      this.$emit("closeEditForm");
+    },
+    async editMemo() {
+      this.error = null;
+      try {
+        const res = await axios.put(
+          `http://localhost:3000/api/memos/${this.memoIdBeingEdited}`,
+          {
+            title: this.title,
+            content: this.content,
+          },
+          {
+            headers: {
+              uid: window.localStorage.getItem("uid"),
+              "access-token": window.localStorage.getItem("access-token"),
+              client: window.localStorage.getItem("client"),
+            },
+          }
+        );
+        if (!res) {
+          new Error("メッセージ一覧を取得できませんでした");
+        }
+        if (!this.error) {
+          this.$emit("getMemos");
+          this.$emit("closeEditForm");
+        }
+
+        console.log({ res });
+        return res;
+      } catch (error) {
+        console.log({ error });
+        this.error = "メモを保存できませんでした";
+      }
+    },
   },
 };
 </script>
