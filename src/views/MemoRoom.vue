@@ -21,9 +21,9 @@
           <button
             @click="
               shouldShowModal = true;
-              memoIdBeingEdited = `${memo.id}`;
-              memoTitleBeingEdited = `${memo.title}`;
-              memoContentBeingEdited = `${memo.content}`;
+              idToEdit = `${memo.id}`;
+              titleToEdit = `${memo.title}`;
+              contentToEdit = `${memo.content}`;
             "
           >
             edit
@@ -37,9 +37,9 @@
         </div>
         <div v-if="shouldShowModal">
           <EditForm
-            :memoIdBeingEdited="memoIdBeingEdited"
-            :memoTitleBeingEdited="memoTitleBeingEdited"
-            :memoContentBeingEdited="memoContentBeingEdited"
+            :idToEdit="idToEdit"
+            :titleToEdit="titleToEdit"
+            :contentToEdit="contentToEdit"
             @closeEditForm="closeEditForm"
             @getMemos="getMemos"
           />
@@ -65,9 +65,9 @@ export default {
       perPage: 11,
       error: "",
       shouldShowModal: false,
-      memoIdBeingEdited: "",
-      memoTitleBeingEdited: "",
-      memoContentBeingEdited: "",
+      idToEdit: "",
+      titleToEdit: "",
+      contentToEdit: "",
     };
   },
   methods: {
