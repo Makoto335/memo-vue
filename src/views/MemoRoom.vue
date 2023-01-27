@@ -68,6 +68,8 @@ export default {
       idToEdit: "",
       titleToEdit: "",
       contentToEdit: "",
+      idToDelete: "",
+      deleteDialog: "",
     };
   },
   methods: {
@@ -90,6 +92,10 @@ export default {
       } catch (err) {
         console.log(err);
       }
+    },
+    confirmDeletion(id) {
+      this.deleteDialog = true;
+      this.idToDelete = id;
     },
     async deleteMemo(id) {
       this.error = null;
