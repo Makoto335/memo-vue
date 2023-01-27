@@ -13,12 +13,13 @@
         </label>
         <input type="submit" value="保存する" />
         <div class="ConfirmationModal_Action">
-          <button
+          <button class="ConfirmationModal_Btn" @click="onClickCancel">
+            <!-- <button
             class="ConfirmationModal_Btn"
             :disabled="isDisabled"
             @click="onClickCancel"
             :class="{ _disabledBtn: isDisabled }"
-          >
+          > -->
             戻る
           </button>
         </div>
@@ -32,12 +33,13 @@
 import axios from "axios";
 
 export default {
-  props: ["memoIdBeingEdited", "memoTitleBeingEdited", "memoContentBeingEdited"],
+  props: ["idToEdit", "titleToEdit", "contentToEdit"],
   data() {
     return {
-      title: this.memoTitleBeingEdited,
-      content: this.memoContentBeingEdited,
-      id: this.memoIdBeingEdited
+      title: this.titleToEdit,
+      content: this.contentToEdit,
+      id: this.idToEdit,
+      error: "",
     };
   },
   methods: {
