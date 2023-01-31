@@ -28,25 +28,43 @@
           >
             edit
           </button>
-          <button @click="deleteMemo(`${memo.id}`)">delete</button>
+          <!-- <button @click="deleteMemo(`${memo.id}`)">delete</button> -->
+          <button
+            @click="
+              deleteDialog = true;
+              confirmDeletion(`${memo.id}`);
+            "
+          >
+            delete
+          </button>
         </div>
         <h3>{{ memo.title }}</h3>
         <p>{{ memo.content }}</p>
         <div class="MemoRoom_CreateAt">
           {{ memo.created_at }}
         </div>
-        <div v-if="shouldShowModal">
-          <EditForm
-            :idToEdit="idToEdit"
-            :titleToEdit="titleToEdit"
-            :contentToEdit="contentToEdit"
-            @closeEditForm="closeEditForm"
-            @getMemos="getMemos"
-          />
-        </div>
       </div>
     </div>
+    <div v-if="shouldShowModal">
+      <EditForm
+        :idToEdit="idToEdit"
+        :titleToEdit="titleToEdit"
+        :contentToEdit="contentToEdit"
+        @closeEditForm="closeEditForm"
+        @getMemos="getMemos"
+        @editMemo="editMemo"
+      />
+    </div>
+    <div v-if="deleteDialog">
+      <DeleteDialog
+        :idToDelete="idToDelete"
+        @closeDeleteDialog="closeDeleteDialog"
+        @deleteMemo="deleteMemo(idToDelete)"
+      />
+    </div>
   </div>
+ <img :src="avatar" />
+ {{avatar}}
 </template>
 
 <script>
@@ -54,10 +72,11 @@ import Navbar from "../components/NavBar";
 import MemoForm from "../components/MemoForm";
 import axios from "axios";
 import Paginate from "vuejs-paginate-next";
-import EditForm from "../components/modules/EditForm.vue";
+import EditForm from "../components/modules/EditForm";
+import DeleteDialog from "../components/modules/DeleteDialog";
 
 export default {
-  components: { Navbar, MemoForm, Paginate, EditForm },
+  components: { Navbar, MemoForm, Paginate, EditForm, DeleteDialog },
   data() {
     return {
       memos: [],
@@ -69,12 +88,16 @@ export default {
       titleToEdit: "",
       contentToEdit: "",
       idToDelete: "",
-      deleteDialog: "",
+      deleteDialog: false,
+      avatar: "",
     };
   },
   methods: {
     closeEditForm() {
       this.shouldShowModal = false;
+    },
+    closeDeleteDialog() {
+      this.deleteDialog = false;
     },
     async getMemos() {
       try {
@@ -88,14 +111,48 @@ export default {
         if (!res) {
           new Error("メッセージ一覧を取得できませんでした");
         }
-        this.memos = res.data;
+        this.memos = res.data.user.memos_array;
+        this.avatar = res.data.user.avatar_url
+        console.log(res.data.avatar_url)
+
       } catch (err) {
         console.log(err);
       }
     },
     confirmDeletion(id) {
-      this.deleteDialog = true;
       this.idToDelete = id;
+    },
+     async editMemo(editedTitle,editedContent) {
+      this.error = null;
+      try {
+        const res = await axios.put(
+          `http://localhost:3000/api/memos/${this.idToEdit}`,
+          {
+            title: editedTitle,
+            content: editedContent,
+          },
+          {
+            headers: {
+              uid: window.localStorage.getItem("uid"),
+              "access-token": window.localStorage.getItem("access-token"),
+              client: window.localStorage.getItem("client"),
+            },
+          }
+        );
+        if (!res) {
+          new Error("メッセージ一覧を取得できませんでした");
+        }
+        if (!this.error) {
+          this.getMemos()
+          this.closeEditForm()
+        }
+
+        console.log({ res });
+        return res;
+      } catch (error) {
+        console.log({ error });
+        this.error = "メモを保存できませんでした";
+      }
     },
     async deleteMemo(id) {
       this.error = null;
@@ -118,6 +175,7 @@ export default {
         }
         if (!this.error) {
           this.getMemos();
+          this.closeDeleteDialog();
         }
 
         console.log({ res });
