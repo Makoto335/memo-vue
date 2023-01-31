@@ -2,7 +2,7 @@
   <div class="EditForm">
     <div class="EditForm_Overlay"></div>
     <div class="EditForm_Wrapper">
-      <form @submit.prevent="editMemo()">
+      <form @submit.prevent="onClickEdit()">
         <label>
           <span>Title</span>
           <input class="EditForm_Title" type="text" v-model="title" />
@@ -30,8 +30,6 @@
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
   props: ["idToEdit", "titleToEdit", "contentToEdit"],
   data() {
@@ -46,37 +44,8 @@ export default {
     onClickCancel() {
       this.$emit("closeEditForm");
     },
-    async editMemo() {
-      this.error = null;
-      try {
-        const res = await axios.put(
-          `http://localhost:3000/api/memos/${this.id}`,
-          {
-            title: this.title,
-            content: this.content,
-          },
-          {
-            headers: {
-              uid: window.localStorage.getItem("uid"),
-              "access-token": window.localStorage.getItem("access-token"),
-              client: window.localStorage.getItem("client"),
-            },
-          }
-        );
-        if (!res) {
-          new Error("メッセージ一覧を取得できませんでした");
-        }
-        if (!this.error) {
-          this.$emit("getMemos");
-          this.$emit("closeEditForm");
-        }
-
-        console.log({ res });
-        return res;
-      } catch (error) {
-        console.log({ error });
-        this.error = "メモを保存できませんでした";
-      }
+    onClickEdit() {
+      this.$emit("editMemo",this.title,this.content);
     },
   },
 };
