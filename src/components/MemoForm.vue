@@ -52,6 +52,8 @@ export default {
         }
         if (!this.error) {
           this.$emit("getMemos");
+          this.title = null;
+          this.content = null;
         }
 
         console.log({ res });
