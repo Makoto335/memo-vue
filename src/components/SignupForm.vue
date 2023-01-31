@@ -52,11 +52,18 @@
       </div>
       <div class="SignupForm_UploadImage">
         <label>プロフィール画像</label>
-        <div><input type="file" required name="image" /></div>
+        <div>
+          <input
+            type="file"
+            name="image"
+            accept=".jpg, .jpeg, .gif, .png"
+            @change="selectedImage"
+          />
+        </div>
       </div>
       <div class="SignupForm_Terms">
         <a
-          href="https://menherasenpai.notion.site/457df49475494671807673a0a3346451"
+          href="#"
         >
           <p>利用規約はこちら</p>
         </a>
@@ -89,19 +96,32 @@ export default {
       error: null,
       dateOfBirth: defaultDate,
       termsChk: false,
+      avatar: null,
     };
   },
   methods: {
+    selectedImage(e) {
+      e.preventDefault();
+      this.avatar = e.target.files[0];
+    },
     async signUp() {
       this.error = null;
+      let formData = new FormData();
+      formData.append("registration[name]", this.name);
+      formData.append("registration[email]", this.email);
+      formData.append("registration[password]", this.password);
+      formData.append(
+        "registration[password_confirmation]",
+        this.passwordConfirmation
+      );
+      formData.append("registration[gender]", this.gender);
+      formData.append("registration[date_of_birth]", this.dateOfBirth);
+      formData.append("registration[avatar]", this.avatar);
       try {
-        const res = await axios.post("http://localhost:3000/auth", {
-          name: this.name,
-          email: this.email,
-          password: this.password,
-          password_confirmation: this.passwordConfirmation,
-          gender: this.gender,
-          date_of_birth: this.dateOfBirth,
+        const res = await axios.post("http://localhost:3000/auth", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         });
         if (!res) {
           throw new Error("アカウントを登録できませんでした");
