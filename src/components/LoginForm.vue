@@ -2,12 +2,14 @@
   <div class="LoginForm">
     <h2>ログイン</h2>
     <form @submit.prevent="login">
+      <label>メールアドレス</label>
       <input
         type="email"
         required
         placeholder="メールアドレス"
         v-model="email"
       />
+      <label>パスワード（８〜５０文字）</label>
       <input
         type="password"
         required
@@ -64,6 +66,10 @@ export default {
 
 <style scoped lang="scss">
 .LoginForm {
+  label {
+    margin-left: 5px;
+    font-weight: bold;
+  }
   h2 {
     text-align: center;
   }
