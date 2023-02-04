@@ -4,46 +4,55 @@
     <form @submit.prevent="signUp">
       <div class="SignupForm_TextInput">
         <label>お名前</label>
-        <input type="text" required placeholder="例）山田太郎" v-model="name" />
+        <input
+          type="text"
+          placeholder="例）山田太郎"
+          v-model="name"
+          @blur="validateName"
+          @keyup="validateName"
+        />
+        <div class="error">{{ nameError }}</div>
         <label>メールアドレス</label>
         <input
           type="email"
-          required
           placeholder="例）example@example.com"
           v-model="email"
+          autocomplete="off"
+          @blur="validateEmail"
+          @keyup="validateEmail"
         />
+        <div class="error">{{ emailError }}</div>
         <label>パスワード（８〜５０文字）</label>
         <input
           type="password"
-          required
           placeholder="パスワード"
           v-model="password"
+          autocomplete="off"
+          @blur="
+            validatePassword();
+            validatePasswordConfirmation();
+          "
+          @keyup="
+            validatePassword();
+            validatePasswordConfirmation();
+          "
         />
+        <div class="error">{{ passwordError }}</div>
         <label>パスワード（確認用）</label>
         <input
           type="password"
-          required
           placeholder="パスワード（確認用）"
           v-model="passwordConfirmation"
+          @blur="validatePasswordConfirmation"
+          @keyup="validatePasswordConfirmation"
         />
+        <div class="error">{{ passwordConfirmationError }}</div>
       </div>
       <div class="SignupForm_Gender">
         <label>性別</label>
         <div class="SignupForm_GenderInput">
-          <input
-            type="radio"
-            required
-            name="gender"
-            value="male"
-            v-model="gender"
-          />男
-          <input
-            type="radio"
-            required
-            name="gender"
-            value="female"
-            v-model="gender"
-          />女
+          <input type="radio" name="gender" value="male" v-model="gender" />男
+          <input type="radio" name="gender" value="female" v-model="gender" />女
         </div>
       </div>
       <div class="SignupForm_DateOfBirth">
@@ -53,25 +62,22 @@
       <div class="SignupForm_UploadImage">
         <label>プロフィール画像</label>
         <div>
-          <input
-            type="file"
-            name="image"
-            accept=".jpg, .jpeg, .gif, .png"
-            @change="selectedImage"
-          />
+          <input type="file" name="image" @change="selectedImage" />
         </div>
       </div>
       <div class="SignupForm_Terms">
-        <a
-          href="#"
-        >
+        <a href="#">
           <p>利用規約はこちら</p>
         </a>
-        <input type="checkbox" required name="checkbox" v-model="termsChk" />
+        <input type="checkbox" name="checkbox" v-model="termsChk" />
         <label for="consent-chk">利用規約に同意する</label>
       </div>
       <div class="error">{{ error }}</div>
-      <div class="SignupForm_BtnWrapper"><button>登録する</button></div>
+      <div class="SignupForm_BtnWrapper">
+        <button :class="{ _disabled: !isValid }" :disabled="!isValid">
+          登録する
+        </button>
+      </div>
     </form>
   </div>
 </template>
@@ -89,20 +95,88 @@ export default {
     const defaultDate = dayjs().toDate();
     return {
       name: "",
+      nameError: "",
       email: "",
+      emailError: "",
       gender: "",
       password: "",
+      passwordError: "",
       passwordConfirmation: "",
+      passwordConfirmationError: "",
       error: null,
       dateOfBirth: defaultDate,
       termsChk: false,
       avatar: null,
     };
   },
+  computed: {
+    isValid() {
+      return (
+        this.name &&
+        !this.nameError &&
+        this.email &&
+        !this.emailError &&
+        this.password &&
+        !this.passwordError &&
+        this.passwordConfirmation &&
+        !this.passwordConfirmationError &&
+        this.gender &&
+        this.dateOfBirth &&
+        this.avatar &&
+        this.termsChk
+      );
+    },
+  },
   methods: {
+    validateName() {
+      !this.name
+        ? (this.nameError = "お名前を入力してください")
+        : this.name.length > 60
+        ? (this.nameError = "60文字以内にして下さい")
+        : (this.nameError = "");
+    },
+    validateEmail() {
+      const regex =
+        /^([\w!#$%&'*+\-/=?^`{|}~]+(\.[\w!#$%&'*+\-/=?^`{|}~]+)*|"([\w!#$%&'*+\-/=?^`{|}~. ()<>[\]:;@,]|\\[\\"])+")@(([a-zA-Z\d-]+\.)+[a-zA-Z]+|\[(\d{1,3}(\.\d{1,3}){3}|IPv6:[\da-fA-F]{0,4}(:[\da-fA-F]{0,4}){1,5}(:\d{1,3}(\.\d{1,3}){3}|(:[\da-fA-F]{0,4}){0,2}))\])$/;
+      !regex.test(this.email)
+        ? (this.emailError = "有効なメールアドレスを入力してください")
+        : this.email.length > 254
+        ? (this.emailError = "254文字以内にして下さい")
+        : (this.emailError = "");
+    },
+    validatePassword() {
+      this.password.length < 6
+        ? (this.passwordError = "Password must be at least 6 characters")
+        : (this.passwordError = "");
+    },
+    validatePasswordConfirmation() {
+      !(this.passwordConfirmation === this.password)
+        ? (this.passwordConfirmationError = "Passwords do not match")
+        : (this.passwordConfirmationError = "");
+    },
     selectedImage(e) {
       e.preventDefault();
       this.avatar = e.target.files[0];
+      // name = file.name,
+      let size = this.avatar.size,
+        type = this.avatar.type,
+        errors = "";
+      if (size > 2097152) {
+        errors += "ファイルの上限サイズ2MBを超えています\n";
+      }
+      if (
+        type != "image/jpeg" &&
+        type != "image/gif" &&
+        type != "image/png" &&
+        type != "application/pdf"
+      ) {
+        errors +=
+          ".jpg、.gif、.png、.pdfのいずれかのファイルのみ許可されています\n";
+      }
+      if (errors) {
+        alert(errors);
+        this.avatar = "";
+      }
     },
     async signUp() {
       this.error = null;
@@ -141,6 +215,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+._disabled {
+  background: grey;
+}
 .SignupForm {
   width: 500px;
   margin: 0 auto;
