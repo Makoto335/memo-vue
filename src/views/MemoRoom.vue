@@ -1,6 +1,6 @@
 <template>
   <div class="MemoRoom">
-    <Navbar />
+    <Navbar :avatar="avatar" />
     <paginate
       :page-count="getPaginateCount"
       :page-range="3"
@@ -63,8 +63,6 @@
       />
     </div>
   </div>
- <img :src="avatar" />
- {{avatar}}
 </template>
 
 <script>
