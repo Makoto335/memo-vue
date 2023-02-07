@@ -5,14 +5,12 @@
       <label>メールアドレス</label>
       <input
         type="email"
-        required
         placeholder="メールアドレス"
         v-model="email"
       />
-      <label>パスワード（８〜５０文字）</label>
+      <label>パスワード</label>
       <input
         type="password"
-        required
         placeholder="パスワード"
         v-model="password"
       />
