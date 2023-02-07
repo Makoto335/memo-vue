@@ -54,28 +54,15 @@
         />
         <div class="error">{{ passwordConfirmationError }}</div>
       </div>
-      <!-- <div class="SignupForm_Gender">
-        <label>性別</label>
-        <div class="SignupForm_GenderInput">
-          <input type="radio" name="gender" value="male" v-model="gender" />男
-          <input type="radio" name="gender" value="female" v-model="gender" />女
-        </div>
-      </div> -->
       <div class="SignupForm_DateOfBirth">
         <label>生年月日</label>
         <SelectDate v-model="dateOfBirth" />
       </div>
-      <!-- <div class="SignupForm_Terms">
-        <a href="#">
-          <p>利用規約はこちら</p>
-        </a>
-        <input type="checkbox" name="checkbox" v-model="termsChk" />
-        <label for="consent-chk">利用規約に同意する</label>
-      </div> -->
       <div class="error">{{ error }}</div>
       <div class="SignupForm_BtnWrapper">
-        <!-- <button :class="{ _disabled: !isValid }"  :disabled="!isValid"> -->
-        <button :class="{ _disabled: !isValid }">登録する</button>
+        <button :class="{ _disabled: !isValid }"  :disabled="!isValid">
+        <!-- <button :class="{ _disabled: !isValid }"> -->
+          登録する</button>
       </div>
     </form>
   </div>
@@ -97,14 +84,12 @@ export default {
       nameError: "",
       email: "",
       emailError: "",
-      // gender: "",
       password: "",
       passwordError: "",
       passwordConfirmation: "",
       passwordConfirmationError: "",
       error: null,
       dateOfBirth: defaultDate,
-      // termsChk: false,
       avatar: null,
       preview: require("../assets/images/blank-profile-picture_640.png"),
     };
@@ -120,10 +105,7 @@ export default {
         !this.passwordError &&
         this.passwordConfirmation &&
         !this.passwordConfirmationError &&
-        // this.gender &&
-        this.dateOfBirth &&
-        this.avatar
-        // this.termsChk
+        this.dateOfBirth
       );
     },
   },
@@ -151,7 +133,7 @@ export default {
       this.password.length < 10
         ? (this.passwordError = "Password must be at least 10 characters")
         : !regex.test(this.password)
-        ? (this.passwordError = "有効なパスワードを入力してください")
+        ? (this.passwordError = "半角のアルファベットと数字をそれぞれ一文字以上入れて下さい")
         : (this.passwordError = "");
     },
     validatePasswordConfirmation() {
