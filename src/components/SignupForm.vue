@@ -2,6 +2,12 @@
   <div class="SignupForm">
     <h2>アカウントを登録</h2>
     <form @submit.prevent="signUp">
+      <div class="SignupForm_UploadImage">
+        <img class="SignupForm_Avatar" :src="preview" />
+        <label class="sample">
+          <input type="file" name="image" @change="selectedImage" />
+        </label>
+      </div>
       <div class="SignupForm_TextInput">
         <label>お名前</label>
         <input
@@ -14,7 +20,7 @@
         <div class="error">{{ nameError }}</div>
         <label>メールアドレス</label>
         <input
-          type="email"
+          type="text"
           placeholder="例）example@example.com"
           v-model="email"
           autocomplete="off"
@@ -22,7 +28,7 @@
           @keyup="validateEmail"
         />
         <div class="error">{{ emailError }}</div>
-        <label>パスワード（８〜５０文字）</label>
+        <label>パスワード</label>
         <input
           type="password"
           placeholder="パスワード"
@@ -48,35 +54,28 @@
         />
         <div class="error">{{ passwordConfirmationError }}</div>
       </div>
-      <div class="SignupForm_Gender">
+      <!-- <div class="SignupForm_Gender">
         <label>性別</label>
         <div class="SignupForm_GenderInput">
           <input type="radio" name="gender" value="male" v-model="gender" />男
           <input type="radio" name="gender" value="female" v-model="gender" />女
         </div>
-      </div>
+      </div> -->
       <div class="SignupForm_DateOfBirth">
         <label>生年月日</label>
         <SelectDate v-model="dateOfBirth" />
       </div>
-      <div class="SignupForm_UploadImage">
-        <label>プロフィール画像</label>
-        <div>
-          <input type="file" name="image" @change="selectedImage" />
-        </div>
-      </div>
-      <div class="SignupForm_Terms">
+      <!-- <div class="SignupForm_Terms">
         <a href="#">
           <p>利用規約はこちら</p>
         </a>
         <input type="checkbox" name="checkbox" v-model="termsChk" />
         <label for="consent-chk">利用規約に同意する</label>
-      </div>
+      </div> -->
       <div class="error">{{ error }}</div>
       <div class="SignupForm_BtnWrapper">
-        <button :class="{ _disabled: !isValid }" :disabled="!isValid">
-          登録する
-        </button>
+        <!-- <button :class="{ _disabled: !isValid }"  :disabled="!isValid"> -->
+        <button :class="{ _disabled: !isValid }">登録する</button>
       </div>
     </form>
   </div>
@@ -98,15 +97,16 @@ export default {
       nameError: "",
       email: "",
       emailError: "",
-      gender: "",
+      // gender: "",
       password: "",
       passwordError: "",
       passwordConfirmation: "",
       passwordConfirmationError: "",
       error: null,
       dateOfBirth: defaultDate,
-      termsChk: false,
+      // termsChk: false,
       avatar: null,
+      preview: require("../assets/images/blank-profile-picture_640.png"),
     };
   },
   computed: {
@@ -120,10 +120,10 @@ export default {
         !this.passwordError &&
         this.passwordConfirmation &&
         !this.passwordConfirmationError &&
-        this.gender &&
+        // this.gender &&
         this.dateOfBirth &&
-        this.avatar &&
-        this.termsChk
+        this.avatar
+        // this.termsChk
       );
     },
   },
@@ -136,8 +136,10 @@ export default {
         : (this.nameError = "");
     },
     validateEmail() {
-      const regex =
-        /^([\w!#$%&'*+\-/=?^`{|}~]+(\.[\w!#$%&'*+\-/=?^`{|}~]+)*|"([\w!#$%&'*+\-/=?^`{|}~. ()<>[\]:;@,]|\\[\\"])+")@(([a-zA-Z\d-]+\.)+[a-zA-Z]+|\[(\d{1,3}(\.\d{1,3}){3}|IPv6:[\da-fA-F]{0,4}(:[\da-fA-F]{0,4}){1,5}(:\d{1,3}(\.\d{1,3}){3}|(:[\da-fA-F]{0,4}){0,2}))\])$/;
+      const regex = new RegExp(
+        /^[A-Za-z0-9_!#$%&'*+/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/,
+        "gm"
+      );
       !regex.test(this.email)
         ? (this.emailError = "有効なメールアドレスを入力してください")
         : this.email.length > 254
@@ -145,8 +147,11 @@ export default {
         : (this.emailError = "");
     },
     validatePassword() {
-      this.password.length < 6
-        ? (this.passwordError = "Password must be at least 6 characters")
+      const regex = /^(?=.*?[a-z])(?=.*?\d)[a-z\d]{8,100}$/i;
+      this.password.length < 10
+        ? (this.passwordError = "Password must be at least 10 characters")
+        : !regex.test(this.password)
+        ? (this.passwordError = "有効なパスワードを入力してください")
         : (this.passwordError = "");
     },
     validatePasswordConfirmation() {
@@ -157,6 +162,7 @@ export default {
     selectedImage(e) {
       e.preventDefault();
       this.avatar = e.target.files[0];
+      this.preview = URL.createObjectURL(this.avatar);
       // name = file.name,
       let size = this.avatar.size,
         type = this.avatar.type,
@@ -188,9 +194,9 @@ export default {
         "registration[password_confirmation]",
         this.passwordConfirmation
       );
-      formData.append("registration[gender]", this.gender);
+      // formData.append("registration[gender]", this.gender);
       formData.append("registration[date_of_birth]", this.dateOfBirth);
-      formData.append("registration[avatar]", this.avatar);
+      this.avatar ? formData.append("registration[avatar]", this.avatar) : false
       try {
         const res = await axios.post("http://localhost:3000/auth", formData, {
           headers: {
@@ -262,7 +268,33 @@ export default {
     margin: 0 0 10px 0;
   }
   &_UploadImage {
-    margin: 0 0 10px 0;
+    margin: 0 auto;
+    height: 150px;
+    width: 150px;
+    position: relative;
+    input {
+      display: none;
+    }
+  }
+  &_Avatar {
+    margin: 0 auto;
+    display: block;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+  }
+  .sample {
+    position: absolute;
+    bottom: -15px;
+    right: 0;
+    z-index: 2;
+    display: block;
+    height: 54px;
+    width: 54px;
+    background-image: url("../assets/images/add-camera_96.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    cursor: pointer;
   }
   &_Terms {
     margin: 0 0 10px 0;
