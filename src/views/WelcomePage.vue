@@ -41,7 +41,7 @@ export default {
   components: { SignupForm, LoginForm, AppDescription },
   data() {
     return {
-      showLoginForm: false,
+      showLoginForm: true,
     };
   },
     methods: {
