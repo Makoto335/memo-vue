@@ -1,6 +1,6 @@
 <template>
   <div class="MemoRoom">
-    <Navbar :avatar="avatar" />
+    <Navbar :avatar="avatar" @getMemos="getMemos" />
     <paginate
       :page-count="getPaginateCount"
       :page-range="3"
@@ -110,9 +110,8 @@ export default {
           new Error("メッセージ一覧を取得できませんでした");
         }
         this.memos = res.data.user.memos_array;
-        this.avatar = res.data.user.avatar_url
-        console.log(res.data.avatar_url)
-
+        this.avatar = res.data.user.avatar_url;
+        console.log(res.data.avatar_url);
       } catch (err) {
         console.log(err);
       }
@@ -120,7 +119,7 @@ export default {
     confirmDeletion(id) {
       this.idToDelete = id;
     },
-     async editMemo(editedTitle,editedContent) {
+    async editMemo(editedTitle, editedContent) {
       this.error = null;
       try {
         const res = await axios.put(
@@ -141,8 +140,8 @@ export default {
           new Error("メッセージ一覧を取得できませんでした");
         }
         if (!this.error) {
-          this.getMemos()
-          this.closeEditForm()
+          this.getMemos();
+          this.closeEditForm();
         }
 
         console.log({ res });

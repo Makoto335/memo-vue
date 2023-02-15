@@ -1,7 +1,9 @@
 <template>
   <div class="NavBar">
     <nav>
-      <img class="NavBar_Avatar" :src="avatarInNav" />
+      <a href="#" @click.prevent.stop="showModal = true"
+        ><img class="NavBar_Avatar" :src="avatarInNav"
+      /></a>
       <div>
         <p>
           <span class="NavBar_Name">{{ name }}</span
@@ -11,18 +13,24 @@
       </div>
       <button @click="logout">ログアウト</button>
     </nav>
+    <div v-if="showModal">
+      <UpdateAvatar :avatarInNav="avatarInNav" @closeUpdateAvatar="closeUpdateAvatar"  @getMemos="getMemos" />
+    </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import removeItem from "../plugins/auth/removeItem";
+import UpdateAvatar from "../components/modules/UpdateAvatar";
 export default {
   props: ["avatar"],
+  components: { UpdateAvatar },
   data() {
     return {
       name: window.localStorage.getItem("name"),
       email: window.localStorage.getItem("uid"),
+      showModal: false,
       error: null,
     };
   },
@@ -59,6 +67,12 @@ export default {
         this.error = "ログアウトできませんでした";
       }
     },
+    closeUpdateAvatar() {
+      this.showModal = false;
+    },
+    getMemos(){
+      this.$emit("getMemos");
+    }
   },
 };
 </script>
