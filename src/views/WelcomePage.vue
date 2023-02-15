@@ -72,6 +72,9 @@ export default {
     background: white;
     padding: 10px;
   }
+    &_Text {
+      text-align: center;
+    }
   &_ChangeForm {
     font-size: 16px;
     margin: 10px;
