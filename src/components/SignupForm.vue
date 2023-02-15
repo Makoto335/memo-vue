@@ -2,9 +2,9 @@
   <div class="SignupForm">
     <h2>アカウントを登録</h2>
     <form @submit.prevent="signUp">
-      <div class="SignupForm_UploadImage">
+      <div class="SignupForm_UploadAvatar">
         <img class="SignupForm_Avatar" :src="preview" />
-        <label class="sample">
+        <label class="SignupForm_CameraIcon">
           <input type="file" name="image" @change="selectedImage" />
         </label>
       </div>
@@ -249,7 +249,7 @@ export default {
   &_DateOfBirth {
     margin: 0 0 10px 0;
   }
-  &_UploadImage {
+  &_UploadAvatar {
     margin: 0 auto;
     height: 150px;
     width: 150px;
@@ -265,7 +265,7 @@ export default {
     height: 150px;
     border-radius: 50%;
   }
-  .sample {
+  &_CameraIcon {
     position: absolute;
     bottom: -25px;
     right: 0;
