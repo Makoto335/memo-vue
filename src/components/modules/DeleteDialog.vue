@@ -4,7 +4,7 @@
     <div class="DeleteDialog_Wrapper">
       <p>{{ message }}</p>
       <div class="DeleteDialog_Action">
-        <button class="DeleteDialog_Btn" @click="onClickCancel">戻る</button>
+        <a  class="DeleteDialog_Btn" href="#" @click.prevent.stop="onClickCancel">戻る</a >
         <button class="DeleteDialog_Btn DeleteDialog_DeleteBtn" @click="onClickDelete">削除</button>
       </div>
       <div class="error">{{ error }}</div>

@@ -14,9 +14,9 @@
         </div>
         <input type="submit" value="保存する" />
         <div class="ConfirmationModal_Action">
-          <button class="ConfirmationModal_Btn" @click="onClickCancel">
+          <a  class="ConfirmationModal_Btn" href="#" @click.prevent.stop="onClickCancel">
             戻る
-          </button>
+          </a >
         </div>
         <div class="error">{{ error }}</div>
       </form>

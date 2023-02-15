@@ -18,8 +18,8 @@
       <div v-for="memo in getItems" :key="memo.id" class="MemoRoom_Memos">
         <div class="MemoRoom_BtnWrapper">
           {{ memo.id }}
-          <button
-            @click="
+          <a 
+            href="#" @click.prevent.stop="
               shouldShowModal = true;
               idToEdit = `${memo.id}`;
               titleToEdit = `${memo.title}`;
@@ -27,16 +27,16 @@
             "
           >
             edit
-          </button>
+          </a >
           <!-- <button @click="deleteMemo(`${memo.id}`)">delete</button> -->
-          <button
-            @click="
+          <a 
+            href="#" @click.prevent.stop="
               deleteDialog = true;
               confirmDeletion(`${memo.id}`);
             "
           >
             delete
-          </button>
+          </a >
         </div>
         <h3>{{ memo.title }}</h3>
         <p>{{ memo.content }}</p>
@@ -262,5 +262,6 @@ export default {
     bottom: 1rem;
     right: 1.5rem;
   }
+
 }
 </style>
