@@ -59,10 +59,10 @@
         <SelectDate v-model="dateOfBirth" />
       </div>
       <div class="error">{{ error }}</div>
+      <div class="error">{{ error2 }}</div>
       <div class="SignupForm_BtnWrapper">
-        <button :class="{ _disabled: !isValid }"  :disabled="!isValid">
-        <!-- <button :class="{ _disabled: !isValid }"> -->
-          登録する</button>
+        <!-- <button :class="{ _disabled: !isValid }"  :disabled="!isValid"> -->
+        <button :class="{ _disabled: !isValid }">登録する</button>
       </div>
     </form>
   </div>
@@ -73,6 +73,7 @@ import dayjs from "dayjs";
 import axios from "axios";
 import setItem from "../plugins/auth/setItem";
 import SelectDate from "./modules/SelectDate.vue";
+import errorHandler from "../plugins/errorHandler";
 
 export default {
   components: { SelectDate },
@@ -89,6 +90,7 @@ export default {
       passwordConfirmation: "",
       passwordConfirmationError: "",
       error: null,
+      error2: null,
       dateOfBirth: defaultDate,
       avatar: null,
       preview: require("../assets/images/blank-profile-picture_640.png"),
@@ -133,7 +135,8 @@ export default {
       this.password.length < 10
         ? (this.passwordError = "Password must be at least 10 characters")
         : !regex.test(this.password)
-        ? (this.passwordError = "半角のアルファベットと数字をそれぞれ一文字以上入れて下さい")
+        ? (this.passwordError =
+            "半角のアルファベットと数字をそれぞれ一文字以上入れて下さい")
         : (this.passwordError = "");
     },
     validatePasswordConfirmation() {
@@ -176,25 +179,22 @@ export default {
         "registration[password_confirmation]",
         this.passwordConfirmation
       );
-      // formData.append("registration[gender]", this.gender);
       formData.append("registration[date_of_birth]", this.dateOfBirth);
-      this.avatar ? formData.append("registration[avatar]", this.avatar) : false
+      this.avatar
+        ? formData.append("registration[avatar]", this.avatar)
+        : false;
       try {
         const res = await axios.post("http://localhost:3000/auth", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
         });
-        if (!res) {
-          throw new Error("アカウントを登録できませんでした");
-        }
-        if (!this.error) {
-          setItem(res.headers, res.data.data.name);
-          this.$emit("redirectToMemoRoom");
-        }
+        setItem(res.headers, res.data.data.name);
+        this.$emit("redirectToMemoRoom");
         console.log({ res });
         return res;
-      } catch (error) {
+      } catch (err) {
+        errorHandler(err);
         this.error = "アカウントを登録できませんでした";
       }
     },
@@ -267,7 +267,7 @@ export default {
   }
   .sample {
     position: absolute;
-    bottom: -15px;
+    bottom: -25px;
     right: 0;
     z-index: 2;
     display: block;
