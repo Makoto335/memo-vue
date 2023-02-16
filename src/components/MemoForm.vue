@@ -51,7 +51,7 @@ export default {
           throw new Error("メモを保存できませんでした");
         }
         if (!this.error) {
-          this.$emit("getMemos");
+          this.$emit("reloadUserData");
           this.title = null;
           this.content = null;
         }
