@@ -194,7 +194,7 @@ export default {
     },
   },
   mounted() {
-    this.getMemos();
+    this.reloadUserData();
   },
 };
 </script>
