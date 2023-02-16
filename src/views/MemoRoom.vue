@@ -165,19 +165,17 @@ export default {
             },
           }
         );
-        if (!res) {
-          new Error("メッセージ一覧を取得できませんでした");
-        }
-        if (!this.error) {
-          this.getMemos();
-          this.closeDeleteDialog();
-        }
-
+        this.reloadUserData();
+        this.closeDeleteDialog();
         console.log({ res });
         return res;
-      } catch (error) {
-        console.log({ error });
-        this.error = "メモを保存できませんでした";
+      } catch (err) {
+        console.log({ err });
+        errorHandler(err);
+        this.error = "メモを削除できませんでした";
+      } finally {
+        this.closeDeleteDialog();
+        this.idToDelete = "";
       }
     },
     clickCallback(pageNum) {
