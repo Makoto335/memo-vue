@@ -1,7 +1,7 @@
 <template>
   <div class="MemoRoom">
     <Navbar :avatar="avatar" @reloadUserData="reloadUserData" />
-   
+    {{ error }}
     <paginate
       :page-count="getPaginateCount"
       :page-range="3"
