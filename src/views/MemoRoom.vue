@@ -111,9 +111,6 @@ export default {
             client: window.localStorage.getItem("client"),
           },
         });
-        if (!res) {
-          new Error("メッセージ一覧を取得できませんでした");
-        }
         this.memos = res.data.user.memos_array;
         this.avatar = res.data.user.avatar_url;
         return res;
@@ -157,9 +154,6 @@ export default {
     },
     async deleteMemo(id) {
       this.error = null;
-      // this.$refs.cfModal.disableButton();
-      // this.isDisabled = true;
-      // this.$refs.cfModal.loadSubmit();
       try {
         const res = await axios.delete(
           `http://localhost:3000/api/memos/${id}`,
@@ -264,6 +258,5 @@ export default {
     bottom: 1rem;
     right: 1.5rem;
   }
-
 }
 </style>
