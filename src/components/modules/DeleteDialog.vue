@@ -5,7 +5,7 @@
       <p>{{ message }}</p>
       <div class="DeleteDialog_Action">
         <a  class="DeleteDialog_Btn" href="#" @click.prevent.stop="onClickCancel">戻る</a >
-        <button class="DeleteDialog_Btn DeleteDialog_DeleteBtn" @click="onClickDelete">削除</button>
+        <a class="DeleteDialog_Btn DeleteDialog_DeleteBtn" @click.prevent.stop="onClickDelete">削除</a>
       </div>
       <div class="error">{{ error }}</div>
     </div>
@@ -75,6 +75,7 @@ export default {
     line-height: 1.5;
     font-weight: bold;
     cursor: pointer;
+    font-size:1rem;
   }
   &_DeleteBtn {
     background: rgb(239 68 68);
