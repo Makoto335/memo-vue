@@ -19,16 +19,17 @@
       <div v-for="memo in getItems" :key="memo.id" class="MemoRoom_Memos">
         <div class="MemoRoom_BtnWrapper">
           {{ memo.id }}
-          <a 
-            href="#" @click.prevent.stop="
+          <a
+            href="#"
+            @click.prevent.stop="
               shouldShowModal = true;
-              idToEdit = `${memo.id}`;
+              setIdToEdit(`${memo.id}`);
               titleToEdit = `${memo.title}`;
               contentToEdit = `${memo.content}`;
             "
           >
             edit
-          </a >
+          </a>
           <!-- <button @click="deleteMemo(`${memo.id}`)">delete</button> -->
           <a 
             href="#" @click.prevent.stop="
