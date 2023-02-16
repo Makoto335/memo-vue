@@ -119,7 +119,7 @@ export default {
         this.error = "正しくデータを取得できませんでした";
       }
     },
-    confirmDeletion(id) {
+    setIdToDelete(id) {
       this.idToDelete = id;
     },
     setIdToEdit(id) {
