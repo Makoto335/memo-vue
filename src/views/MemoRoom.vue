@@ -15,7 +15,7 @@
       >
     </paginate>
     <div class="MemoRoom_Grid">
-      <MemoForm @getMemos="getMemos" />
+      <MemoForm @reloadUserData="reloadUserData" />
       <div v-for="memo in getItems" :key="memo.id" class="MemoRoom_Memos">
         <div class="MemoRoom_BtnWrapper">
           {{ memo.id }}
