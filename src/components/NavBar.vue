@@ -14,7 +14,11 @@
       <button @click="logout">ログアウト</button>
     </nav>
     <div v-if="showModal">
-      <UpdateAvatar :avatarInNav="avatarInNav" @closeUpdateAvatar="closeUpdateAvatar"  @getMemos="getMemos" />
+      <UpdateAvatar
+        :avatarInNav="avatarInNav"
+        @closeUpdateAvatar="closeUpdateAvatar"
+        @reloadUserData="reloadUserData"
+      />
     </div>
   </div>
 </template>
@@ -70,9 +74,9 @@ export default {
     closeUpdateAvatar() {
       this.showModal = false;
     },
-    getMemos(){
-      this.$emit("getMemos");
-    }
+    reloadUserData() {
+      this.$emit("reloadUserData");
+    },
   },
 };
 </script>
