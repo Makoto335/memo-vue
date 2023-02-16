@@ -122,6 +122,9 @@ export default {
     confirmDeletion(id) {
       this.idToDelete = id;
     },
+    setIdToEdit(id) {
+      this.idToEdit = id;
+    },
     async editMemo(editedTitle, editedContent) {
       this.error = null;
       try {
