@@ -113,9 +113,10 @@ export default {
         }
         this.memos = res.data.user.memos_array;
         this.avatar = res.data.user.avatar_url;
-        console.log(res.data.avatar_url);
+        return res;
       } catch (err) {
-        console.log(err);
+        errorHandler(err);
+        this.error = "正しくデータを取得できませんでした";
       }
     },
     confirmDeletion(id) {
@@ -138,19 +139,14 @@ export default {
             },
           }
         );
-        if (!res) {
-          new Error("メッセージ一覧を取得できませんでした");
-        }
-        if (!this.error) {
-          this.getMemos();
-          this.closeEditForm();
-        }
-
-        console.log({ res });
+        this.reloadUserData();
         return res;
-      } catch (error) {
-        console.log({ error });
+      } catch (err) {
+        errorHandler(err);
         this.error = "メモを保存できませんでした";
+      } finally {
+        this.closeEditForm();
+        this.idToEdit = "";
       }
     },
     async deleteMemo(id) {
