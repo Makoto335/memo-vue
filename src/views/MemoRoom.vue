@@ -1,6 +1,7 @@
 <template>
   <div class="MemoRoom">
-    <Navbar :avatar="avatar" @getMemos="getMemos" />
+    <Navbar :avatar="avatar" @reloadUserData="reloadUserData" />
+   
     <paginate
       :page-count="getPaginateCount"
       :page-range="3"
