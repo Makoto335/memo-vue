@@ -31,14 +31,15 @@
             edit
           </a>
           <!-- <button @click="deleteMemo(`${memo.id}`)">delete</button> -->
-          <a 
-            href="#" @click.prevent.stop="
+          <a
+            href="#"
+            @click.prevent.stop="
               deleteDialog = true;
-              confirmDeletion(`${memo.id}`);
+              setIdToDelete(`${memo.id}`);
             "
           >
             delete
-          </a >
+          </a>
         </div>
         <h3>{{ memo.title }}</h3>
         <p>{{ memo.content }}</p>
