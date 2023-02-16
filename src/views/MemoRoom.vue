@@ -52,7 +52,7 @@
         :titleToEdit="titleToEdit"
         :contentToEdit="contentToEdit"
         @closeEditForm="closeEditForm"
-        @getMemos="getMemos"
+        @reloadUserData="reloadUserData"
         @editMemo="editMemo"
       />
     </div>
@@ -98,7 +98,8 @@ export default {
     closeDeleteDialog() {
       this.deleteDialog = false;
     },
-    async getMemos() {
+    async reloadUserData() {
+      this.error = null;
       try {
         const res = await axios.get("http://localhost:3000/user", {
           headers: {
