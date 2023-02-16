@@ -82,7 +82,7 @@ export default {
             "Content-Type": "multipart/form-data",
           },
         });
-        this.$emit("getMemos");
+        this.$emit("reloadUserData");
         this.onClickCancel();
         console.log({ res });
         return res;
