@@ -75,6 +75,7 @@ import axios from "axios";
 import Paginate from "vuejs-paginate-next";
 import EditForm from "../components/modules/EditForm";
 import DeleteDialog from "../components/modules/DeleteDialog";
+import errorHandler from "@/plugins/errorHandler";
 
 export default {
   components: { Navbar, MemoForm, Paginate, EditForm, DeleteDialog },
