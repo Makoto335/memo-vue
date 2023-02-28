@@ -29,7 +29,7 @@
               contentToEdit = `${memo.content}`;
             "
           >
-            編集
+            <font-awesome-icon icon="fa-solid fa-pencil" class="fa-lg" />
           </a>
           <a
             href="#"
@@ -38,7 +38,7 @@
               setIdToDelete(`${memo.id}`);
             "
           >
-            削除
+            <font-awesome-icon icon="fa-solid fa-trash-can" class="fa-lg" />
           </a>
         </div>
         <h3>{{ memo.title }}</h3>
@@ -201,13 +201,12 @@ export default {
 
 <style scoped lang="scss">
 .MemoRoom {
-    .prev-class .next-class {
+  .prev-class .next-class {
     cursor: pointer;
   }
   a {
     text-decoration: none;
-    background: #51b392;
-    color: white;
+    color: black;
     font-weight: bold;
     border: 0;
     border-radius: 3px;
@@ -251,11 +250,10 @@ export default {
     right: 1rem;
     a {
       display: inline-block;
-      width: 45px;
+      width: 5px;
       text-align: center;
       &:nth-child(2) {
-        margin-left: 20px;
-        background: rgb(239 68 68);
+        margin-left: 5px;
       }
     }
   }
