@@ -1,6 +1,13 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
-import './assets/main.scss'
+import { createApp } from "vue";
+import App from "./App.vue";
+import router from "./router";
+import "./assets/main.scss";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faTrashCan, faPencil } from "@fortawesome/free-solid-svg-icons";
 
-createApp(App).use(router).mount('#app')
+library.add(faTrashCan, faPencil);
+createApp(App)
+  .use(router)
+  .component("font-awesome-icon", FontAwesomeIcon)
+  .mount("#app");
