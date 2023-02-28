@@ -1,7 +1,7 @@
 <template>
   <div class="MemoRoom">
     <Navbar :avatar="avatar" @reloadUserData="reloadUserData" />
-    {{ error }}
+    <div class="error">{{ error }}</div>
     <paginate
       :page-count="getPaginateCount"
       :page-range="3"
@@ -11,34 +11,34 @@
       :next-text="'＞'"
       :container-class="'pagination'"
       :page-class="'page-item'"
+      :prev-class="'prev-class'"
+      :next-class="'next-class'"
     >
       >
     </paginate>
     <div class="MemoRoom_Grid">
       <MemoForm @reloadUserData="reloadUserData" />
-      <div v-for="memo in getItems" :key="memo.id" class="MemoRoom_Memos">
+      <div v-for="memo in reversedMemos" :key="memo.id" class="MemoRoom_Memos">
         <div class="MemoRoom_BtnWrapper">
-          {{ memo.id }}
           <a
             href="#"
             @click.prevent.stop="
-              shouldShowModal = true;
+              showEditForm = true;
               setIdToEdit(`${memo.id}`);
               titleToEdit = `${memo.title}`;
               contentToEdit = `${memo.content}`;
             "
           >
-            edit
+            編集
           </a>
-          <!-- <button @click="deleteMemo(`${memo.id}`)">delete</button> -->
           <a
             href="#"
             @click.prevent.stop="
-              deleteDialog = true;
+              showDeleteDialog = true;
               setIdToDelete(`${memo.id}`);
             "
           >
-            delete
+            削除
           </a>
         </div>
         <h3>{{ memo.title }}</h3>
@@ -48,9 +48,8 @@
         </div>
       </div>
     </div>
-    <div v-if="shouldShowModal">
+    <div v-if="showEditForm">
       <EditForm
-        :idToEdit="idToEdit"
         :titleToEdit="titleToEdit"
         :contentToEdit="contentToEdit"
         @closeEditForm="closeEditForm"
@@ -58,9 +57,8 @@
         @editMemo="editMemo"
       />
     </div>
-    <div v-if="deleteDialog">
+    <div v-if="showDeleteDialog">
       <DeleteDialog
-        :idToDelete="idToDelete"
         @closeDeleteDialog="closeDeleteDialog"
         @deleteMemo="deleteMemo(idToDelete)"
       />
@@ -85,22 +83,16 @@ export default {
       currentPage: 1,
       perPage: 11,
       error: "",
-      shouldShowModal: false,
+      showEditForm: false,
       idToEdit: "",
       titleToEdit: "",
       contentToEdit: "",
       idToDelete: "",
-      deleteDialog: false,
+      showDeleteDialog: false,
       avatar: "",
     };
   },
   methods: {
-    closeEditForm() {
-      this.shouldShowModal = false;
-    },
-    closeDeleteDialog() {
-      this.deleteDialog = false;
-    },
     async reloadUserData() {
       this.error = null;
       try {
@@ -118,12 +110,6 @@ export default {
         errorHandler(err);
         this.error = "正しくデータを取得できませんでした";
       }
-    },
-    setIdToDelete(id) {
-      this.idToDelete = id;
-    },
-    setIdToEdit(id) {
-      this.idToEdit = id;
     },
     async editMemo(editedTitle, editedContent) {
       this.error = null;
@@ -152,6 +138,13 @@ export default {
         this.idToEdit = "";
       }
     },
+    setIdToEdit(id) {
+      this.idToEdit = id;
+    },
+    closeEditForm() {
+      this.idToEdit = "";
+      this.showEditForm = false;
+    },
     async deleteMemo(id) {
       this.error = null;
       try {
@@ -178,12 +171,19 @@ export default {
         this.idToDelete = "";
       }
     },
+    setIdToDelete(id) {
+      this.idToDelete = id;
+    },
+    closeDeleteDialog() {
+      this.idToDelete = "";
+      this.showDeleteDialog = false;
+    },
     clickCallback(pageNum) {
       this.currentPage = Number(pageNum);
     },
   },
   computed: {
-    getItems: function () {
+    reversedMemos: function () {
       let reversedMemos = this.memos.slice().reverse();
       let start = (this.currentPage - 1) * this.perPage;
       let end = this.currentPage * this.perPage;
@@ -201,12 +201,18 @@ export default {
 
 <style scoped lang="scss">
 .MemoRoom {
-  .pagination {
-    text-align: center;
-    margin: 10 0 0 0;
-    padding: 0;
-    list-style-type: none;
-    // color: white;
+    .prev-class .next-class {
+    cursor: pointer;
+  }
+  a {
+    text-decoration: none;
+    background: #51b392;
+    color: white;
+    font-weight: bold;
+    border: 0;
+    border-radius: 3px;
+    padding: 10px 20px;
+    cursor: pointer;
   }
   &_Grid {
     display: grid;
@@ -243,8 +249,10 @@ export default {
     position: absolute;
     top: 1rem;
     right: 1rem;
-    button {
-      width: 80px;
+    a {
+      display: inline-block;
+      width: 45px;
+      text-align: center;
       &:nth-child(2) {
         margin-left: 20px;
         background: rgb(239 68 68);
@@ -257,6 +265,10 @@ export default {
     position: absolute;
     bottom: 1rem;
     right: 1.5rem;
+  }
+  .error {
+    text-align: center;
+    font-size: 1rem;
   }
 }
 </style>
