@@ -21,29 +21,68 @@ button {
   margin-top: 30px;
   background-color: #ededed;
 }
-a {
-  text-decoration: none;
-  background: #51b392;
-  color: white;
-  font-weight: bold;
-  border: 0;
-  border-radius: 3px;
-  padding: 10px 20px;
-  cursor: pointer;
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin: 10 0 0 0;
+  padding: 0;
+  list-style-type: none;
 }
 .page-item {
   display: inline-block;
   width: 50px;
   height: 50px;
+  text-align: center;
   line-height: 48px;
   margin: 0 2px;
   box-sizing: border-box;
-  text-align: center;
   border-radius: 5px;
+  &:not(.disabled) {
+    &:hover {
+      background: grey;
+    }
+  }
   cursor: pointer;
   &.active {
-    background: #f5811f;
-    a{color: #fff;}
+    background: #367edd;
+    a {
+      color: #fff;
+    }
   }
+}
+.page-link {
+  display: block;
+  width: 50px;
+  height: 50px;
 
+}
+.prev-class {
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  line-height: 48px;
+  &.disabled {
+    visibility: hidden;
+  }
+  &:not(.disabled) {
+    &:hover {
+      background: grey;
+    }
+  }
+}
+.next-class {
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  line-height: 48px;
+  &.disabled {
+    visibility: hidden;
+  }
+  &:not(.disabled) {
+    &:hover {
+      background: grey;
+    }
+  }
 }
