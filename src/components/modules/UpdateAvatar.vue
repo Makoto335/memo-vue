@@ -3,20 +3,24 @@
     <div class="UpdateAvatar_Overlay"></div>
     <div class="UpdateAvatar_Wrapper">
       <form @submit.prevent="updateAvatar()">
-        <div class="UpdateAvatar_UpdateImage">
+        <div class="UpdateAvatar_Avatar">
           >
-          <img class="UpdateAvatar_Avatar" :src="previewAvatar" />
+          <img class="UpdateAvatar_Image" :src="previewAvatar" />
           <div class="circle">
-            <label class="sample">
+            <label class="UpdateAvatar_CameraIcon">
               <input type="file" name="image" @change="selectedImage" />
             </label>
           </div>
         </div>
-        <input type="submit" value="保存する" />
-        <div class="ConfirmationModal_Action">
-          <a  class="ConfirmationModal_Btn" href="#" @click.prevent.stop="onClickCancel">
+        <div class="UpdateAvatar_BtnWrapper">
+          <a
+            class="UpdateAvatar_CancelBtn"
+            href="#"
+            @click.prevent.stop="onClickCancel"
+          >
             戻る
-          </a >
+          </a>
+          <button class="UpdateAvatar_SaveBtn">保存</button>
         </div>
         <div class="error">{{ error }}</div>
       </form>
@@ -45,7 +49,6 @@ export default {
       e.preventDefault();
       this.avatar = e.target.files[0];
       this.previewAvatar = URL.createObjectURL(this.avatar);
-      // name = file.name,
       let size = this.avatar.size,
         type = this.avatar.type,
         errors = "";
@@ -88,7 +91,7 @@ export default {
         return res;
       } catch (err) {
         errorHandler(err);
-        this.error = "アカウントを登録できませんでした";
+        this.error = "画像を変更できませんでした";
       }
     },
   },
@@ -114,7 +117,7 @@ export default {
     position: absolute;
     top: 48%;
     left: 50%;
-    // display: flex;
+    // background: linear-gradient(-20deg, #00cdac 0%, #8ddad5 100%);
     flex-direction: column;
     transform: translate(-50%, -50%);
     width: 500px;
@@ -129,34 +132,69 @@ export default {
     margin: auto;
     width: 300px;
   }
-  &_Avatar {
+  &_Image {
     margin: 0 auto;
     display: block;
     width: 300px;
     height: 300px;
     border-radius: 50%;
   }
-  &_UpdateImage {
+  &_Avatar {
     margin: 0 auto;
-    height: 300px;
+    height: 380px;
     width: 300px;
     position: relative;
     input {
       display: none;
     }
   }
-}
-.sample {
-  position: absolute;
-  bottom: -50px;
-  right: 0;
-  z-index: 2;
-  display: block;
-  height: 80px;
-  width: 80px;
-  background-image: url("../../assets/images/add-camera_96.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  cursor: pointer;
+  &_CameraIcon {
+    position: absolute;
+    bottom: 40px;
+    right: 0;
+    z-index: 2;
+    display: block;
+    height: 80px;
+    width: 80px;
+    background-image: url("../../assets/images/add-camera_96.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    cursor: pointer;
+  }
+  &_BtnWrapper {
+    margin-top: auto;
+    display: flex;
+    width: 300px;
+    font-size: 1rem;
+  }
+  &_SaveBtn {
+    width: 160px;
+    text-align: center;
+    margin: 0 20px;
+    text-decoration: none;
+    background: #367EDD;
+    color: white;
+    font-weight: bold;
+    border: 0;
+    border-radius: 3px;
+    cursor: pointer;
+    padding: 10px 20px;
+    font-size: 1rem;
+    line-height: 25px;
+  }
+  &_CancelBtn {
+    margin: 0 20px;
+    width: 120px;
+    font-size: 1rem;
+    text-decoration: none;
+    padding: 10px 20px;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid #000000;
+    color: black;
+    font-weight: bold;
+    background: white;
+    line-height: 25px;
+  }
 }
 </style>

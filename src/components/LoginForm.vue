@@ -3,19 +3,11 @@
     <h2>ログイン</h2>
     <form @submit.prevent="login">
       <label>メールアドレス</label>
-      <input
-        type="email"
-        placeholder="メールアドレス"
-        v-model="email"
-      />
+      <input type="email" placeholder="メールアドレス" v-model="email" />
       <label>パスワード</label>
-      <input
-        type="password"
-        placeholder="パスワード"
-        v-model="password"
-      />
+      <input type="password" placeholder="パスワード" v-model="password" />
       <div class="error">{{ error }}</div>
-      <div class="LoginForm_BtnWrapper"><button>ログインする</button></div>
+      <div class="LoginForm_BtnWrapper"><button>ログイン</button></div>
     </form>
   </div>
 </template>
@@ -23,6 +15,7 @@
 <script>
 import axios from "axios";
 import setItem from "../plugins/auth/setItem";
+import errorHandler from "../plugins/errorHandler";
 
 export default {
   emits: ["redirectToMemoRoom"],
@@ -35,26 +28,18 @@ export default {
   },
   methods: {
     async login() {
+      this.error = null;
       try {
-        this.error = null;
-
         const res = await axios.post("http://localhost:3000/auth/sign_in", {
           email: this.email,
           password: this.password,
         });
-
-        if (!res) {
-          throw new Error("メールアドレスかパスワードが違います");
-        }
-        if (!this.error) {
-          setItem(res.headers, res.data.data.name);
-          this.$emit("redirectToMemoRoom");
-        }
-
+        setItem(res.headers, res.data.data.name);
+        this.$emit("redirectToMemoRoom");
         console.log({ res });
         return res;
-      } catch (error) {
-        console.log({ error });
+      } catch (err) {
+        errorHandler(err);
         this.error = "メールアドレスかパスワードが違います";
       }
     },
@@ -64,12 +49,18 @@ export default {
 
 <style scoped lang="scss">
 .LoginForm {
-  label {
-    margin-left: 5px;
-    font-weight: bold;
+  width: 500px;
+  margin: 0 auto;
+  padding: 10px;
+  button {
+    background: linear-gradient(-20deg, #00cdac 0%, #8ddad5 100%);
   }
   h2 {
     text-align: center;
+  }
+  label {
+    margin-left: 5px;
+    font-weight: bold;
   }
   input {
     width: 100%;

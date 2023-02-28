@@ -3,9 +3,15 @@
     <div class="DeleteDialog_Overlay"></div>
     <div class="DeleteDialog_Wrapper">
       <p>{{ message }}</p>
-      <div class="DeleteDialog_Action">
-        <a  class="DeleteDialog_Btn" href="#" @click.prevent.stop="onClickCancel">戻る</a >
-        <a class="DeleteDialog_Btn DeleteDialog_DeleteBtn" @click.prevent.stop="onClickDelete">削除</a>
+      <div class="DeleteDialog_BtnWrapper">
+        <a class="DeleteDialog_Btn DeleteDialog_CancelBtn" href="#" @click.prevent.stop="onClickCancel"
+          >戻る</a
+        >
+        <a
+          class="DeleteDialog_Btn DeleteDialog_DeleteBtn"
+          @click.prevent.stop="onClickDelete"
+          >削除</a
+        >
       </div>
       <div class="error">{{ error }}</div>
     </div>
@@ -63,7 +69,7 @@ export default {
     border: 1px solid #333;
     text-align: center;
   }
-    &_Action {
+  &_BtnWrapper {
     margin-top: auto;
     display: flex;
     justify-content: center;
@@ -71,13 +77,21 @@ export default {
   &_Btn {
     width: 130px;
     margin: 0 20px;
-    padding: 8px;
-    line-height: 1.5;
+    text-decoration: none;
+    color: white;
     font-weight: bold;
+    border-radius: 3px;
+    padding: 10px 20px;
+    line-height: 1.5;
     cursor: pointer;
-    font-size:1rem;
+    font-size: 1rem;
+  }
+  &_CancelBtn{
+    border: 1px solid #000000;
+    color: black;
   }
   &_DeleteBtn {
+    border: 0;
     background: rgb(239 68 68);
     color: white;
   }

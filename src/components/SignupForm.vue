@@ -8,6 +8,7 @@
           <input type="file" name="image" @change="selectedImage" />
         </label>
       </div>
+      <div class="error SignupForm_AvatarError">{{ avatarError }}</div>
       <div class="SignupForm_TextInput">
         <label>お名前</label>
         <input
@@ -31,7 +32,7 @@
         <label>パスワード</label>
         <input
           type="password"
-          placeholder="パスワード"
+          placeholder="１０文字以上の半角英字と半角数字の混合"
           v-model="password"
           autocomplete="off"
           @blur="
@@ -49,6 +50,7 @@
           type="password"
           placeholder="パスワード（確認用）"
           v-model="passwordConfirmation"
+          autocomplete="off"
           @blur="validatePasswordConfirmation"
           @keyup="validatePasswordConfirmation"
         />
@@ -56,13 +58,15 @@
       </div>
       <div class="SignupForm_DateOfBirth">
         <label>生年月日</label>
-        <SelectDate v-model="dateOfBirth" />
+        <SelectDate @setDateOfBirth="setDateOfBirth" />
+        <div class="error">{{ dateOfBirthError }}</div>
       </div>
+
       <div class="error">{{ error }}</div>
-      <div class="error">{{ error2 }}</div>
       <div class="SignupForm_BtnWrapper">
-        <!-- <button :class="{ _disabled: !isValid }"  :disabled="!isValid"> -->
-        <button :class="{ _disabled: !isValid }">登録する</button>
+        <button :class="{ _disabled: !isValid }" :disabled="!isValid">
+          登録する
+        </button>
       </div>
     </form>
   </div>
@@ -74,25 +78,27 @@ import axios from "axios";
 import setItem from "../plugins/auth/setItem";
 import SelectDate from "./modules/SelectDate.vue";
 import errorHandler from "../plugins/errorHandler";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+dayjs.extend(customParseFormat);
 
 export default {
   components: { SelectDate },
   emits: ["redirectToMemoRoom"],
   data() {
-    const defaultDate = dayjs().toDate();
     return {
       name: "",
-      nameError: "",
+      nameError: null,
       email: "",
-      emailError: "",
+      emailError: null,
       password: "",
-      passwordError: "",
+      passwordError: null,
       passwordConfirmation: "",
-      passwordConfirmationError: "",
+      passwordConfirmationError: null,
       error: null,
-      error2: null,
-      dateOfBirth: defaultDate,
+      dateOfBirth: "",
+      dateOfBirthError: null,
       avatar: null,
+      avatarError: null,
       preview: require("../assets/images/blank-profile-picture_640.png"),
     };
   },
@@ -107,17 +113,33 @@ export default {
         !this.passwordError &&
         this.passwordConfirmation &&
         !this.passwordConfirmationError &&
-        this.dateOfBirth
+        this.dateOfBirth &&
+        !this.dateOfBirthError
       );
     },
   },
+  watch: {
+    dateOfBirth(date) {
+      if (
+        !dayjs(date, "YYYY-M-D", true).isValid() ||
+        !dayjs(date, "YYYY-M-D", true).isBefore()
+      ) {
+        this.dateOfBirthError = "有効な日付を選択して下さい";
+      } else {
+        this.dateOfBirthError = null;
+      }
+    },
+  },
   methods: {
+    setDateOfBirth(value) {
+      this.dateOfBirth = value;
+    },
     validateName() {
       !this.name
         ? (this.nameError = "お名前を入力してください")
         : this.name.length > 60
         ? (this.nameError = "60文字以内にして下さい")
-        : (this.nameError = "");
+        : (this.nameError = null);
     },
     validateEmail() {
       const regex = new RegExp(
@@ -128,27 +150,28 @@ export default {
         ? (this.emailError = "有効なメールアドレスを入力してください")
         : this.email.length > 254
         ? (this.emailError = "254文字以内にして下さい")
-        : (this.emailError = "");
+        : (this.emailError = null);
     },
     validatePassword() {
       const regex = /^(?=.*?[a-z])(?=.*?\d)[a-z\d]{8,100}$/i;
       this.password.length < 10
-        ? (this.passwordError = "Password must be at least 10 characters")
+        ? (this.passwordError =
+            "１０文字以上の半角英字と半角数字の混合にしてください")
         : !regex.test(this.password)
         ? (this.passwordError =
             "半角のアルファベットと数字をそれぞれ一文字以上入れて下さい")
-        : (this.passwordError = "");
+        : (this.passwordError = null);
     },
     validatePasswordConfirmation() {
       !(this.passwordConfirmation === this.password)
         ? (this.passwordConfirmationError = "Passwords do not match")
-        : (this.passwordConfirmationError = "");
+        : (this.passwordConfirmationError = null);
     },
     selectedImage(e) {
       e.preventDefault();
       this.avatar = e.target.files[0];
+      this.avatarError = null;
       this.preview = URL.createObjectURL(this.avatar);
-      // name = file.name,
       let size = this.avatar.size,
         type = this.avatar.type,
         errors = "";
@@ -165,8 +188,9 @@ export default {
           ".jpg、.gif、.png、.pdfのいずれかのファイルのみ許可されています\n";
       }
       if (errors) {
-        alert(errors);
-        this.avatar = "";
+        console.log(errors);
+        this.avatarError = errors;
+        this.avatar = null;
       }
     },
     async signUp() {
@@ -203,23 +227,19 @@ export default {
 </script>
 
 <style scoped lang="scss">
-._disabled {
-  background: grey;
-}
 .SignupForm {
   width: 500px;
   margin: 0 auto;
   padding: 10px;
+  button {
+    background: linear-gradient(-20deg, #00cdac 0%, #8ddad5 100%);
+  }
   h2 {
     text-align: center;
   }
   label {
     margin-left: 5px;
     font-weight: bold;
-  }
-  &_Wrapper {
-    width: 400px;
-    margin: 0 auto;
   }
   &_TextInput {
     input {
@@ -232,26 +252,12 @@ export default {
       box-sizing: border-box;
     }
   }
-  &_GenderInput {
-    margin: 0 0 10px 0;
-    height: 20px;
-    line-height: 20px;
-    display: flex;
-    input {
-      margin: unset;
-      width: 30px;
-      height: 100%;
-      &:nth-child(2) {
-        margin-left: 20px;
-      }
-    }
-  }
   &_DateOfBirth {
     margin: 0 0 10px 0;
   }
   &_UploadAvatar {
     margin: 0 auto;
-    height: 150px;
+    height: 200px;
     width: 150px;
     position: relative;
     input {
@@ -265,9 +271,12 @@ export default {
     height: 150px;
     border-radius: 50%;
   }
+  &_AvatarError {
+    white-space: pre-line;
+  }
   &_CameraIcon {
     position: absolute;
-    bottom: -25px;
+    bottom: 25px;
     right: 0;
     z-index: 2;
     display: block;
@@ -278,16 +287,12 @@ export default {
     background-repeat: no-repeat;
     cursor: pointer;
   }
-  &_Terms {
-    margin: 0 0 10px 0;
-    input[type="checkbox"] {
-      transform: scale(1.5);
-      margin: 0 6px 0 0;
-    }
-  }
   &_BtnWrapper {
     text-align: center;
-    margin: 20px auto;
+    margin-top: 50px;
+  }
+  ._disabled {
+    background: grey;
   }
 }
 </style>

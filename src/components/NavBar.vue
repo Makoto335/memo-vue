@@ -95,6 +95,9 @@ export default {
     font-size: 16px;
     color: #444;
   }
+  button {
+    background: radial-gradient(486px at 37.5% -17.2%, rgb(255, 2, 2) 0%, rgb(254, 78, 172) 90%);
+  }
   &_Avatar {
     display: block;
     width: 100px;

@@ -11,17 +11,15 @@
           <span>Content</span>
           <textarea v-model="content"></textarea>
         </label>
-        <input type="submit" value="保存する" />
-        <div class="ConfirmationModal_Action">
-          <a class="ConfirmationModal_Btn" href="#" @click.prevent.stop="onClickCancel">
-            <!-- <button
-            class="ConfirmationModal_Btn"
-            :disabled="isDisabled"
-            @click="onClickCancel"
-            :class="{ _disabledBtn: isDisabled }"
-          > -->
+        <div class="EditForm_BtnWrapper">
+          <a
+            class="EditForm_CancelBtn"
+            href="#"
+            @click.prevent.stop="onClickCancel"
+          >
             戻る
           </a>
+          <button class="EditForm_SaveBtn">保存</button>
         </div>
         <div class="error">{{ error }}</div>
       </form>
@@ -31,7 +29,7 @@
 
 <script>
 export default {
-  props: ["idToEdit", "titleToEdit", "contentToEdit"],
+  props: ["titleToEdit", "contentToEdit"],
   data() {
     return {
       title: this.titleToEdit,
@@ -45,7 +43,7 @@ export default {
       this.$emit("closeEditForm");
     },
     onClickEdit() {
-      this.$emit("editMemo",this.title,this.content);
+      this.$emit("editMemo", this.title, this.content);
     },
   },
 };
@@ -59,7 +57,6 @@ export default {
   width: 100%;
   height: 100%;
   z-index: 6;
-
   &_Overlay {
     width: 100%;
     height: 100%;
@@ -98,6 +95,41 @@ export default {
     display: block;
     width: 100%;
     padding: 0.5rem 1rem 0.5rem 1rem;
+  }
+  &_BtnWrapper {
+    margin-top: 20px;
+    display: flex;
+    width: 300px;
+    font-size: 1rem;
+  }
+  &_SaveBtn {
+    width: 160px;
+    text-align: center;
+    margin: 0 20px;
+    text-decoration: none;
+    background: #367edd;
+    color: white;
+    font-weight: bold;
+    border: 0;
+    border-radius: 3px;
+    cursor: pointer;
+    padding: 10px 20px;
+    font-size: 1rem;
+    line-height: 25px;
+  }
+  &_CancelBtn {
+    margin: 0 20px;
+    width: 120px;
+    font-size: 1rem;
+    text-decoration: none;
+    padding: 10px 20px;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid #000000;
+    color: black;
+    font-weight: bold;
+    background: white;
+    line-height: 25px;
   }
 }
 </style>

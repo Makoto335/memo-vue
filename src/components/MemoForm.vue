@@ -9,7 +9,7 @@
         <span>Content</span>
         <textarea v-model="content"></textarea>
       </label>
-      <input type="submit" value="保存する" />
+      <button class="MemoForm_SaveBtn">保存</button>
       <div class="error">{{ error }}</div>
     </form>
   </div>
@@ -17,6 +17,7 @@
 
 <script>
 import axios from "axios";
+import errorHandler from "../plugins/errorHandler";
 
 export default {
   data() {
@@ -46,20 +47,13 @@ export default {
             },
           }
         );
-
-        if (!res) {
-          throw new Error("メモを保存できませんでした");
-        }
-        if (!this.error) {
-          this.$emit("reloadUserData");
-          this.title = null;
-          this.content = null;
-        }
-
+        this.$emit("reloadUserData");
+        // this.title = null;
+        // this.content = null;
         console.log({ res });
         return res;
-      } catch (error) {
-        console.log({ error });
+      } catch (err) {
+        errorHandler(err);
         this.error = "メモを保存できませんでした";
       }
     },
@@ -71,7 +65,7 @@ export default {
 .MemoForm {
   form {
     width: 300px;
-    margin: 1.5rem;
+    margin-left: 1.5rem;
     label {
       display: block;
     }
@@ -86,6 +80,21 @@ export default {
     display: block;
     width: 100%;
     padding: 0.5rem 1rem 0.5rem 1rem;
+  }
+  &_SaveBtn {
+    margin-top: 10px;
+    width: 100px;
+    text-align: center;
+    text-decoration: none;
+    background: #367edd;
+    color: white;
+    font-weight: bold;
+    border: 0;
+    border-radius: 3px;
+    cursor: pointer;
+    padding: 10px 20px;
+    font-size: 1rem;
+    line-height: 25px;
   }
 }
 </style>
