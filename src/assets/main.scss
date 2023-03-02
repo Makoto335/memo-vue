@@ -1,10 +1,15 @@
+// * {
+//   outline: 2px red solid;
+// }
+
 body {
   color: #444;
   font-family: Bodoni MT, Didot, Didot LT STD, Hoefler Text, Garamond,
     Times New Roman, serif;
   line-height: 1.7;
   min-height: 100vh;
-  background: linear-gradient(-20deg, #00cdac 0%, #8ddad5 100%);
+  background: #252A2E;
+  margin: unset;
 }
 .error {
   color: #ff3f80;
@@ -14,7 +19,8 @@ button {
   text-decoration: none;
   font-family: Bodoni MT, Didot, Didot LT STD, Hoefler Text, Garamond,
     Times New Roman, serif;
-  box-sizing: border-box;}
+  box-sizing: border-box;
+}
 
 @mixin box001 {
   padding: 20px;
@@ -44,9 +50,9 @@ button {
   }
   cursor: pointer;
   &.active {
-    background: #367edd;
+    background: #5FFE0E;
     a {
-      color: #fff;
+      color: black;
     }
   }
 }
@@ -54,7 +60,6 @@ button {
   display: block;
   width: 50px;
   height: 50px;
-
 }
 .prev-class {
   cursor: pointer;
