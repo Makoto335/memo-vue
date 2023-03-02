@@ -44,7 +44,7 @@
         <h3>{{ memo.title }}</h3>
         <p>{{ memo.content }}</p>
         <div class="MemoRoom_CreateAt">
-          {{ memo.created_at }}
+          {{ formatDate(memo.created_at) }}
         </div>
       </div>
     </div>
@@ -74,6 +74,7 @@ import Paginate from "vuejs-paginate-next";
 import EditForm from "../components/modules/EditForm";
 import DeleteDialog from "../components/modules/DeleteDialog";
 import errorHandler from "@/plugins/errorHandler";
+import dayjs from "dayjs";
 
 export default {
   components: { Navbar, MemoForm, Paginate, EditForm, DeleteDialog },
@@ -181,6 +182,9 @@ export default {
     clickCallback(pageNum) {
       this.currentPage = Number(pageNum);
     },
+    formatDate(date) {
+      return dayjs(date).format("YYYY-MM-DD HH:mm:ss");
+    },
   },
   computed: {
     reversedMemos: function () {
@@ -201,9 +205,7 @@ export default {
 
 <style scoped lang="scss">
 .MemoRoom {
-  .prev-class .next-class {
-    cursor: pointer;
-  }
+  color: white;
   a {
     text-decoration: none;
     color: black;
@@ -216,15 +218,17 @@ export default {
   &_Grid {
     display: grid;
     gap: 5px;
+    justify-content: center;
     grid-template-columns: repeat(4, minmax(300px, 1fr));
   }
   &_Memos {
     position: relative;
     background: white;
     padding: 1.5rem;
-    margin: 0.5rem;
+    margin: 10px auto;
     width: 360px;
     height: 200px;
+    color: black;
     h3 {
       width: 180px;
       height: 58px;
