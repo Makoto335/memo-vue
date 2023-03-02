@@ -41,7 +41,6 @@ export default {
   data() {
     return {
       name: window.localStorage.getItem("name"),
-      email: window.localStorage.getItem("uid"),
       showModal: false,
       error: null,
       showLogoutDialog: false,
@@ -55,7 +54,6 @@ export default {
   methods: {
     async logout() {
       this.error = null;
-
       try {
         const res = await axios.delete("http://localhost:3000/auth/sign_out", {
           headers: {
@@ -89,26 +87,47 @@ export default {
 
 <style scoped lang="scss">
 .NavBar {
-  nav {
-    padding: 10px;
-    border-bottom: 1px solid #eee;
+  color: black;
+  &_Wrapper {
+    height: 55px;
+    background: #fcf707;
+    border-bottom: 1px solid;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    box-sizing: border-box;
   }
-  p {
-    margin: 2px auto;
-    font-size: 16px;
-    color: #444;
-  }
-  button {
-    background: radial-gradient(486px at 37.5% -17.2%, rgb(255, 2, 2) 0%, rgb(254, 78, 172) 90%);
+  &_LogoutBtn {
+    a {
+      background: #252a2e;
+      text-align: center;
+      margin: 0 20px;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      border: 0;
+      border-radius: 3px;
+      cursor: pointer;
+      padding: 10px 20px;
+      font-size: 1rem;
+      line-height: 25px;
+    }
   }
   &_Avatar {
+    margin: 0 20px;
     display: block;
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
+  }
+  &_User {
+    position: absolute;
+    right: 0;
+    display: flex;
+    align-items: center;
+  }
+  .error {
+    margin: 0;
   }
 }
 </style>
