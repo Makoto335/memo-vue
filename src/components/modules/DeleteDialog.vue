@@ -5,12 +5,12 @@
       <p>{{ message }}</p>
       <div class="DeleteDialog_BtnWrapper">
         <a class="DeleteDialog_Btn DeleteDialog_CancelBtn" href="#" @click.prevent.stop="onClickCancel"
-          >戻る</a
+          >Cancel</a
         >
         <a
           class="DeleteDialog_Btn DeleteDialog_DeleteBtn"
           @click.prevent.stop="onClickDelete"
-          >削除</a
+          >Delete</a
         >
       </div>
       <div class="error">{{ error }}</div>
@@ -46,7 +46,9 @@ export default {
   width: 100%;
   height: 100%;
   z-index: 6;
-
+  p{
+    color:#000000;
+  }
   &_Overlay {
     width: 100%;
     height: 100%;
