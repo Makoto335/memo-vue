@@ -7,7 +7,7 @@
       <label>パスワード</label>
       <input type="password" placeholder="パスワード" v-model="password" />
       <div class="error">{{ error }}</div>
-      <div class="LoginForm_BtnWrapper"><button>ログイン</button></div>
+      <div class="LoginForm_BtnWrapper"><button>Login</button></div>
     </form>
   </div>
 </template>
@@ -49,6 +49,7 @@ export default {
 
 <style scoped lang="scss">
 .LoginForm {
+  color: black;
   width: 500px;
   margin: 0 auto;
   padding: 10px;
@@ -70,6 +71,21 @@ export default {
     border: 1px solid #eee;
     outline: none;
     box-sizing: border-box;
+  }
+    button {
+    color: black;
+    margin-top: 10px;
+    width: 200px;
+    text-align: center;
+    text-decoration: none;
+    background: #5ffe0e;
+    font-weight: bold;
+    border: 0;
+    border-radius: 3px;
+    cursor: pointer;
+    padding: 10px 20px;
+    font-size: 1rem;
+    line-height: 25px;
   }
   &_BtnWrapper {
     text-align: center;
