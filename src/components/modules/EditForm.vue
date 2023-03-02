@@ -17,9 +17,9 @@
             href="#"
             @click.prevent.stop="onClickCancel"
           >
-            戻る
+            Cancel
           </a>
-          <button class="EditForm_SaveBtn">保存</button>
+          <button class="EditForm_SaveBtn">Save</button>
         </div>
         <div class="error">{{ error }}</div>
       </form>
@@ -107,8 +107,9 @@ export default {
     text-align: center;
     margin: 0 20px;
     text-decoration: none;
-    background: #367edd;
-    color: white;
+    background: #5FFE0E;
+    color: #000000;
+    // background: #367edd;
     font-weight: bold;
     border: 0;
     border-radius: 3px;
