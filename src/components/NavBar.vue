@@ -1,24 +1,29 @@
 <template>
   <div class="NavBar">
-    <nav>
-      <a href="#" @click.prevent.stop="showModal = true"
-        ><img class="NavBar_Avatar" :src="avatarInNav"
-      /></a>
-      <div>
+    <div class="NavBar_Wrapper">
+      <p class="error">{{ error }}</p>
+      <div class="NavBar_User">
         <p>
           <span class="NavBar_Name">{{ name }}</span
           >さん
         </p>
-        <div class="NavBar_Error">{{ error }}</div>
+        <a href="#" @click.prevent.stop="showModal = true"
+          ><img class="NavBar_Avatar" :src="avatarInNav"
+        /></a>
+        <div class="NavBar_LogoutBtn">
+          <a href="#" @click.prevent.stop="showLogoutDialog = true">Logout </a>
+        </div>
       </div>
-      <button @click="logout">ログアウト</button>
-    </nav>
-    <div v-if="showModal">
-      <UpdateAvatar
-        :avatarInNav="avatarInNav"
-        @closeUpdateAvatar="closeUpdateAvatar"
-        @reloadUserData="reloadUserData"
-      />
+      <div v-if="showModal">
+        <UpdateAvatar
+          :avatarInNav="avatarInNav"
+          @closeUpdateAvatar="closeUpdateAvatar"
+          @reloadUserData="reloadUserData"
+        />
+      </div>
+      <div v-if="showLogoutDialog">
+        <LogoutDialog @closeLogoutDialog="closeLogoutDialog" @logout="logout" />
+      </div>
     </div>
   </div>
 </template>
@@ -27,9 +32,11 @@
 import axios from "axios";
 import removeItem from "../plugins/auth/removeItem";
 import UpdateAvatar from "../components/modules/UpdateAvatar";
+import LogoutDialog from "./modules/LogoutDialog";
+
 export default {
   props: ["avatar"],
-  components: { UpdateAvatar },
+  components: { UpdateAvatar, LogoutDialog },
   data() {
     return {
       name: window.localStorage.getItem("name"),
@@ -73,6 +80,9 @@ export default {
     },
     closeUpdateAvatar() {
       this.showModal = false;
+    },
+    closeLogoutDialog() {
+      this.showLogoutDialog = false;
     },
     reloadUserData() {
       this.$emit("reloadUserData");
