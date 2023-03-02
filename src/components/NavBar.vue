@@ -32,6 +32,7 @@
 import axios from "axios";
 import removeItem from "../plugins/auth/removeItem";
 import UpdateAvatar from "../components/modules/UpdateAvatar";
+import errorHandler from "@/plugins/errorHandler";
 import LogoutDialog from "./modules/LogoutDialog";
 
 export default {
@@ -57,24 +58,17 @@ export default {
       try {
         const res = await axios.delete("http://localhost:3000/auth/sign_out", {
           headers: {
-            uid: this.email,
+            uid: window.localStorage.getItem("uid"),
             "access-token": window.localStorage.getItem("access-token"),
             client: window.localStorage.getItem("client"),
           },
         });
-
-        if (!res) {
-          new Error("ログアウトできませんでした");
-        }
-
-        if (!this.error) {
-          console.log("ログアウトしました");
-          removeItem();
-          this.$router.push({ name: "WelcomePage" });
-        }
-
+        console.log("ログアウトしました");
+        removeItem();
+        this.$router.push({ name: "WelcomePage" });
         return res;
-      } catch (error) {
+      } catch (err) {
+        errorHandler(err);
         this.error = "ログアウトできませんでした";
       }
     },
