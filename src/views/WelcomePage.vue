@@ -51,6 +51,9 @@ export default {
 
 <style scoped lang="scss">
 .WelcomePage {
+  h1{
+    color:#fcf707;
+  }
   span {
     font-weight: bold;
     text-decoration: underline;
