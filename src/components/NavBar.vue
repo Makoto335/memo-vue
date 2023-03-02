@@ -44,6 +44,7 @@ export default {
       email: window.localStorage.getItem("uid"),
       showModal: false,
       error: null,
+      showLogoutDialog: false,
     };
   },
   computed: {
@@ -70,6 +71,7 @@ export default {
       } catch (err) {
         errorHandler(err);
         this.error = "ログアウトできませんでした";
+        this.closeLogoutDialog();
       }
     },
     closeUpdateAvatar() {
