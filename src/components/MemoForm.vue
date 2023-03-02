@@ -9,7 +9,7 @@
         <span>Content</span>
         <textarea v-model="content"></textarea>
       </label>
-      <button class="MemoForm_SaveBtn">保存</button>
+      <button class="MemoForm_SaveBtn">Save</button>
       <div class="error">{{ error }}</div>
     </form>
   </div>
@@ -48,8 +48,8 @@ export default {
           }
         );
         this.$emit("reloadUserData");
-        // this.title = null;
-        // this.content = null;
+        this.title = null;
+        this.content = null;
         console.log({ res });
         return res;
       } catch (err) {
@@ -86,8 +86,7 @@ export default {
     width: 100px;
     text-align: center;
     text-decoration: none;
-    background: #367edd;
-    color: white;
+    background: #5FFE0E;
     font-weight: bold;
     border: 0;
     border-radius: 3px;
