@@ -64,8 +64,12 @@
 
       <div class="error">{{ error }}</div>
       <div class="SignupForm_BtnWrapper">
-        <button :class="{ _disabled: !isValid }" :disabled="!isValid">
-          登録する
+        <button
+          class="SignupForm_Btn"
+          :class="{ _disabled: !isValid }"
+          :disabled="!isValid"
+        >
+          Sign Up
         </button>
       </div>
     </form>
@@ -228,11 +232,24 @@ export default {
 
 <style scoped lang="scss">
 .SignupForm {
+  color: black;
   width: 500px;
   margin: 0 auto;
   padding: 10px;
   button {
-    background: linear-gradient(-20deg, #00cdac 0%, #8ddad5 100%);
+    color: black;
+    margin-top: 10px;
+    width: 200px;
+    text-align: center;
+    text-decoration: none;
+    background: #fcf707;
+    font-weight: bold;
+    border: 0;
+    border-radius: 3px;
+    cursor: pointer;
+    padding: 10px 20px;
+    font-size: 1rem;
+    line-height: 25px;
   }
   h2 {
     text-align: center;
