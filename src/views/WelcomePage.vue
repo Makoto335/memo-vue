@@ -1,7 +1,7 @@
 <template>
   <div class="WelcomePage">
     <div class="WelcomePage_Wrapper">
-      <div class="WelcomePage_AppDescription">
+      <div class="WelcomePage_Title">
         <h1>Simple Memo</h1>
       </div>
       <div class="WelcomePage_Form">
@@ -51,9 +51,6 @@ export default {
 
 <style scoped lang="scss">
 .WelcomePage {
-  h1{
-    color:#fcf707;
-  }
   span {
     font-weight: bold;
     text-decoration: underline;
@@ -62,11 +59,13 @@ export default {
   }
   &_Wrapper {
     width: 600px;
-    margin: 60px auto;
+    margin: 20px auto;
   }
-  &_AppDescription {
+  &_Title {
     text-align: center;
-    margin-top: 80px;
+    h1 {
+      color: #fcf707;
+    }
   }
   &_Form {
     margin: 0 auto;
@@ -75,9 +74,9 @@ export default {
     background: white;
     padding: 10px;
   }
-    &_Text {
-      text-align: center;
-    }
+  &_Text {
+    text-align: center;
+  }
   &_ChangeForm {
     font-size: 16px;
     margin: 10px;
