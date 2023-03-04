@@ -8,8 +8,8 @@ body {
     Times New Roman, serif;
   line-height: 1.7;
   min-height: 100vh;
-  background: #252A2E;
-  margin: unset;
+  background: #252a2e;
+  margin: 0;
 }
 .error {
   color: #ff3f80;
@@ -21,7 +21,42 @@ button {
     Times New Roman, serif;
   box-sizing: border-box;
 }
-
+.btn {
+  display: block;
+  margin-top: 10px;
+  width: 7.5rem;
+  text-align: center;
+  text-decoration: none;
+  background: #5ffe0e;
+  font-weight: bold;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 10px 20px;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  box-sizing: border-box;
+  border: 1px solid #000000;
+  color: black;
+}
+a {
+  text-decoration: none;
+}
+.a-btn {
+  border: 1px solid #000000;
+  display: block;
+  box-sizing: border-box;
+  text-align: center;
+  width: 7.5rem;
+  margin: 0 20px;
+  color: black;
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  line-height: 1.5rem;
+}
 @mixin box001 {
   padding: 20px;
   margin-top: 30px;
@@ -50,7 +85,7 @@ button {
   }
   cursor: pointer;
   &.active {
-    background: #5FFE0E;
+    background: #5ffe0e;
     a {
       color: black;
     }
