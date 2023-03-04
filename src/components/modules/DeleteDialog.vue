@@ -4,11 +4,11 @@
     <div class="DeleteDialog_Wrapper">
       <p>{{ message }}</p>
       <div class="DeleteDialog_BtnWrapper">
-        <a class="DeleteDialog_Btn DeleteDialog_CancelBtn" href="#" @click.prevent.stop="onClickCancel"
+        <a class="a-btn DeleteDialog_CancelBtn" href="#" @click.prevent.stop="onClickCancel"
           >Cancel</a
         >
         <a
-          class="DeleteDialog_Btn DeleteDialog_DeleteBtn"
+          class="a-btn DeleteDialog_DeleteBtn"
           @click.prevent.stop="onClickDelete"
           >Delete</a
         >
@@ -75,18 +75,6 @@ export default {
     margin-top: auto;
     display: flex;
     justify-content: center;
-  }
-  &_Btn {
-    width: 130px;
-    margin: 0 20px;
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    border-radius: 3px;
-    padding: 10px 20px;
-    line-height: 1.5;
-    cursor: pointer;
-    font-size: 1rem;
   }
   &_CancelBtn{
     border: 1px solid #000000;

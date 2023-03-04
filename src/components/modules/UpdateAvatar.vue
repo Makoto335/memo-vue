@@ -14,13 +14,13 @@
         </div>
         <div class="UpdateAvatar_BtnWrapper">
           <a
-            class="UpdateAvatar_CancelBtn"
+            class="UpdateAvatar_CancelBtn a-btn"
             href="#"
             @click.prevent.stop="onClickCancel"
           >
             Cancel
           </a>
-          <button class="UpdateAvatar_SaveBtn">Save</button>
+          <button class="UpdateAvatar_SaveBtn btn">Save</button>
         </div>
         <div class="error">{{ error }}</div>
       </form>
@@ -168,33 +168,11 @@ export default {
     font-size: 1rem;
   }
   &_SaveBtn {
-    width: 160px;
-    text-align: center;
     margin: 0 20px;
-    text-decoration: none;
-    background: #5FFE0E;
-    color: black;
-    font-weight: bold;
-    border: 0;
-    border-radius: 3px;
-    cursor: pointer;
-    padding: 10px 20px;
-    font-size: 1rem;
-    line-height: 25px;
   }
   &_CancelBtn {
     margin: 0 20px;
-    width: 120px;
-    font-size: 1rem;
-    text-decoration: none;
-    padding: 10px 20px;
-    text-align: center;
-    border-radius: 5px;
-    border: 1px solid #000000;
     color: black;
-    font-weight: bold;
-    background: white;
-    line-height: 25px;
   }
 }
 </style>

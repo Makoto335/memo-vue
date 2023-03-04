@@ -65,7 +65,7 @@
       <div class="error">{{ error }}</div>
       <div class="SignupForm_BtnWrapper">
         <button
-          class="SignupForm_Btn"
+          class="SignupForm_Btn btn"
           :class="{ _disabled: !isValid }"
           :disabled="!isValid"
         >
@@ -168,7 +168,7 @@ export default {
     },
     validatePasswordConfirmation() {
       !(this.passwordConfirmation === this.password)
-        ? (this.passwordConfirmationError = "Passwords do not match")
+        ? (this.passwordConfirmationError = "パスワードが一致していません")
         : (this.passwordConfirmationError = null);
     },
     selectedImage(e) {
@@ -236,21 +236,6 @@ export default {
   width: 500px;
   margin: 0 auto;
   padding: 10px;
-  button {
-    color: black;
-    margin-top: 10px;
-    width: 200px;
-    text-align: center;
-    text-decoration: none;
-    background: #fcf707;
-    font-weight: bold;
-    border: 0;
-    border-radius: 3px;
-    cursor: pointer;
-    padding: 10px 20px;
-    font-size: 1rem;
-    line-height: 25px;
-  }
   h2 {
     text-align: center;
   }
@@ -305,8 +290,14 @@ export default {
     cursor: pointer;
   }
   &_BtnWrapper {
-    text-align: center;
-    margin-top: 50px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  &_Btn {
+    width: 200px;
+    background: #fcf707;
+    border: 0;
   }
   ._disabled {
     background: grey;

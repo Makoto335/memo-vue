@@ -9,7 +9,7 @@
         <span>Content</span>
         <textarea v-model="content"></textarea>
       </label>
-      <button class="MemoForm_SaveBtn">Save</button>
+      <button class="btn">Save</button>
       <div class="error">{{ error }}</div>
     </form>
   </div>
@@ -80,20 +80,6 @@ export default {
     display: block;
     width: 100%;
     padding: 0.5rem 1rem 0.5rem 1rem;
-  }
-  &_SaveBtn {
-    margin-top: 10px;
-    width: 100px;
-    text-align: center;
-    text-decoration: none;
-    background: #5FFE0E;
-    font-weight: bold;
-    border: 0;
-    border-radius: 3px;
-    cursor: pointer;
-    padding: 10px 20px;
-    font-size: 1rem;
-    line-height: 25px;
   }
 }
 </style>
