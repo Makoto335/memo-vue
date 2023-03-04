@@ -133,7 +133,7 @@ export default {
         return res;
       } catch (err) {
         errorHandler(err);
-        this.error = "メモを保存できませんでした";
+        this.error = "メモを編集できませんでした";
       } finally {
         this.closeEditForm();
         this.idToEdit = "";
