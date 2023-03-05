@@ -1,7 +1,7 @@
 <template>
   <div class="NavBar">
     <div class="NavBar_Wrapper">
-      <p class="error">{{ error }}</p>
+      <div class="error">{{ error }}</div> 
       <div class="NavBar_User">
         <p>
           <span class="NavBar_Name">{{ name }}</span
@@ -89,7 +89,7 @@ export default {
 .NavBar {
   color: black;
   &_Wrapper {
-    height: 55px;
+    height: 60px;
     background: #fcf707;
     border-bottom: 1px solid;
     display: flex;
