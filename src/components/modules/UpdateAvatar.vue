@@ -117,7 +117,6 @@ export default {
     position: absolute;
     top: 48%;
     left: 50%;
-    // background: linear-gradient(-20deg, #00cdac 0%, #8ddad5 100%);
     flex-direction: column;
     transform: translate(-50%, -50%);
     width: 500px;
