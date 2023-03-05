@@ -1,5 +1,6 @@
 import axios from "axios";
 import { ref } from "vue";
+import errorHandler from "../errorHandler";
 import removeItem from './removeItem'
 
 const error = ref(null);
@@ -18,12 +19,9 @@ const validate = async () => {
         client: client,
       },
     });
-    if (!res) {
-      throw new Error("認証に失敗しました");
-    }
-
     return res;
   } catch (err) {
+    errorHandler(err)
     error.value = "認証に失敗しました";
     removeItem();
   }
