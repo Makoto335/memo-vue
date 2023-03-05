@@ -133,7 +133,7 @@ export default {
         return res;
       } catch (err) {
         errorHandler(err);
-        this.error = "メモを編集できませんでした";
+        this.error = "メモをhennsできませんでした";
       } finally {
         this.closeEditForm();
         this.idToEdit = "";
@@ -206,15 +206,6 @@ export default {
 <style scoped lang="scss">
 .MemoRoom {
   color: white;
-  a {
-    text-decoration: none;
-    color: black;
-    font-weight: bold;
-    border: 0;
-    border-radius: 3px;
-    padding: 10px 20px;
-    cursor: pointer;
-  }
   &_Grid {
     display: grid;
     gap: 5px;
@@ -252,12 +243,19 @@ export default {
     position: absolute;
     top: 1rem;
     right: 1rem;
+    display: flex;
     a {
       display: inline-block;
       width: 5px;
-      text-align: center;
+    color: black;
+    font-weight: bold;
+    border: 0;
+    border-radius: 3px;
+    padding: 2px;
+    cursor: pointer;
       &:nth-child(2) {
-        margin-left: 5px;
+        margin-right:20px;
+        margin-left:40px;
       }
     }
   }
