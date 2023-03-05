@@ -10,9 +10,9 @@
         <a href="#" @click.prevent.stop="showModal = true"
           ><img class="NavBar_Avatar" :src="avatarInNav"
         /></a>
-        <div class="NavBar_LogoutBtn">
-          <a href="#" @click.prevent.stop="showLogoutDialog = true">Logout </a>
-        </div>
+        <a class="NavBar_LogoutBtn a-btn" href="#" @click.prevent.stop="showLogoutDialog = true"
+          >Logout
+        </a>
       </div>
       <div v-if="showModal">
         <UpdateAvatar
@@ -98,20 +98,10 @@ export default {
     box-sizing: border-box;
   }
   &_LogoutBtn {
-    a {
       background: #252a2e;
-      text-align: center;
-      margin: 0 20px;
-      text-decoration: none;
       color: white;
-      font-weight: bold;
       border: 0;
-      border-radius: 3px;
       cursor: pointer;
-      padding: 10px 20px;
-      font-size: 1rem;
-      line-height: 25px;
-    }
   }
   &_Avatar {
     margin: 0 20px;

@@ -81,7 +81,6 @@ export default {
     color: black;
   }
   &_DeleteBtn {
-    border: 0;
     background: rgb(239 68 68);
     color: white;
   }
