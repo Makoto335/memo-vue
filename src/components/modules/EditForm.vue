@@ -4,12 +4,23 @@
     <div class="EditForm_Wrapper">
       <form @submit.prevent="onClickEdit()">
         <label>
-          <span>Title</span>
-          <input class="EditForm_Title" type="text" v-model="title" />
+          <div class="EditForm_Label"><span>Title</span></div>
+          <input
+            class="EditForm_Title"
+            type="text"
+            v-model="title"
+            @blur="validateTitle"
+            @keyup="validateTitle"
+          />
         </label>
         <label>
-          <span>Content</span>
-          <textarea v-model="content"></textarea>
+          <div class="EditForm_Label"><span>Content</span></div>
+          <textarea
+            class="EditForm_Content"
+            v-model="content"
+            @blur="validateContent"
+            @keyup="validateContent"
+          ></textarea>
         </label>
         <div class="EditForm_BtnWrapper">
           <a
@@ -19,9 +30,17 @@
           >
             Cancel
           </a>
-          <button class="EditForm_SaveBtn btn">Save</button>
+          <button
+            class="EditForm_SaveBtn btn"
+            :class="{ _disabled: !isValid }"
+            :disabled="!isValid"
+          >
+            Save
+          </button>
         </div>
         <div class="error">{{ error }}</div>
+        <div class="error">{{ titleError }}</div>
+        <div class="error">{{ contentError }}</div>
       </form>
     </div>
   </div>
@@ -33,12 +52,35 @@ export default {
   data() {
     return {
       title: this.titleToEdit,
+      titleError: "",
       content: this.contentToEdit,
+      contentError: "",
       id: this.idToEdit,
       error: "",
     };
   },
+  computed: {
+    isValid() {
+      return (
+        this.title && !this.titleError && this.content && !this.contentError
+      );
+    },
+  },
   methods: {
+    validateTitle() {
+      !this.title
+        ? (this.titleError = "Titleの入力が必要です")
+        : this.title.length > 20
+        ? (this.titleError = "Titleは20文字以内にしてください")
+        : (this.titleError = null);
+    },
+    validateContent() {
+      !this.content
+        ? (this.contentError = "Contentの入力が必要です")
+        : this.content.length > 500
+        ? (this.contentError = "Contentは500文字以内にしてください")
+        : (this.contentError = null);
+    },
     onClickCancel() {
       this.$emit("closeEditForm");
     },
@@ -51,6 +93,7 @@ export default {
 
 <style scoped lang="scss">
 .EditForm {
+  color: black;
   position: fixed;
   top: 0;
   left: 0;
@@ -70,8 +113,8 @@ export default {
     display: flex;
     flex-direction: column;
     transform: translate(-50%, -50%);
-    width: 500px;
-    height: 300px;
+    width: 800px;
+    height: 800px;
     padding: 32px;
     box-sizing: border-box;
     background-color: #fff;
@@ -79,8 +122,7 @@ export default {
     border: 1px solid #333;
   }
   form {
-    margin: auto;
-    width: 300px;
+    width: 700px;
     label {
       display: block;
     }
@@ -88,16 +130,27 @@ export default {
       display: block;
       padding: 0.5rem 1rem 0.5rem 1rem;
       width: 100%;
-      height: 80px;
+      height: 450px;
     }
   }
+  &_Label {
+    margin-top: 10px;
+    font-size: 1.5rem;
+  }
   &_Title {
+    font-size: 1.5rem;
+    display: block;
+    width: 100%;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+  }
+  &_Content {
+    font-size: 1rem;
     display: block;
     width: 100%;
     padding: 0.5rem 1rem 0.5rem 1rem;
   }
   &_BtnWrapper {
-    margin-top: 20px;
+    margin: 20px auto 0 auto;
     display: flex;
     width: 300px;
     font-size: 1rem;
@@ -107,6 +160,13 @@ export default {
   }
   &_CancelBtn {
     color: black;
+  }
+  .error {
+    text-align: center;
+    margin: 2px 0;
+  }
+  ._disabled {
+    background: grey;
   }
 }
 </style>
