@@ -19,32 +19,42 @@
     <div class="MemoRoom_Grid">
       <MemoForm @reloadUserData="reloadUserData" />
       <div v-for="memo in reversedMemos" :key="memo.id" class="MemoRoom_Memos">
-        <div class="MemoRoom_BtnWrapper">
-          <a
-            href="#"
-            @click.prevent.stop="
-              showEditForm = true;
-              setIdToEdit(`${memo.id}`);
-              titleToEdit = `${memo.title}`;
-              contentToEdit = `${memo.content}`;
-            "
-          >
-            <font-awesome-icon icon="fa-solid fa-pencil" class="fa-lg" />
-          </a>
-          <a
-            href="#"
-            @click.prevent.stop="
-              showDeleteDialog = true;
-              setIdToDelete(`${memo.id}`);
-            "
-          >
-            <font-awesome-icon icon="fa-solid fa-trash-can" class="fa-lg" />
-          </a>
-        </div>
-        <h3>{{ memo.title }}</h3>
-        <p>{{ memo.content }}</p>
-        <div class="MemoRoom_CreateAt">
-          {{ formatDate(memo.created_at) }}
+        <div
+          class="MemoRoom_MemoWrapper"
+          @click.prevent.stop="
+            showEditForm = true;
+            setIdToEdit(`${memo.id}`);
+            titleToEdit = `${memo.title}`;
+            contentToEdit = `${memo.content}`;
+          "
+        >
+          <div class="MemoRoom_BtnWrapper">
+            <a
+              href="#"
+              @click.prevent.stop="
+                showEditForm = true;
+                setIdToEdit(`${memo.id}`);
+                titleToEdit = `${memo.title}`;
+                contentToEdit = `${memo.content}`;
+              "
+            >
+              <font-awesome-icon icon="fa-solid fa-pencil" class="fa-lg" />
+            </a>
+            <a
+              href="#"
+              @click.prevent.stop="
+                showDeleteDialog = true;
+                setIdToDelete(`${memo.id}`);
+              "
+            >
+              <font-awesome-icon icon="fa-solid fa-trash-can" class="fa-lg" />
+            </a>
+          </div>
+          <h3>{{ memo.title }}</h3>
+          <p>{{ memo.content }}</p>
+          <div class="MemoRoom_CreateAt">
+            {{ formatDate(memo.created_at) }}
+          </div>
         </div>
       </div>
     </div>
@@ -220,6 +230,7 @@ export default {
     width: 360px;
     height: 200px;
     color: black;
+    cursor: pointer;
     h3 {
       width: 180px;
       height: 58px;
@@ -247,15 +258,15 @@ export default {
     a {
       display: inline-block;
       width: 5px;
-    color: black;
-    font-weight: bold;
-    border: 0;
-    border-radius: 3px;
-    padding: 2px;
-    cursor: pointer;
+      color: black;
+      font-weight: bold;
+      border: 0;
+      border-radius: 3px;
+      padding: 2px;
+      cursor: pointer;
       &:nth-child(2) {
-        margin-right:20px;
-        margin-left:40px;
+        margin-right: 20px;
+        margin-left: 40px;
       }
     }
   }
