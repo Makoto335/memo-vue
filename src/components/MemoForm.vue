@@ -3,14 +3,31 @@
     <form @submit.prevent="handleCreate">
       <label>
         <span>Title</span>
-        <input class="MemoForm_Title" type="text" v-model="title" />
+        <input
+          placeholder="20文字以内"
+          class="MemoForm_Title"
+          type="text"
+          v-model="title"
+          @blur="validateTitle"
+          @keyup="validateTitle"
+        />
       </label>
       <label>
         <span>Content</span>
-        <textarea v-model="content"></textarea>
+        <textarea
+          placeholder="500文字以内"
+          v-model="content"
+          @blur="validateContent"
+          @keyup="validateContent"
+        ></textarea>
       </label>
-      <button class="btn">Save</button>
+      <button class="btn" :class="{ _disabled: !isValid }" :disabled="!isValid">
+        Save
+      </button>
       <div class="error">{{ error }}</div>
+      <div class="error">{{ titleError }}</div>
+      <div class="error">{{ contentError }}</div>
+
     </form>
   </div>
 </template>
@@ -23,11 +40,34 @@ export default {
   data() {
     return {
       title: "",
+      titleError: "",
       content: "",
+      contentError: "",
       error: null,
     };
   },
+  computed: {
+    isValid() {
+      return (
+        this.title && !this.titleError && this.content && !this.contentError
+      );
+    },
+  },
   methods: {
+    validateTitle() {
+      !this.title
+        ? (this.titleError = "Titleの入力が必要です")
+        : this.title.length > 20
+        ? (this.titleError = "Titleは20文字以内にしてください")
+        : (this.titleError = null);
+    },
+    validateContent() {
+      !this.content
+        ? (this.contentError = "Contentの入力が必要です")
+        : this.content.length > 500
+        ? (this.contentError = "Contentは500文字以内にしてください")
+        : (this.contentError = null);
+    },
     async handleCreate() {
       try {
         this.error = null;
@@ -80,6 +120,9 @@ export default {
     display: block;
     width: 100%;
     padding: 0.5rem 1rem 0.5rem 1rem;
+  }
+  ._disabled {
+    background: grey;
   }
 }
 </style>
