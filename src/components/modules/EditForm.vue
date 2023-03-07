@@ -26,7 +26,7 @@
           <a
             class="EditForm_CancelBtn a-btn"
             href="#"
-            @click.prevent.stop="onClickCancel"
+            @click.prevent.stop="onClickCancel()"
           >
             Cancel
           </a>

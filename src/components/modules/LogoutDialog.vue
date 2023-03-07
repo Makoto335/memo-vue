@@ -4,12 +4,12 @@
     <div class="LogoutDialog_Wrapper">
       <p>{{ message }}</p>
       <div class="LogoutDialog_BtnWrapper">
-        <a class="LogoutDialog_Btn LogoutDialog_CancelBtn" href="#" @click.prevent.stop="onClickCancel"
+        <a class="LogoutDialog_Btn LogoutDialog_CancelBtn" href="#" @click.prevent.stop="onClickCancel()"
           >Cancel</a
         >
         <a
           class="LogoutDialog_Btn LogoutDialog_DeleteBtn"
-          @click.prevent.stop="onClickDelete"
+          @click.prevent.stop="onClickDelete()"
           >Logout</a
         >
       </div>

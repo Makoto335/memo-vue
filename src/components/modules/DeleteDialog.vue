@@ -4,12 +4,12 @@
     <div class="DeleteDialog_Wrapper">
       <p>{{ message }}</p>
       <div class="DeleteDialog_BtnWrapper">
-        <a class="a-btn DeleteDialog_CancelBtn" href="#" @click.prevent.stop="onClickCancel"
+        <a class="a-btn DeleteDialog_CancelBtn" href="#" @click.prevent.stop="onClickCancel()"
           >Cancel</a
         >
         <a
           class="a-btn DeleteDialog_DeleteBtn"
-          @click.prevent.stop="onClickDelete"
+          @click.prevent.stop="onClickDelete()"
           >Delete</a
         >
       </div>
