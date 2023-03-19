@@ -1,7 +1,7 @@
 <template>
   <div class="NavBar">
     <div class="NavBar_Wrapper">
-      <div class="error">{{ error }}</div> 
+      <div class="error">{{ error }}</div>
       <div class="NavBar_User">
         <p>
           <span class="NavBar_Name">{{ name }}</span
@@ -10,7 +10,10 @@
         <a href="#" @click.prevent.stop="showModal = true"
           ><img class="NavBar_Avatar" :src="avatarInNav"
         /></a>
-        <a class="NavBar_LogoutBtn a-btn" href="#" @click.prevent.stop="showLogoutDialog = true"
+        <a
+          class="NavBar_LogoutBtn a-btn"
+          href="#"
+          @click.prevent.stop="showLogoutDialog = true"
           >Logout
         </a>
       </div>
@@ -55,13 +58,16 @@ export default {
     async logout() {
       this.error = null;
       try {
-        const res = await axios.delete("http://localhost:3000/auth/sign_out", {
-          headers: {
-            uid: window.localStorage.getItem("uid"),
-            "access-token": window.localStorage.getItem("access-token"),
-            client: window.localStorage.getItem("client"),
-          },
-        });
+        const res = await axios.delete(
+          "http://localhost:80/api/v1/auth/sign_out",
+          {
+            headers: {
+              uid: window.localStorage.getItem("uid"),
+              "access-token": window.localStorage.getItem("access-token"),
+              client: window.localStorage.getItem("client"),
+            },
+          }
+        );
         console.log("ログアウトしました");
         removeItem();
         this.$router.push({ name: "WelcomePage" });
@@ -98,10 +104,10 @@ export default {
     box-sizing: border-box;
   }
   &_LogoutBtn {
-      background: #252a2e;
-      color: white;
-      border: 0;
-      cursor: pointer;
+    background: #252a2e;
+    color: white;
+    border: 0;
+    cursor: pointer;
   }
   &_Avatar {
     margin: 0 20px;

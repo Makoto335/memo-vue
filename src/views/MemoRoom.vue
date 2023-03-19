@@ -107,7 +107,7 @@ export default {
     async reloadUserData() {
       this.error = null;
       try {
-        const res = await axios.get("http://localhost:3000/user", {
+        const res = await axios.get("http://localhost:80/api/v1/user", {
           headers: {
             uid: window.localStorage.getItem("uid"),
             "access-token": window.localStorage.getItem("access-token"),
@@ -126,7 +126,7 @@ export default {
       this.error = null;
       try {
         const res = await axios.put(
-          `http://localhost:3000/api/memos/${this.idToEdit}`,
+          `http://localhost:80/api/v1//memos/${this.idToEdit}`,
           {
             title: editedTitle,
             content: editedContent,
@@ -160,7 +160,7 @@ export default {
       this.error = null;
       try {
         const res = await axios.delete(
-          `http://localhost:3000/api/memos/${id}`,
+          `http://localhost:80/api/v1/memos/${id}`,
           {
             headers: {
               uid: window.localStorage.getItem("uid"),

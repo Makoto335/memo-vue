@@ -163,7 +163,9 @@ export default {
         : !regex.test(this.password)
         ? (this.passwordError =
             "半角のアルファベットと数字をそれぞれ一文字以上入れてください")
-        :  this.password.length > 128 ? (this.passwordError ="128文字以内にしてください") :(this.passwordError = null) 
+        : this.password.length > 128
+        ? (this.passwordError = "128文字以内にしてください")
+        : (this.passwordError = null);
     },
     validatePasswordConfirmation() {
       !(this.passwordConfirmation === this.password)
@@ -211,11 +213,15 @@ export default {
         ? formData.append("registration[avatar]", this.avatar)
         : false;
       try {
-        const res = await axios.post("http://localhost:3000/auth", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        });
+        const res = await axios.post(
+          "http://localhost:80/api/v1/auth",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
         setItem(res.headers, res.data.data.name);
         this.$emit("redirectToMemoRoom");
         console.log({ res });

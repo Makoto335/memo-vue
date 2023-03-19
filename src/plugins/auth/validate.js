@@ -1,7 +1,7 @@
 import axios from "axios";
 import { ref } from "vue";
 import errorHandler from "../errorHandler";
-import removeItem from './removeItem'
+import removeItem from "./removeItem";
 
 const error = ref(null);
 
@@ -12,16 +12,19 @@ const validate = async () => {
   const accessToken = window.localStorage.getItem("access-token");
 
   try {
-    const res = await axios.get("http://localhost:3000/auth/validate_token", {
-      headers: {
-        uid: uid,
-        "access-token": accessToken,
-        client: client,
-      },
-    });
+    const res = await axios.get(
+      "http://localhost:80/api/v1/auth/validate_token",
+      {
+        headers: {
+          uid: uid,
+          "access-token": accessToken,
+          client: client,
+        },
+      }
+    );
     return res;
   } catch (err) {
-    errorHandler(err)
+    errorHandler(err);
     error.value = "認証に失敗しました";
     removeItem();
   }
