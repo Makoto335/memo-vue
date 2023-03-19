@@ -19,7 +19,10 @@
     "vue": "^3.2.13",
     "vue-axios": "^3.5.2",
     "vue-router": "^4.0.3",
-    "vuejs-paginate-next": "^1.0.2"
+    "vuejs-paginate-next": "^1.0.2",
+    "sass": "^1.57.1",
+    "sass-loader": "^13.2.0",
+    "serve": "^14.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
@@ -29,10 +32,7 @@
     "@vue/cli-plugin-router": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
     "eslint": "^7.32.0",
-    "eslint-plugin-vue": "^8.0.3",
-    "sass": "^1.57.1",
-    "sass-loader": "^13.2.0",
-    "serve": "^14.2.0"
+    "eslint-plugin-vue": "^8.0.3"
   },
   "eslintConfig": {
     "root": true,
