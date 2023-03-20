@@ -18,4 +18,4 @@ RUN yarn build
 RUN yarn global add serve
 
 # コンテナ起動時のコマンド
-CMD ["serve", "-s", "dist", "-l", "$PORT"]
+CMD ["serve", "-s", "dist", "-l", "tcp://0.0.0.0:${PORT}"]
