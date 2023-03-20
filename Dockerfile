@@ -19,4 +19,4 @@ RUN yarn global add serve
 EXPOSE 8081
 
 # コンテナ起動時のコマンド
-CMD ["serve", "-s", "dist", "-l", "8081"]
+CMD ["serve", "-s", "dist", "-l", "$PORT"]
