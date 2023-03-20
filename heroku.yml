@@ -2,4 +2,4 @@ build:
   docker:
     web: Dockerfile
 run:
-  web: yarn run serve
+  web: serve -s dist
