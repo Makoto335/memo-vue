@@ -15,7 +15,7 @@ COPY . /app
 RUN yarn build
 
 # サーバーのインストール
-RUN yarn global add @vue/cli
+RUN yarn global add serve
 
 # コンテナ起動時のコマンド
 # CMD ["serve", "-s", "dist", "-l", "$PORT"]
