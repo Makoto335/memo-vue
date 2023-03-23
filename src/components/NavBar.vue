@@ -59,7 +59,7 @@ export default {
       this.error = null;
       try {
         const res = await axios.delete(
-          "http://localhost:80/api/v1/auth/sign_out",
+          "https://test-rails.herokuapp.com/api/v1/auth/sign_out",
           {
             headers: {
               uid: window.localStorage.getItem("uid"),

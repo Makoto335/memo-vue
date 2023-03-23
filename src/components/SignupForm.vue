@@ -214,7 +214,7 @@ export default {
         : false;
       try {
         const res = await axios.post(
-          "http://localhost:80/api/v1/auth",
+          "https://test-rails.herokuapp.com/api/v1/auth",
           formData,
           {
             headers: {
