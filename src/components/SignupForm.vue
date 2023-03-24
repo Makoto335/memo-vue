@@ -128,7 +128,7 @@ export default {
         !dayjs(date, "YYYY-M-D", true).isValid() ||
         !dayjs(date, "YYYY-M-D", true).isBefore()
       ) {
-        this.dateOfBirthError = "有効な日付を選択して下さい";
+        this.dateOfBirthError = "有効な日付を選択してください";
       } else {
         this.dateOfBirthError = null;
       }
@@ -142,7 +142,7 @@ export default {
       !this.name
         ? (this.nameError = "お名前を入力してください")
         : this.name.length > 60
-        ? (this.nameError = "60文字以内にして下さい")
+        ? (this.nameError = "60文字以内にしてください")
         : (this.nameError = null);
     },
     validateEmail() {
@@ -153,11 +153,11 @@ export default {
       !regex.test(this.email)
         ? (this.emailError = "有効なメールアドレスを入力してください")
         : this.email.length > 254
-        ? (this.emailError = "254文字以内にして下さい")
+        ? (this.emailError = "254文字以内にしてください")
         : (this.emailError = null);
     },
     validatePassword() {
-      const regex = /^(?=.*?[a-z])(?=.*?\d)[a-z\d]{8,100}$/i;
+      const regex = /^(?=.*?[a-z])(?=.*?\d)[a-z\d]{8,300}$/i;
       this.password.length < 10
         ? (this.passwordError =
             "１０文字以上の半角英字と半角数字の混合にしてください")
