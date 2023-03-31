@@ -107,16 +107,13 @@ export default {
     async reloadUserData() {
       this.error = null;
       try {
-        const res = await axios.get(
-          "https://simple-memo-rails.herokuapp.com/api/v1/user",
-          {
-            headers: {
-              uid: window.localStorage.getItem("uid"),
-              "access-token": window.localStorage.getItem("access-token"),
-              client: window.localStorage.getItem("client"),
-            },
-          }
-        );
+        const res = await axios.get("https://seaentrance.link/api/v1/user", {
+          headers: {
+            uid: window.localStorage.getItem("uid"),
+            "access-token": window.localStorage.getItem("access-token"),
+            client: window.localStorage.getItem("client"),
+          },
+        });
         this.memos = res.data.user.memos_array;
         this.avatar = res.data.user.avatar_url;
         return res;
@@ -129,7 +126,7 @@ export default {
       this.error = null;
       try {
         const res = await axios.put(
-          `https://simple-memo-rails.herokuapp.com/api/v1//memos/${this.idToEdit}`,
+          `http://localhost:80/api/v1//memos/${this.idToEdit}`,
           {
             title: editedTitle,
             content: editedContent,
@@ -163,7 +160,7 @@ export default {
       this.error = null;
       try {
         const res = await axios.delete(
-          `https://simple-memo-rails.herokuapp.com/api/v1/memos/${id}`,
+          `http://localhost:80/api/v1/memos/${id}`,
           {
             headers: {
               uid: window.localStorage.getItem("uid"),

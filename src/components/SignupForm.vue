@@ -215,7 +215,7 @@ export default {
         : false;
       try {
         const res = await axios.post(
-          "https://simple-memo-rails.herokuapp.com/api/v1/auth",
+          "https://seaentrance.link/api/v1/auth",
           formData,
           {
             headers: {
