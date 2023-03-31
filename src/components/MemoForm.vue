@@ -27,7 +27,6 @@
       <div class="error">{{ error }}</div>
       <div class="error">{{ titleError }}</div>
       <div class="error">{{ contentError }}</div>
-
     </form>
   </div>
 </template>
@@ -73,7 +72,7 @@ export default {
         this.error = null;
 
         const res = await axios.post(
-          "http://localhost/api/v1/memos",
+          "https://seaentrance.link/api/v1/memos",
           {
             title: this.title,
             content: this.content,

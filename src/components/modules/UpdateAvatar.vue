@@ -77,7 +77,7 @@ export default {
       let formData = new FormData();
       formData.append("user[avatar]", this.avatar);
       try {
-        const res = await axios.patch(`http://localhost:80/api/v1//user`, formData, {
+        const res = await axios.patch(`https://seaentrance.link/api/v1//user`, formData, {
           headers: {
             uid: window.localStorage.getItem("uid"),
             "access-token": window.localStorage.getItem("access-token"),

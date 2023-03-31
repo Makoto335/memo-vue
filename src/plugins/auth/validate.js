@@ -13,7 +13,7 @@ const validate = async () => {
 
   try {
     const res = await axios.get(
-      "http://localhost:80/api/v1/auth/validate_token",
+      "https://seaentrance.link/api/v1/auth/validate_token",
       {
         headers: {
           uid: uid,

@@ -33,7 +33,7 @@ export default {
       this.error = null;
       try {
         const res = await axios.post(
-          "http://localhost:80/api/v1/auth/sign_in",
+          "https://seaentrance.link/api/v1/auth/sign_in",
           {
             email: this.email,
             password: this.password,
