@@ -13,7 +13,7 @@ const validate = async () => {
 
   try {
     const res = await axios.get(
-      "https://test-rails.herokuapp.com/api/v1/auth/validate_token",
+      "https://simple-memo-rails.herokuapp.com/api/v1/auth/validate_token",
       {
         headers: {
           uid: uid,

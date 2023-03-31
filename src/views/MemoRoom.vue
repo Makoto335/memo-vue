@@ -108,7 +108,7 @@ export default {
       this.error = null;
       try {
         const res = await axios.get(
-          "https://test-rails.herokuapp.com/api/v1/user",
+          "https://simple-memo-rails.herokuapp.com/api/v1/user",
           {
             headers: {
               uid: window.localStorage.getItem("uid"),
@@ -129,7 +129,7 @@ export default {
       this.error = null;
       try {
         const res = await axios.put(
-          `https://test-rails.herokuapp.com/api/v1//memos/${this.idToEdit}`,
+          `https://simple-memo-rails.herokuapp.com/api/v1//memos/${this.idToEdit}`,
           {
             title: editedTitle,
             content: editedContent,
@@ -163,7 +163,7 @@ export default {
       this.error = null;
       try {
         const res = await axios.delete(
-          `https://test-rails.herokuapp.com/api/v1/memos/${id}`,
+          `https://simple-memo-rails.herokuapp.com/api/v1/memos/${id}`,
           {
             headers: {
               uid: window.localStorage.getItem("uid"),

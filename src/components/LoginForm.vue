@@ -33,7 +33,7 @@ export default {
       this.error = null;
       try {
         const res = await axios.post(
-          "https://test-rails.herokuapp.com/api/v1/auth/sign_in",
+          "https://simple-memo-rails.herokuapp.com/api/v1/auth/sign_in",
           {
             email: this.email,
             password: this.password,
