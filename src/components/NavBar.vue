@@ -93,6 +93,7 @@ export default {
   color: black;
   &_Wrapper {
     height: 60px;
+    margin: 0 auto;
     background: #fcf707;
     border-bottom: 1px solid;
     display: flex;

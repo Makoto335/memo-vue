@@ -212,6 +212,7 @@ export default {
 
 <style scoped lang="scss">
 .MemoRoom {
+  min-width: 400px;
   color: white;
   &_Grid {
     display: grid;
