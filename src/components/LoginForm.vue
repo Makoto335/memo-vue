@@ -32,13 +32,10 @@ export default {
     async login() {
       this.error = null;
       try {
-        const res = await axios.post(
-          "https://seaentrance.link/api/v1/auth/sign_in",
-          {
-            email: this.email,
-            password: this.password,
-          }
-        );
+        const res = await axios.post("/api/v1/auth/sign_in", {
+          email: this.email,
+          password: this.password,
+        });
         setItem(res.headers, res.data.data.name);
         this.$emit("redirectToMemoRoom");
         console.log({ res });

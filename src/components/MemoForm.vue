@@ -72,7 +72,7 @@ export default {
         this.error = null;
 
         const res = await axios.post(
-          "https://seaentrance.link/api/v1/memos",
+          "/api/v1/memos",
           {
             title: this.title,
             content: this.content,
@@ -102,9 +102,11 @@ export default {
 
 <style scoped lang="scss">
 .MemoForm {
+  width: 400px;
+  margin: 0 auto;
   form {
-    width: 300px;
-    margin-left: 1.5rem;
+    width: 340px;
+    margin-left: 10px;
     label {
       display: block;
     }

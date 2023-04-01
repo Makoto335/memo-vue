@@ -58,16 +58,13 @@ export default {
     async logout() {
       this.error = null;
       try {
-        const res = await axios.delete(
-          "https://seaentrance.link/api/v1/auth/sign_out",
-          {
-            headers: {
-              uid: window.localStorage.getItem("uid"),
-              "access-token": window.localStorage.getItem("access-token"),
-              client: window.localStorage.getItem("client"),
-            },
-          }
-        );
+        const res = await axios.delete("/api/v1/auth/sign_out", {
+          headers: {
+            uid: window.localStorage.getItem("uid"),
+            "access-token": window.localStorage.getItem("access-token"),
+            client: window.localStorage.getItem("client"),
+          },
+        });
         console.log("ログアウトしました");
         removeItem();
         this.$router.push({ name: "WelcomePage" });

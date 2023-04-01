@@ -107,7 +107,7 @@ export default {
     async reloadUserData() {
       this.error = null;
       try {
-        const res = await axios.get("https://seaentrance.link/api/v1/user", {
+        const res = await axios.get("/api/v1/user", {
           headers: {
             uid: window.localStorage.getItem("uid"),
             "access-token": window.localStorage.getItem("access-token"),
@@ -126,7 +126,7 @@ export default {
       this.error = null;
       try {
         const res = await axios.put(
-          `https://seaentrance.link/api/v1//memos/${this.idToEdit}`,
+          `/api/v1//memos/${this.idToEdit}`,
           {
             title: editedTitle,
             content: editedContent,
@@ -159,16 +159,13 @@ export default {
     async deleteMemo(id) {
       this.error = null;
       try {
-        const res = await axios.delete(
-          `https://seaentrance.link/api/v1/memos/${id}`,
-          {
-            headers: {
-              uid: window.localStorage.getItem("uid"),
-              "access-token": window.localStorage.getItem("access-token"),
-              client: window.localStorage.getItem("client"),
-            },
-          }
-        );
+        const res = await axios.delete(`/api/v1/memos/${id}`, {
+          headers: {
+            uid: window.localStorage.getItem("uid"),
+            "access-token": window.localStorage.getItem("access-token"),
+            client: window.localStorage.getItem("client"),
+          },
+        });
         this.reloadUserData();
         this.closeDeleteDialog();
         console.log({ res });
@@ -222,12 +219,27 @@ export default {
     justify-content: center;
     grid-template-columns: repeat(4, minmax(300px, 1fr));
   }
+  @media screen and (max-width: 1630px) {
+    &_Grid {
+      grid-template-columns: repeat(3, minmax(300px, 1fr));
+    }
+  }
+  @media screen and (max-width: 1250px) {
+    &_Grid {
+      grid-template-columns: repeat(2, minmax(300px, 1fr));
+    }
+  }
+  @media screen and (max-width: 900px) {
+    &_Grid {
+      grid-template-columns: repeat(1, minmax(300px, 1fr));
+    }
+  }
   &_Memos {
     position: relative;
     background: white;
     padding: 1.5rem;
     margin: 10px auto;
-    width: 360px;
+    width: 340px;
     height: 200px;
     color: black;
     cursor: pointer;

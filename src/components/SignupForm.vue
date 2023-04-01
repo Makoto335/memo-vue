@@ -214,15 +214,11 @@ export default {
         ? formData.append("registration[avatar]", this.avatar)
         : false;
       try {
-        const res = await axios.post(
-          "https://seaentrance.link/api/v1/auth",
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
+        const res = await axios.post("/api/v1/auth", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
         setItem(res.headers, res.data.data.name);
         this.$emit("redirectToMemoRoom");
         console.log({ res });
