@@ -126,7 +126,7 @@ export default {
       this.error = null;
       try {
         const res = await axios.put(
-          `http://localhost:80/api/v1//memos/${this.idToEdit}`,
+          `https://seaentrance.link/api/v1//memos/${this.idToEdit}`,
           {
             title: editedTitle,
             content: editedContent,
@@ -160,7 +160,7 @@ export default {
       this.error = null;
       try {
         const res = await axios.delete(
-          `http://localhost:80/api/v1/memos/${id}`,
+          `https://seaentrance.link/api/v1/memos/${id}`,
           {
             headers: {
               uid: window.localStorage.getItem("uid"),
