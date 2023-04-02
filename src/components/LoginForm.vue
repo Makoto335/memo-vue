@@ -51,23 +51,29 @@ export default {
 
 <style scoped lang="scss">
 .LoginForm {
-  width: 500px;
+  width: 100%;
   margin: 0 auto;
-  padding: 10px;
+  padding: 30px;
+  box-sizing: border-box;
+  form {
+    width: 100%;
+    margin: 0 auto;
+    label {
+      display: block;
+    }
+  }
   h2 {
     text-align: center;
   }
   label {
-    margin-left: 5px;
+    margin: 5px 0 5px 5px;
     font-weight: bold;
   }
   input {
+    font-size: 1rem;
+    display: block;
     width: 100%;
-    padding: 12px 20px;
-    margin: 8px auto;
-    border-radius: 4px;
-    border: 1px solid #eee;
-    outline: none;
+    padding: 0.5rem;
     box-sizing: border-box;
   }
   button {

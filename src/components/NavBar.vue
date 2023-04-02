@@ -126,9 +126,4 @@ export default {
     margin: 0;
   }
 }
-@media screen and (max-width: 900px) {
-  .NavBar {
-    
-  }
-}
 </style>

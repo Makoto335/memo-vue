@@ -112,14 +112,16 @@ export default {
     textarea {
       width: 100%;
       display: block;
-      padding: 0.5rem 0;
+      padding: 0.5rem;
+      box-sizing: border-box;
       height: 80px;
     }
   }
   &_Title {
     display: block;
     width: 99.5%;
-    padding: 0.5rem 0;
+    padding: 0.5rem;
+    box-sizing: border-box;
   }
   ._disabled {
     background: grey;

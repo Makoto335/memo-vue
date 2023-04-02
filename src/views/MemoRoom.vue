@@ -296,21 +296,14 @@ export default {
 }
 @media screen and (max-width: 900px) {
   .MemoRoom {
-    // width: 350px;
     &_Grid {
       grid-template-columns: repeat(1, minmax(300px, 1fr));
-      
-    }
-    &_Memos{
- 
     }
   }
 }
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 400px) {
   .MemoRoom {
-    // width: 350px;
-
-    &_Memos{
+    &_Memos {
       width: 300px;
     }
   }
