@@ -212,28 +212,13 @@ export default {
 
 <style scoped lang="scss">
 .MemoRoom {
-  min-width: 400px;
+  min-width: 300px;
   color: white;
   &_Grid {
     display: grid;
     gap: 5px;
     justify-content: center;
     grid-template-columns: repeat(4, minmax(300px, 1fr));
-  }
-  @media screen and (max-width: 1630px) {
-    &_Grid {
-      grid-template-columns: repeat(3, minmax(300px, 1fr));
-    }
-  }
-  @media screen and (max-width: 1250px) {
-    &_Grid {
-      grid-template-columns: repeat(2, minmax(300px, 1fr));
-    }
-  }
-  @media screen and (max-width: 900px) {
-    &_Grid {
-      grid-template-columns: repeat(1, minmax(300px, 1fr));
-    }
   }
   &_Memos {
     position: relative;
@@ -254,7 +239,7 @@ export default {
       font-size: 1rem;
     }
     p {
-      width: 360px;
+      width: 100%;
       height: 100px;
       overflow: hidden;
       display: block;
@@ -293,6 +278,41 @@ export default {
   .error {
     text-align: center;
     font-size: 1rem;
+  }
+}
+@media screen and (max-width: 1630px) {
+  .MemoRoom {
+    &_Grid {
+      grid-template-columns: repeat(3, minmax(300px, 1fr));
+    }
+  }
+}
+@media screen and (max-width: 1250px) {
+  .MemoRoom {
+    &_Grid {
+      grid-template-columns: repeat(2, minmax(300px, 1fr));
+    }
+  }
+}
+@media screen and (max-width: 900px) {
+  .MemoRoom {
+    // width: 350px;
+    &_Grid {
+      grid-template-columns: repeat(1, minmax(300px, 1fr));
+      
+    }
+    &_Memos{
+ 
+    }
+  }
+}
+@media screen and (max-width: 425px) {
+  .MemoRoom {
+    // width: 350px;
+
+    &_Memos{
+      width: 300px;
+    }
   }
 }
 </style>

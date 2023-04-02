@@ -105,25 +105,29 @@ export default {
   width: 400px;
   margin: 0 auto;
   form {
-    width: 340px;
-    margin-left: 10px;
+    width: 100%;
     label {
       display: block;
     }
     textarea {
-      display: block;
-      padding: 0.5rem 1rem 0.5rem 1rem;
       width: 100%;
+      display: block;
+      padding: 0.5rem 0;
       height: 80px;
     }
   }
   &_Title {
     display: block;
-    width: 100%;
-    padding: 0.5rem 1rem 0.5rem 1rem;
+    width: 99.5%;
+    padding: 0.5rem 0;
   }
   ._disabled {
     background: grey;
+  }
+}
+@media screen and (max-width: 400px) {
+  .MemoForm {
+    width: 350px;
   }
 }
 </style>

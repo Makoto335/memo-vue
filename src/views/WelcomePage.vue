@@ -51,6 +51,7 @@ export default {
 
 <style scoped lang="scss">
 .WelcomePage {
+  min-width: 350px;
   span {
     font-weight: bold;
     text-decoration: underline;
