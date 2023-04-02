@@ -91,7 +91,9 @@ export default {
 <style scoped lang="scss">
 .NavBar {
   color: black;
+  width: 100%;
   &_Wrapper {
+    width: 100%;
     height: 60px;
     margin: 0 auto;
     background: #fcf707;

@@ -119,7 +119,7 @@ export default {
     left: 50%;
     flex-direction: column;
     transform: translate(-50%, -50%);
-    width: 500px;
+    width: 400px;
     height: 500px;
     padding: 32px;
     box-sizing: border-box;

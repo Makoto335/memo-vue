@@ -1,9 +1,16 @@
-* {
+// * {
   // outline: 2px red solid;
-  // box-sizing: border-box;
+// }
+html {
+  box-sizing: border-box;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
-
 body {
+  width: 100%;
   color: #444;
   font-family: Bodoni MT, Didot, Didot LT STD, Hoefler Text, Garamond,
     Times New Roman, serif;

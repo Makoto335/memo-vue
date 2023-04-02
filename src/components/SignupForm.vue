@@ -234,10 +234,10 @@ export default {
 
 <style scoped lang="scss">
 .SignupForm {
-  color: black;
-  width: 500px;
+  width: 100%;
   margin: 0 auto;
-  padding: 10px;
+  padding: 20px;
+  box-sizing: border-box;
   h2 {
     text-align: center;
   }
@@ -248,7 +248,7 @@ export default {
   &_TextInput {
     input {
       width: 100%;
-      padding: 12px 20px;
+      padding: 0.5rem;
       margin: 0 0 8px 0;
       border-radius: 4px;
       border: 1px solid #eee;

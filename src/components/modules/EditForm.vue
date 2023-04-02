@@ -122,14 +122,14 @@ export default {
     border: 1px solid #333;
   }
   form {
-    width: 700px;
+    width: 100%;
+    margin: 0 auto;
     label {
       display: block;
     }
     textarea {
       display: block;
-      padding: 0.5rem 1rem 0.5rem 1rem;
-      width: 100%;
+      padding: 0.5rem 0;
       height: 450px;
     }
   }
@@ -141,13 +141,13 @@ export default {
     font-size: 1.5rem;
     display: block;
     width: 100%;
-    padding: 0.5rem 1rem 0.5rem 1rem;
+    padding: 0.5rem 0;
   }
   &_Content {
     font-size: 1rem;
     display: block;
     width: 100%;
-    padding: 0.5rem 1rem 0.5rem 1rem;
+    padding: 0.5rem 0;
   }
   &_BtnWrapper {
     margin: 20px auto 0 auto;
@@ -167,6 +167,26 @@ export default {
   }
   ._disabled {
     background: grey;
+  }
+}
+@media screen and (max-width: 800px) {
+  .EditForm {
+    &_Wrapper {
+      width: 500px;
+    }
+  }
+}
+@media screen and (max-width: 500px) {
+  .EditForm {
+    &_Wrapper {
+      width: 380px;
+    }
+    &_Title {
+      font-size: 1.5rem;
+      display: block;
+      width: 100%;
+      padding: 0.5rem 0;
+    }
   }
 }
 </style>
