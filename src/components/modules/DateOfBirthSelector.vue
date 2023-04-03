@@ -36,7 +36,7 @@ import dayjs from "dayjs";
 
 export default {
   name: "DateSelector",
-    props: {
+  props: {
     label: String,
     error: String,
   },
@@ -73,7 +73,7 @@ export default {
     height: 30px;
     padding: 5px;
   }
-    label {
+  label {
     margin-left: 5px;
     font-weight: bold;
   }

@@ -146,7 +146,7 @@ export default {
   &_Content {
     font-size: 1rem;
     width: 100%;
-    padding: 0.5rem ;
+    padding: 0.5rem;
   }
   &_BtnWrapper {
     margin: 20px auto 0 auto;

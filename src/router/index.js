@@ -25,30 +25,30 @@ const requireAuth = async (to, from, next) => {
 };
 
 const noRequireAuth = async (to, from, next) => {
-  const uid = window.localStorage.getItem('uid')
-  const client = window.localStorage.getItem('client')
-  const accessToken = window.localStorage.getItem('access-token')
+  const uid = window.localStorage.getItem("uid");
+  const client = window.localStorage.getItem("client");
+  const accessToken = window.localStorage.getItem("access-token");
 
   if (!uid && !client && !accessToken) {
-    next()
-    return
+    next();
+    return;
   }
 
-  await validate()
+  await validate();
 
   if (!error.value) {
-    next({ name: 'MemoRoom' })
+    next({ name: "MemoRoom" });
   } else {
-    next()
+    next();
   }
-}
+};
 
 const routes = [
   {
     path: "/",
     name: "WelcomePage",
     component: WelcomePage,
-    beforeEnter: noRequireAuth
+    beforeEnter: noRequireAuth,
   },
   {
     path: "/memo",

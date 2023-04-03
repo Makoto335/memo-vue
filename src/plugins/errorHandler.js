@@ -5,5 +5,5 @@ const errorHandler = (err) => {
   } else {
     console.error(err.message);
   }
-}
-export default errorHandler
+};
+export default errorHandler;

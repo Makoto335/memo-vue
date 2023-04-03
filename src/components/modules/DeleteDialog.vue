@@ -4,7 +4,10 @@
     <div class="DeleteDialog_Wrapper">
       <p>{{ message }}</p>
       <div class="DeleteDialog_BtnWrapper">
-        <a class="a-btn DeleteDialog_CancelBtn" href="#" @click.prevent.stop="onClickCancel()"
+        <a
+          class="a-btn DeleteDialog_CancelBtn"
+          href="#"
+          @click.prevent.stop="onClickCancel()"
           >Cancel</a
         >
         <a
@@ -46,8 +49,8 @@ export default {
   width: 100%;
   height: 100%;
   z-index: 6;
-  p{
-    color:#000000;
+  p {
+    color: #000000;
   }
   &_Overlay {
     width: 100%;
@@ -76,7 +79,7 @@ export default {
     display: flex;
     justify-content: center;
   }
-  &_CancelBtn{
+  &_CancelBtn {
     border: 1px solid #000000;
     color: black;
   }

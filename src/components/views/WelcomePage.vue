@@ -7,9 +7,7 @@
           <SignupForm @redirectToMemoRoom="redirectToMemoRoom" />
           <div class="WelcomePage_Text">
             <p class="WelcomePage_ChangeForm">
-              <span @click="showSignUpForm = false"
-                >ログイン</span
-              >
+              <span @click="showSignUpForm = false">ログイン</span>
             </p>
           </div>
         </div>
@@ -17,9 +15,7 @@
           <LoginForm @redirectToMemoRoom="redirectToMemoRoom" />
           <div class="WelcomePage_Text">
             <p class="WelcomePage_ChangeForm">
-              <span @click="showSignUpForm = true"
-                >アカウント登録はこちら</span
-              >
+              <span @click="showSignUpForm = true">アカウント登録はこちら</span>
             </p>
           </div>
         </div>
