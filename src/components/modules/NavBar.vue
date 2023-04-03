@@ -18,9 +18,9 @@
         </a>
       </div>
       <div v-if="showModal">
-        <UpdateAvatar
+        <AvatarUpdater
           :avatarInNav="avatarInNav"
-          @closeUpdateAvatar="closeUpdateAvatar"
+          @closeAvatarUpdater="closeAvatarUpdater"
           @reloadUserData="reloadUserData"
         />
       </div>
@@ -34,13 +34,13 @@
 <script>
 import axios from "axios";
 import removeItem from "../../plugins/auth/removeItem";
-import UpdateAvatar from "../../components/modules/UpdateAvatar";
+import AvatarUpdater from "../../components/modules/AvatarUpdater";
 import errorHandler from "@/plugins/errorHandler";
 import LogoutDialog from "./LogoutDialog";
 
 export default {
   props: ["avatar"],
-  components: { UpdateAvatar, LogoutDialog },
+  components: { AvatarUpdater, LogoutDialog },
   data() {
     return {
       name: window.localStorage.getItem("name"),
@@ -75,7 +75,7 @@ export default {
         this.closeLogoutDialog();
       }
     },
-    closeUpdateAvatar() {
+    closeAvatarUpdater() {
       this.showModal = false;
     },
     closeLogoutDialog() {

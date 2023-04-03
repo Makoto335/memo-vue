@@ -1,26 +1,26 @@
 <template>
-  <div class="UpdateAvatar">
-    <div class="UpdateAvatar_Overlay"></div>
-    <div class="UpdateAvatar_Wrapper">
+  <div class="AvatarUpdater">
+    <div class="AvatarUpdater_Overlay"></div>
+    <div class="AvatarUpdater_Wrapper">
       <form @submit.prevent="updateAvatar()">
-        <div class="UpdateAvatar_Avatar">
+        <div class="AvatarUpdater_Avatar">
           >
-          <img class="UpdateAvatar_Image" :src="previewAvatar" />
+          <img class="AvatarUpdater_Image" :src="previewAvatar" />
           <div class="circle">
-            <label class="UpdateAvatar_CameraIcon">
+            <label class="AvatarUpdater_CameraIcon">
               <input type="file" name="image" @change="selectedImage" />
             </label>
           </div>
         </div>
-        <div class="UpdateAvatar_BtnWrapper">
+        <div class="AvatarUpdater_BtnWrapper">
           <a
-            class="UpdateAvatar_CancelBtn a-btn"
+            class="AvatarUpdater_CancelBtn a-btn"
             href="#"
             @click.prevent.stop="onClickCancel()"
           >
             Cancel
           </a>
-          <button class="UpdateAvatar_SaveBtn btn">Save</button>
+          <button class="AvatarUpdater_SaveBtn btn">Save</button>
         </div>
         <div class="error">{{ error }}</div>
       </form>
@@ -70,7 +70,7 @@ export default {
       }
     },
     onClickCancel() {
-      this.$emit("closeUpdateAvatar");
+      this.$emit("closeAvatarUpdater");
     },
     async updateAvatar() {
       this.error = null;
@@ -99,7 +99,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.UpdateAvatar {
+.AvatarUpdater {
   position: fixed;
   top: 0;
   left: 0;
