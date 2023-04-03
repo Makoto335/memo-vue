@@ -4,11 +4,21 @@
     <form @submit.prevent="login">
       <div class="input-field">
         <label for="email">メールアドレス</label>
-        <input id="email" type="email" placeholder="メールアドレス" v-model="email" />
+        <input
+          id="email"
+          type="email"
+          placeholder="メールアドレス"
+          v-model="email"
+        />
       </div>
       <div class="input-field">
         <label for="password">パスワード</label>
-        <input id="password" type="password" placeholder="パスワード" v-model="password" />
+        <input
+          id="password"
+          type="password"
+          placeholder="パスワード"
+          v-model="password"
+        />
       </div>
       <div class="error">{{ error }}</div>
       <div class="LoginForm_BtnWrapper">

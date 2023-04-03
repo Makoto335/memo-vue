@@ -1,6 +1,9 @@
 <template>
   <div v-for="memo in memos" :key="memo.id" class="MemoList">
-    <div class="MemoList_MemoWrapper" @click.prevent.stop="emitEditMemo(memo.id, memo.title, memo.content)">
+    <div
+      class="MemoList_MemoWrapper"
+      @click.prevent.stop="emitEditMemo(memo.id, memo.title, memo.content)"
+    >
       <div class="MemoList_BtnWrapper">
         <a
           href="#"
