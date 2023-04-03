@@ -8,8 +8,8 @@
           >Cancel</a
         >
         <a
-          class="LogoutDialog_Btn LogoutDialog_DeleteBtn"
-          @click.prevent.stop="onClickDelete()"
+          class="LogoutDialog_Btn LogoutDialog_LogoutBtn"
+          @click.prevent.stop="onClickLogout()"
           >Logout</a
         >
       </div>
@@ -30,7 +30,7 @@ export default {
     onClickCancel() {
       this.$emit("closeLogoutDialog");
     },
-    onClickDelete() {
+    onClickLogout() {
       this.$emit("logout");
     },
   },
@@ -91,7 +91,7 @@ export default {
     border: 1px solid #000000;
     color: black;
   }
-  &_DeleteBtn {
+  &_LogoutBtn {
     border: 0;
     background: rgb(239 68 68);
     color: white;

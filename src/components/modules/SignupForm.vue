@@ -189,7 +189,6 @@ export default {
           ".jpg、.gif、.png、.pdfのいずれかのファイルのみ許可されています\n";
       }
       if (errors) {
-        console.log(errors);
         this.avatarError = errors;
         this.avatar = null;
       }
@@ -216,8 +215,6 @@ export default {
         });
         setItem(res.headers, res.data.data.name);
         this.$emit("redirectToMemoRoom");
-        console.log({ res });
-        return res;
       } catch (err) {
         errorHandler(err);
         this.error = "アカウントを登録できませんでした";

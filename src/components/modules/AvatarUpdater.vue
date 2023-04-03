@@ -4,7 +4,6 @@
     <div class="AvatarUpdater_Wrapper">
       <form @submit.prevent="updateAvatar()">
         <div class="AvatarUpdater_Avatar">
-          >
           <img class="AvatarUpdater_Image" :src="previewAvatar" />
           <div class="circle">
             <label class="AvatarUpdater_CameraIcon">
@@ -36,9 +35,6 @@ export default {
   props: ["avatarInNav"],
   data() {
     return {
-      title: this.titleToEdit,
-      content: this.contentToEdit,
-      id: this.idToEdit,
       error: "",
       avatar: null,
       previewAvatar: this.avatarInNav,
@@ -66,7 +62,7 @@ export default {
       }
       if (errors) {
         alert(errors);
-        this.avatar = "";
+        this.avatar = null;
       }
     },
     onClickCancel() {
@@ -77,7 +73,7 @@ export default {
       let formData = new FormData();
       formData.append("user[avatar]", this.avatar);
       try {
-        const res = await axios.patch(`/api/v1//user`, formData, {
+        await axios.patch(`/api/v1//user`, formData, {
           headers: {
             uid: window.localStorage.getItem("uid"),
             "access-token": window.localStorage.getItem("access-token"),
@@ -87,8 +83,6 @@ export default {
         });
         this.$emit("reloadUserData");
         this.onClickCancel();
-        console.log({ res });
-        return res;
       } catch (err) {
         errorHandler(err);
         this.error = "画像を変更できませんでした";
@@ -161,7 +155,6 @@ export default {
     cursor: pointer;
   }
   &_BtnWrapper {
-    margin-top: auto;
     display: flex;
     width: 300px;
     font-size: 1rem;

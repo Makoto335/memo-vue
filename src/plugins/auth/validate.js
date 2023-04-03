@@ -12,14 +12,13 @@ const validate = async () => {
   const accessToken = window.localStorage.getItem("access-token");
 
   try {
-    const res = await axios.get("/api/v1/auth/validate_token", {
+    await axios.get("/api/v1/auth/validate_token", {
       headers: {
         uid: uid,
         "access-token": accessToken,
         client: client,
       },
     });
-    return res;
   } catch (err) {
     errorHandler(err);
     error.value = "認証に失敗しました";

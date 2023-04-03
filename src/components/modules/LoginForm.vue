@@ -42,8 +42,6 @@ export default {
         });
         setItem(res.headers, res.data.data.name);
         this.$emit("redirectToMemoRoom");
-        console.log({ res });
-        return res;
       } catch (err) {
         errorHandler(err);
         this.error = "メールアドレスかパスワードが違います";
