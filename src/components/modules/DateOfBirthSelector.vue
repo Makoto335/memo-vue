@@ -1,6 +1,7 @@
 <template>
-  <div class="SelectDate">
-    <div class="SelectDate_Wrapper">
+  <div class="DateOfBirthSelector">
+    <label>{{ label }}</label>
+    <div class="DateOfBirthSelector_Wrapper">
       <div>
         <select v-model="year" @change="emitDateOfBirth">
           <option value="-"></option>
@@ -35,8 +36,11 @@ import dayjs from "dayjs";
 
 export default {
   name: "DateSelector",
+    props: {
+    label: String,
+    error: String,
+  },
   emits: ["setDateOfBirth"],
-
   data() {
     return {
       years: [...Array(120)].map((_, i) => dayjs().year() - i),
@@ -45,7 +49,6 @@ export default {
       year: "",
       month: "",
       day: "",
-      error: "",
     };
   },
   computed: {
@@ -63,11 +66,16 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-.SelectDate {
+.DateOfBirthSelector {
+  margin: 0 0 10px 0;
   select {
     width: 60px;
     height: 30px;
     padding: 5px;
+  }
+    label {
+    margin-left: 5px;
+    font-weight: bold;
   }
   &_Wrapper {
     display: flex;
