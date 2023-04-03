@@ -33,7 +33,7 @@
 
 <script>
 import axios from "axios";
-import errorHandler from "../plugins/errorHandler";
+import errorHandler from "../../plugins/errorHandler";
 
 export default {
   data() {
@@ -71,7 +71,7 @@ export default {
       try {
         this.error = null;
 
-        const res = await axios.post(
+        await axios.post(
           "/api/v1/memos",
           {
             title: this.title,
@@ -89,8 +89,6 @@ export default {
         this.$emit("reloadUserData");
         this.title = null;
         this.content = null;
-        console.log({ res });
-        return res;
       } catch (err) {
         errorHandler(err);
         this.error = "メモを保存できませんでした";

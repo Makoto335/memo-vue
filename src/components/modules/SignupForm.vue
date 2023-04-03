@@ -2,66 +2,61 @@
   <div class="SignupForm">
     <h2>アカウントを登録</h2>
     <form @submit.prevent="signUp">
-      <div class="SignupForm_UploadAvatar">
-        <img class="SignupForm_Avatar" :src="preview" />
-        <label class="SignupForm_CameraIcon">
-          <input type="file" name="image" @change="selectedImage" />
-        </label>
-      </div>
-      <div class="error SignupForm_AvatarError">{{ avatarError }}</div>
-      <div class="SignupForm_TextInput">
-        <label>お名前</label>
-        <input
-          type="text"
-          placeholder="例）山田太郎"
-          v-model="name"
-          @blur="validateName"
-          @keyup="validateName"
-        />
-        <div class="error">{{ nameError }}</div>
-        <label>メールアドレス</label>
-        <input
-          type="text"
-          placeholder="例）example@example.com"
-          v-model="email"
-          autocomplete="off"
-          @blur="validateEmail"
-          @keyup="validateEmail"
-        />
-        <div class="error">{{ emailError }}</div>
-        <label>パスワード</label>
-        <input
-          type="password"
-          placeholder="１０文字以上の半角英字と半角数字の混合"
-          v-model="password"
-          autocomplete="off"
-          @blur="
-            validatePassword();
-            validatePasswordConfirmation();
-          "
-          @keyup="
-            validatePassword();
-            validatePasswordConfirmation();
-          "
-        />
-        <div class="error">{{ passwordError }}</div>
-        <label>パスワード（確認用）</label>
-        <input
-          type="password"
-          placeholder="パスワード（確認用）"
-          v-model="passwordConfirmation"
-          autocomplete="off"
-          @blur="validatePasswordConfirmation"
-          @keyup="validatePasswordConfirmation"
-        />
-        <div class="error">{{ passwordConfirmationError }}</div>
-      </div>
-      <div class="SignupForm_DateOfBirth">
-        <label>生年月日</label>
-        <SelectDate @setDateOfBirth="setDateOfBirth" />
-        <div class="error">{{ dateOfBirthError }}</div>
-      </div>
-
+      <AvatarUploader
+        @imageSelected="imageSelected"
+        :avatarError="avatarError"
+        :preview="preview"
+      />
+      <TextInput
+        type="text"
+        v-model="name"
+        label="お名前"
+        placeholder="例）山田太郎"
+        :error="nameError"
+        @blur="validateName"
+        @keyup="validateName"
+      />
+      <TextInput
+        type="text"
+        label="メールアドレス"
+        placeholder="例）example@example.com"
+        v-model="email"
+        autocomplete="off"
+        @blur="validateEmail"
+        @keyup="validateEmail"
+        :error="emailError"
+      />
+      <TextInput
+        type="password"
+        label="パスワード"
+        placeholder="１０文字以上の半角英字と半角数字の混合"
+        v-model="password"
+        autocomplete="off"
+        @blur="
+          validatePassword();
+          validatePasswordConfirmation();
+        "
+        @keyup="
+          validatePassword();
+          validatePasswordConfirmation();
+        "
+        :error="passwordError"
+      />
+      <TextInput
+        type="password"
+        label="パスワード（確認用）"
+        placeholder="パスワード（確認用）"
+        v-model="passwordConfirmation"
+        autocomplete="off"
+        @blur="validatePasswordConfirmation"
+        @keyup="validatePasswordConfirmation"
+        :error="passwordConfirmationError"
+      />
+      <DateOfBirthSelector
+        @setDateOfBirth="setDateOfBirth"
+        :error="dateOfBirthError"
+        label="生年月日"
+      />
       <div class="error">{{ error }}</div>
       <div class="SignupForm_BtnWrapper">
         <button
@@ -79,14 +74,16 @@
 <script>
 import dayjs from "dayjs";
 import axios from "axios";
-import setItem from "../plugins/auth/setItem";
-import SelectDate from "./modules/SelectDate.vue";
-import errorHandler from "../plugins/errorHandler";
+import setItem from "../../plugins/auth/setItem";
+import DateOfBirthSelector from "./DateOfBirthSelector.vue";
+import AvatarUploader from "./AvatarUploader.vue";
+import TextInput from "./TextInput.vue";
+import errorHandler from "../../plugins/errorHandler";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 dayjs.extend(customParseFormat);
 
 export default {
-  components: { SelectDate },
+  components: { AvatarUploader, TextInput, DateOfBirthSelector },
   emits: ["redirectToMemoRoom"],
   data() {
     return {
@@ -103,7 +100,7 @@ export default {
       dateOfBirthError: null,
       avatar: null,
       avatarError: null,
-      preview: require("../assets/images/blank-profile-picture_640.png"),
+      preview: require("../../assets/images/blank-profile-picture_640.png"),
     };
   },
   computed: {
@@ -173,9 +170,8 @@ export default {
         ? (this.passwordConfirmationError = "パスワードが一致していません")
         : (this.passwordConfirmationError = null);
     },
-    selectedImage(e) {
-      e.preventDefault();
-      this.avatar = e.target.files[0];
+    imageSelected(file) {
+      this.avatar = file;
       this.avatarError = null;
       this.preview = URL.createObjectURL(this.avatar);
       let size = this.avatar.size,
@@ -194,7 +190,6 @@ export default {
           ".jpg、.gif、.png、.pdfのいずれかのファイルのみ許可されています\n";
       }
       if (errors) {
-        console.log(errors);
         this.avatarError = errors;
         this.avatar = null;
       }
@@ -221,8 +216,6 @@ export default {
         });
         setItem(res.headers, res.data.data.name);
         this.$emit("redirectToMemoRoom");
-        console.log({ res });
-        return res;
       } catch (err) {
         errorHandler(err);
         this.error = "アカウントを登録できませんでした";
@@ -240,56 +233,6 @@ export default {
   box-sizing: border-box;
   h2 {
     text-align: center;
-  }
-  label {
-    margin-left: 5px;
-    font-weight: bold;
-  }
-  &_TextInput {
-    input {
-      width: 100%;
-      padding: 0.5rem;
-      margin: 0 0 8px 0;
-      border-radius: 4px;
-      border: 1px solid #eee;
-      outline: none;
-      box-sizing: border-box;
-    }
-  }
-  &_DateOfBirth {
-    margin: 0 0 10px 0;
-  }
-  &_UploadAvatar {
-    margin: 0 auto;
-    height: 200px;
-    width: 150px;
-    position: relative;
-    input {
-      display: none;
-    }
-  }
-  &_Avatar {
-    margin: 0 auto;
-    display: block;
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-  }
-  &_AvatarError {
-    white-space: pre-line;
-  }
-  &_CameraIcon {
-    position: absolute;
-    bottom: 25px;
-    right: 0;
-    z-index: 2;
-    display: block;
-    height: 54px;
-    width: 54px;
-    background-image: url("../assets/images/add-camera_96.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    cursor: pointer;
   }
   &_BtnWrapper {
     margin-top: 20px;

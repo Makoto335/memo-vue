@@ -1,9 +1,7 @@
 <template>
   <div class="WelcomePage">
     <div class="WelcomePage_Wrapper">
-      <div class="WelcomePage_Title">
-        <h1>Simple Memo</h1>
-      </div>
+      <h1 class="WelcomePage_Title">Simple Memo</h1>
       <div class="WelcomePage_Form">
         <div v-if="showSignUpForm">
           <SignupForm @redirectToMemoRoom="redirectToMemoRoom" />
@@ -31,8 +29,8 @@
 </template>
 
 <script>
-import LoginForm from "../components/LoginForm.vue";
-import SignupForm from "../components/SignupForm.vue";
+import LoginForm from "../modules/LoginForm.vue";
+import SignupForm from "../modules/SignupForm.vue";
 
 export default {
   components: { SignupForm, LoginForm },
@@ -65,9 +63,7 @@ export default {
   &_Title {
     width: 100%;
     text-align: center;
-    h1 {
-      color: #fcf707;
-    }
+    color: #fcf707;
   }
   &_Form {
     margin: 0 auto;

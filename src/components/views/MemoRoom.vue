@@ -14,56 +14,20 @@
       :prev-class="'prev-class'"
       :next-class="'next-class'"
     >
-      >
     </paginate>
     <div class="MemoRoom_Grid">
       <MemoForm @reloadUserData="reloadUserData" />
-      <div v-for="memo in reversedMemos" :key="memo.id" class="MemoRoom_Memos">
-        <div
-          class="MemoRoom_MemoWrapper"
-          @click.prevent.stop="
-            showEditForm = true;
-            setIdToEdit(`${memo.id}`);
-            titleToEdit = `${memo.title}`;
-            contentToEdit = `${memo.content}`;
-          "
-        >
-          <div class="MemoRoom_BtnWrapper">
-            <a
-              href="#"
-              @click.prevent.stop="
-                showEditForm = true;
-                setIdToEdit(`${memo.id}`);
-                titleToEdit = `${memo.title}`;
-                contentToEdit = `${memo.content}`;
-              "
-            >
-              <font-awesome-icon icon="fa-solid fa-pencil" class="fa-lg" />
-            </a>
-            <a
-              href="#"
-              @click.prevent.stop="
-                showDeleteDialog = true;
-                setIdToDelete(`${memo.id}`);
-              "
-            >
-              <font-awesome-icon icon="fa-solid fa-trash-can" class="fa-lg" />
-            </a>
-          </div>
-          <h3>{{ memo.title }}</h3>
-          <p>{{ memo.content }}</p>
-          <div class="MemoRoom_CreateAt">
-            {{ formatDate(memo.created_at) }}
-          </div>
-        </div>
-      </div>
+      <MemoList
+        :memos="reversedMemos"
+        @open-edit-form="openEditForm"
+        @open-delete-dialog="openDeleteDialog"
+      ></MemoList>
     </div>
     <div v-if="showEditForm">
       <EditForm
         :titleToEdit="titleToEdit"
         :contentToEdit="contentToEdit"
         @closeEditForm="closeEditForm"
-        @reloadUserData="reloadUserData"
         @editMemo="editMemo"
       />
     </div>
@@ -77,17 +41,18 @@
 </template>
 
 <script>
-import Navbar from "../components/NavBar";
-import MemoForm from "../components/MemoForm";
+import Navbar from "../modules/NavBar";
+import MemoForm from "../modules/MemoForm";
+import MemoList from "../modules/MemoList.vue";
 import axios from "axios";
 import Paginate from "vuejs-paginate-next";
-import EditForm from "../components/modules/EditForm";
-import DeleteDialog from "../components/modules/DeleteDialog";
+import EditForm from "../modules/EditForm";
+import DeleteDialog from "../modules/DeleteDialog";
 import errorHandler from "@/plugins/errorHandler";
 import dayjs from "dayjs";
 
 export default {
-  components: { Navbar, MemoForm, Paginate, EditForm, DeleteDialog },
+  components: { Navbar, MemoForm, Paginate, EditForm, DeleteDialog, MemoList },
   data() {
     return {
       memos: [],
@@ -116,7 +81,6 @@ export default {
         });
         this.memos = res.data.user.memos_array;
         this.avatar = res.data.user.avatar_url;
-        return res;
       } catch (err) {
         errorHandler(err);
         this.error = "正しくデータを取得できませんでした";
@@ -125,7 +89,7 @@ export default {
     async editMemo(editedTitle, editedContent) {
       this.error = null;
       try {
-        const res = await axios.put(
+        await axios.put(
           `/api/v1//memos/${this.idToEdit}`,
           {
             title: editedTitle,
@@ -140,7 +104,6 @@ export default {
           }
         );
         this.reloadUserData();
-        return res;
       } catch (err) {
         errorHandler(err);
         this.error = "メモを編集できませんでした";
@@ -149,8 +112,11 @@ export default {
         this.idToEdit = "";
       }
     },
-    setIdToEdit(id) {
+    openEditForm({ id, title, content }) {
+      this.showEditForm = true;
       this.idToEdit = id;
+      this.titleToEdit = title;
+      this.contentToEdit = content;
     },
     closeEditForm() {
       this.idToEdit = "";
@@ -159,7 +125,7 @@ export default {
     async deleteMemo(id) {
       this.error = null;
       try {
-        const res = await axios.delete(`/api/v1/memos/${id}`, {
+        await axios.delete(`/api/v1/memos/${id}`, {
           headers: {
             uid: window.localStorage.getItem("uid"),
             "access-token": window.localStorage.getItem("access-token"),
@@ -168,10 +134,7 @@ export default {
         });
         this.reloadUserData();
         this.closeDeleteDialog();
-        console.log({ res });
-        return res;
       } catch (err) {
-        console.log({ err });
         errorHandler(err);
         this.error = "メモを削除できませんでした";
       } finally {
@@ -179,7 +142,8 @@ export default {
         this.idToDelete = "";
       }
     },
-    setIdToDelete(id) {
+    openDeleteDialog(id) {
+      this.showDeleteDialog = true;
       this.idToDelete = id;
     },
     closeDeleteDialog() {
@@ -219,61 +183,6 @@ export default {
     gap: 5px;
     justify-content: center;
     grid-template-columns: repeat(4, minmax(300px, 1fr));
-  }
-  &_Memos {
-    position: relative;
-    background: white;
-    padding: 1.5rem;
-    margin: 10px auto;
-    width: 340px;
-    height: 200px;
-    color: black;
-    cursor: pointer;
-    h3 {
-      width: 180px;
-      height: 58px;
-      overflow: hidden;
-      margin-top: unset;
-      margin-bottom: 1rem;
-      font-weight: bold;
-      font-size: 1rem;
-    }
-    p {
-      width: 100%;
-      height: 100px;
-      overflow: hidden;
-      display: block;
-      margin: unset;
-      font-size: 1rem;
-      line-height: 1.25rem;
-    }
-  }
-  &_BtnWrapper {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    display: flex;
-    a {
-      display: inline-block;
-      width: 5px;
-      color: black;
-      font-weight: bold;
-      border: 0;
-      border-radius: 3px;
-      padding: 2px;
-      cursor: pointer;
-      &:nth-child(2) {
-        margin-right: 20px;
-        margin-left: 40px;
-      }
-    }
-  }
-  &_CreateAt {
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    position: absolute;
-    bottom: 1rem;
-    right: 1.5rem;
   }
   .error {
     text-align: center;

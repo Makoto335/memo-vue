@@ -3,8 +3,7 @@
     <div class="NavBar_Wrapper">
       <div class="error">{{ error }}</div>
       <div class="NavBar_User">
-        <p>
-          <span class="NavBar_Name">{{ name }}</span
+        <p><span class="NavBar_Name">{{ name }}</span
           >さん
         </p>
         <a href="#" @click.prevent.stop="showModal = true"
@@ -18,9 +17,9 @@
         </a>
       </div>
       <div v-if="showModal">
-        <UpdateAvatar
+        <AvatarUpdater
           :avatarInNav="avatarInNav"
-          @closeUpdateAvatar="closeUpdateAvatar"
+          @closeAvatarUpdater="closeAvatarUpdater"
           @reloadUserData="reloadUserData"
         />
       </div>
@@ -33,14 +32,14 @@
 
 <script>
 import axios from "axios";
-import removeItem from "../plugins/auth/removeItem";
-import UpdateAvatar from "../components/modules/UpdateAvatar";
+import removeItem from "../../plugins/auth/removeItem";
+import AvatarUpdater from "../../components/modules/AvatarUpdater";
 import errorHandler from "@/plugins/errorHandler";
-import LogoutDialog from "./modules/LogoutDialog";
+import LogoutDialog from "./LogoutDialog";
 
 export default {
   props: ["avatar"],
-  components: { UpdateAvatar, LogoutDialog },
+  components: { AvatarUpdater, LogoutDialog },
   data() {
     return {
       name: window.localStorage.getItem("name"),
@@ -58,24 +57,22 @@ export default {
     async logout() {
       this.error = null;
       try {
-        const res = await axios.delete("/api/v1/auth/sign_out", {
+        await axios.delete("/api/v1/auth/sign_out", {
           headers: {
             uid: window.localStorage.getItem("uid"),
             "access-token": window.localStorage.getItem("access-token"),
             client: window.localStorage.getItem("client"),
           },
         });
-        console.log("ログアウトしました");
         removeItem();
         this.$router.push({ name: "WelcomePage" });
-        return res;
       } catch (err) {
         errorHandler(err);
         this.error = "ログアウトできませんでした";
         this.closeLogoutDialog();
       }
     },
-    closeUpdateAvatar() {
+    closeAvatarUpdater() {
       this.showModal = false;
     },
     closeLogoutDialog() {

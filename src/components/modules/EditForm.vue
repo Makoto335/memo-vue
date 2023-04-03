@@ -4,7 +4,7 @@
     <div class="EditForm_Wrapper">
       <form @submit.prevent="onClickEdit()">
         <label>
-          <div class="EditForm_Label"><span>Title</span></div>
+          <div class="EditForm_Label">Title</div>
           <input
             class="EditForm_Title"
             type="text"
@@ -14,7 +14,7 @@
           />
         </label>
         <label>
-          <div class="EditForm_Label"><span>Content</span></div>
+          <div class="EditForm_Label">Content</div>
           <textarea
             class="EditForm_Content"
             v-model="content"
@@ -128,8 +128,8 @@ export default {
       display: block;
     }
     textarea {
-      display: block;
-      padding: 0.5rem 0;
+      padding: 0.5rem;
+      box-sizing: border-box;
       height: 450px;
     }
   }
@@ -139,15 +139,14 @@ export default {
   }
   &_Title {
     font-size: 1.5rem;
-    display: block;
     width: 100%;
-    padding: 0.5rem 0;
+    padding: 0.5rem;
+    box-sizing: border-box;
   }
   &_Content {
     font-size: 1rem;
-    display: block;
     width: 100%;
-    padding: 0.5rem 0;
+    padding: 0.5rem ;
   }
   &_BtnWrapper {
     margin: 20px auto 0 auto;

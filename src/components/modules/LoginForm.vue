@@ -2,10 +2,14 @@
   <div class="LoginForm">
     <h2>ログイン</h2>
     <form @submit.prevent="login">
-      <label>メールアドレス</label>
-      <input type="email" placeholder="メールアドレス" v-model="email" />
-      <label>パスワード</label>
-      <input type="password" placeholder="パスワード" v-model="password" />
+      <div class="input-field">
+        <label for="email">メールアドレス</label>
+        <input id="email" type="email" placeholder="メールアドレス" v-model="email" />
+      </div>
+      <div class="input-field">
+        <label for="password">パスワード</label>
+        <input id="password" type="password" placeholder="パスワード" v-model="password" />
+      </div>
       <div class="error">{{ error }}</div>
       <div class="LoginForm_BtnWrapper">
         <button class="LoginForm_Btn btn">Login</button>
@@ -16,8 +20,8 @@
 
 <script>
 import axios from "axios";
-import setItem from "../plugins/auth/setItem";
-import errorHandler from "../plugins/errorHandler";
+import setItem from "../../plugins/auth/setItem";
+import errorHandler from "../../plugins/errorHandler";
 
 export default {
   emits: ["redirectToMemoRoom"],
@@ -38,8 +42,6 @@ export default {
         });
         setItem(res.headers, res.data.data.name);
         this.$emit("redirectToMemoRoom");
-        console.log({ res });
-        return res;
       } catch (err) {
         errorHandler(err);
         this.error = "メールアドレスかパスワードが違います";
@@ -55,32 +57,28 @@ export default {
   margin: 0 auto;
   padding: 30px;
   box-sizing: border-box;
-  form {
-    width: 100%;
-    margin: 0 auto;
-    label {
-      display: block;
-    }
-  }
+
   h2 {
     text-align: center;
   }
-  label {
-    margin: 5px 0 5px 5px;
-    font-weight: bold;
-  }
-  input {
-    font-size: 1rem;
-    display: block;
-    width: 100%;
-    padding: 0.5rem;
-    box-sizing: border-box;
-  }
-  button {
-    width: 200px;
+  .input-field {
+    margin-bottom: 20px;
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input {
+      font-size: 1rem;
+      display: block;
+      width: 100%;
+      padding: 0.5rem;
+      box-sizing: border-box;
+    }
   }
   &_BtnWrapper {
-    margin-top: 20px;
     display: flex;
     justify-content: center;
   }

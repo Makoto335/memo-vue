@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
-import WelcomePage from "../views/WelcomePage";
-import MemoRoom from "../views/MemoRoom";
+import WelcomePage from "../components/views/WelcomePage";
+import MemoRoom from "../components/views/MemoRoom";
 import useValidate from "../plugins/auth/validate";
 
 const { error, validate } = useValidate();
@@ -11,14 +11,13 @@ const requireAuth = async (to, from, next) => {
   const accessToken = window.localStorage.getItem("access-token");
 
   if (!uid || !client || !accessToken) {
-    console.log("ログインしていません");
+    ("ログインしていません");
     next({ name: "WelcomePage" });
     return;
   }
 
   await validate();
   if (error.value) {
-    console.log("認証に失敗しました");
     next({ name: "WelcomePage" });
   } else {
     next();

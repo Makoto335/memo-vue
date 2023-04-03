@@ -1,26 +1,25 @@
 <template>
-  <div class="UpdateAvatar">
-    <div class="UpdateAvatar_Overlay"></div>
-    <div class="UpdateAvatar_Wrapper">
+  <div class="AvatarUpdater">
+    <div class="AvatarUpdater_Overlay"></div>
+    <div class="AvatarUpdater_Wrapper">
       <form @submit.prevent="updateAvatar()">
-        <div class="UpdateAvatar_Avatar">
-          >
-          <img class="UpdateAvatar_Image" :src="previewAvatar" />
+        <div class="AvatarUpdater_Avatar">
+          <img class="AvatarUpdater_Image" :src="previewAvatar" />
           <div class="circle">
-            <label class="UpdateAvatar_CameraIcon">
+            <label class="AvatarUpdater_CameraIcon">
               <input type="file" name="image" @change="selectedImage" />
             </label>
           </div>
         </div>
-        <div class="UpdateAvatar_BtnWrapper">
+        <div class="AvatarUpdater_BtnWrapper">
           <a
-            class="UpdateAvatar_CancelBtn a-btn"
+            class="AvatarUpdater_CancelBtn a-btn"
             href="#"
             @click.prevent.stop="onClickCancel()"
           >
             Cancel
           </a>
-          <button class="UpdateAvatar_SaveBtn btn">Save</button>
+          <button class="AvatarUpdater_SaveBtn btn">Save</button>
         </div>
         <div class="error">{{ error }}</div>
       </form>
@@ -36,9 +35,6 @@ export default {
   props: ["avatarInNav"],
   data() {
     return {
-      title: this.titleToEdit,
-      content: this.contentToEdit,
-      id: this.idToEdit,
       error: "",
       avatar: null,
       previewAvatar: this.avatarInNav,
@@ -66,18 +62,18 @@ export default {
       }
       if (errors) {
         alert(errors);
-        this.avatar = "";
+        this.avatar = null;
       }
     },
     onClickCancel() {
-      this.$emit("closeUpdateAvatar");
+      this.$emit("closeAvatarUpdater");
     },
     async updateAvatar() {
       this.error = null;
       let formData = new FormData();
       formData.append("user[avatar]", this.avatar);
       try {
-        const res = await axios.patch(`/api/v1//user`, formData, {
+        await axios.patch(`/api/v1//user`, formData, {
           headers: {
             uid: window.localStorage.getItem("uid"),
             "access-token": window.localStorage.getItem("access-token"),
@@ -87,8 +83,6 @@ export default {
         });
         this.$emit("reloadUserData");
         this.onClickCancel();
-        console.log({ res });
-        return res;
       } catch (err) {
         errorHandler(err);
         this.error = "画像を変更できませんでした";
@@ -99,7 +93,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.UpdateAvatar {
+.AvatarUpdater {
   position: fixed;
   top: 0;
   left: 0;
@@ -161,7 +155,6 @@ export default {
     cursor: pointer;
   }
   &_BtnWrapper {
-    margin-top: auto;
     display: flex;
     width: 300px;
     font-size: 1rem;
