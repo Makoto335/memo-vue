@@ -4,13 +4,17 @@
     <label class="AvatarUploader_CameraIcon">
       <input type="file" name="image" @change="selectedImage" />
     </label>
-    <div class="error AvatarUploader_Error">{{ avatarError }}</div>
+    
   </div>
+  <div class="error AvatarUploader_Error">{{ avatarError }}</div>
 </template>
 
 <script>
 export default {
-  props: ["preview"],
+    props: {
+   preview: String,
+    avatarError: String,
+  },
   methods: {
     selectedImage(e) {
       e.preventDefault();
@@ -50,7 +54,8 @@ export default {
     cursor: pointer;
   }
   &_Error {
-    white-space: pre-line;
+    margin:0 auto;
+    width:350px;
   }
 }
 </style>

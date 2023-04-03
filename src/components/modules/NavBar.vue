@@ -1,9 +1,10 @@
 <template>
   <div class="NavBar">
     <div class="NavBar_Wrapper">
-      <div class="error">{{ error }}</div>
+      <div class="error"><p>{{ error }}</p></div>
       <div class="NavBar_User">
-        <p><span class="NavBar_Name">{{ name }}</span
+        <p>
+          <span class="NavBar_Name">{{ name }}</span
           >さん
         </p>
         <a href="#" @click.prevent.stop="showModal = true"
@@ -91,7 +92,7 @@ export default {
   width: 100%;
   &_Wrapper {
     width: 100%;
-    height: 60px;
+    min-height: 60px;
     margin: 0 auto;
     background: #fcf707;
     border-bottom: 1px solid;
@@ -121,6 +122,17 @@ export default {
   }
   .error {
     margin: 0;
+  }
+}
+@media screen and (max-width: 800px) {
+  .error {
+   height: 100px;
+     display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+   p{
+    margin: unset;
+   }
   }
 }
 </style>
