@@ -129,7 +129,8 @@ export default {
     }
     textarea {
       display: block;
-      padding: 0.5rem 0;
+      padding: 0.5rem;
+      box-sizing: border-box;
       height: 450px;
     }
   }
@@ -141,7 +142,8 @@ export default {
     font-size: 1.5rem;
     display: block;
     width: 100%;
-    padding: 0.5rem 0;
+    padding: 0.5rem;
+    box-sizing: border-box;
   }
   &_Content {
     font-size: 1rem;

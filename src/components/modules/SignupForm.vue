@@ -74,11 +74,11 @@
 <script>
 import dayjs from "dayjs";
 import axios from "axios";
-import setItem from "../plugins/auth/setItem";
-import DateOfBirthSelector from "./modules/DateOfBirthSelector.vue";
-import AvatarUploader from "./modules/AvatarUploader.vue";
-import TextInput from "./modules/TextInput.vue";
-import errorHandler from "../plugins/errorHandler";
+import setItem from "../../plugins/auth/setItem";
+import DateOfBirthSelector from "./DateOfBirthSelector.vue";
+import AvatarUploader from "./AvatarUploader.vue";
+import TextInput from "./TextInput.vue";
+import errorHandler from "../../plugins/errorHandler";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 dayjs.extend(customParseFormat);
 
@@ -100,7 +100,7 @@ export default {
       dateOfBirthError: null,
       avatar: null,
       avatarError: null,
-      preview: require("../assets/images/blank-profile-picture_640.png"),
+      preview: require("../../assets/images/blank-profile-picture_640.png"),
     };
   },
   computed: {

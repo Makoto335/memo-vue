@@ -33,7 +33,7 @@
 
 <script>
 import axios from "axios";
-import errorHandler from "../plugins/errorHandler";
+import errorHandler from "../../plugins/errorHandler";
 
 export default {
   data() {

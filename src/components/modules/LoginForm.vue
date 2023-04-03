@@ -20,8 +20,8 @@
 
 <script>
 import axios from "axios";
-import setItem from "../plugins/auth/setItem";
-import errorHandler from "../plugins/errorHandler";
+import setItem from "../../plugins/auth/setItem";
+import errorHandler from "../../plugins/errorHandler";
 
 export default {
   emits: ["redirectToMemoRoom"],

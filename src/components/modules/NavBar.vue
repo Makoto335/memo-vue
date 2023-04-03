@@ -33,10 +33,10 @@
 
 <script>
 import axios from "axios";
-import removeItem from "../plugins/auth/removeItem";
-import UpdateAvatar from "../components/modules/UpdateAvatar";
+import removeItem from "../../plugins/auth/removeItem";
+import UpdateAvatar from "../../components/modules/UpdateAvatar";
 import errorHandler from "@/plugins/errorHandler";
-import LogoutDialog from "./modules/LogoutDialog";
+import LogoutDialog from "./LogoutDialog";
 
 export default {
   props: ["avatar"],
