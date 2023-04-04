@@ -28,7 +28,9 @@
 import dayjs from "dayjs";
 
 export default {
-  props: ["memos"],
+  props: {
+    memos: Array,
+  },
   methods: {
     formatDate(date) {
       return dayjs(date).format("YYYY-MM-DD HH:mm:ss");

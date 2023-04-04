@@ -23,7 +23,6 @@
 
 <script>
 export default {
-  props: ["idToEdit", "titleToEdit", "contentToEdit"],
   data() {
     return {
       message: "メモを削除します。よろしいですか？",

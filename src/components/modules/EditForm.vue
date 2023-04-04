@@ -48,7 +48,10 @@
 
 <script>
 export default {
-  props: ["titleToEdit", "contentToEdit"],
+  props: {
+    titleToEdit: String,
+    contentToEdit: String,
+  },
   data() {
     return {
       title: this.titleToEdit,

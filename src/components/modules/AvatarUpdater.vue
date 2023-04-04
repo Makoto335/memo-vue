@@ -32,7 +32,9 @@ import axios from "axios";
 import errorHandler from "../../plugins/errorHandler";
 
 export default {
-  props: ["avatarInNav"],
+  props: {
+    avatarInNav: String,
+  },
   data() {
     return {
       error: "",
