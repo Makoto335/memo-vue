@@ -41,7 +41,9 @@ import errorHandler from "@/plugins/errorHandler";
 import LogoutDialog from "./LogoutDialog";
 
 export default {
-  props: ["avatar"],
+  props: {
+    avatar: String,
+  },
   components: { AvatarUpdater, LogoutDialog },
   data() {
     return {
