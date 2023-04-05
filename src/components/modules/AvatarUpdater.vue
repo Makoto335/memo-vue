@@ -150,8 +150,8 @@ export default {
   }
   &_CameraIcon {
     position: absolute;
-    bottom: 40px;
-    right: 0;
+    bottom: 50px;
+    right: 10px;
     z-index: 2;
     display: block;
     height: 80px;
