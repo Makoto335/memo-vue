@@ -1,7 +1,8 @@
 <template>
   <div class="TextInput">
-    <label>{{ label }}</label>
+    <label class="TextInput_Label">{{ label }}</label>
     <input
+      class="TextInput_Input"
       :type="type"
       :placeholder="placeholder"
       :autocomplete="autocomplete"
@@ -30,11 +31,11 @@ export default {
 
 <style scoped lang="scss">
 .TextInput {
-  label {
+  &_Label {
     margin-left: 5px;
     font-weight: bold;
   }
-  input {
+  &_Input {
     width: 100%;
     padding: 0.5rem;
     margin: 0 0 8px 0;

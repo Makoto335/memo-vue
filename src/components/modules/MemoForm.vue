@@ -1,7 +1,7 @@
 <template>
   <div class="MemoForm">
-    <form @submit.prevent="handleCreate">
-      <label>
+    <form class="MemoForm_Form" @submit.prevent="handleCreate">
+      <label class="MemoForm_Label">
         <span>Title</span>
         <input
           placeholder="20文字以内"
@@ -15,6 +15,7 @@
       <label>
         <span>Content</span>
         <textarea
+          class="MemoForm_Content"
           placeholder="500文字以内"
           v-model="content"
           @blur="validateContent"
@@ -100,26 +101,27 @@ export default {
 
 <style scoped lang="scss">
 .MemoForm {
-  width: 400px;
+  width: 390px;
   margin: 0 auto;
-  form {
+  &_Form {
     width: 100%;
-    label {
-      display: block;
-    }
-    textarea {
-      width: 100%;
-      display: block;
-      padding: 0.5rem;
-      box-sizing: border-box;
-      height: 80px;
-    }
+  }
+  &_Label {
+    display: block;
   }
   &_Title {
     display: block;
     width: 99.5%;
     padding: 0.5rem;
     box-sizing: border-box;
+    height: 40px;
+  }
+  &_Content {
+    width: 100%;
+    display: block;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    height: 85px;
   }
   ._disabled {
     background: grey;

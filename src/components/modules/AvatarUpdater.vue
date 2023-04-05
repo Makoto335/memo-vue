@@ -2,12 +2,17 @@
   <div class="AvatarUpdater">
     <div class="AvatarUpdater_Overlay"></div>
     <div class="AvatarUpdater_Wrapper">
-      <form @submit.prevent="updateAvatar()">
+      <form class="AvatarUpdater_Form" @submit.prevent="updateAvatar()">
         <div class="AvatarUpdater_Avatar">
           <img class="AvatarUpdater_Image" :src="previewAvatar" />
           <div class="circle">
             <label class="AvatarUpdater_CameraIcon">
-              <input type="file" name="image" @change="selectedImage" />
+              <input
+                class="AvatarUpdater_ImageInput"
+                type="file"
+                name="image"
+                @change="selectedImage"
+              />
             </label>
           </div>
         </div>
@@ -123,7 +128,7 @@ export default {
     border-radius: 4px;
     border: 1px solid #333;
   }
-  form {
+  &_Form {
     margin: auto;
     width: 300px;
   }
@@ -139,9 +144,9 @@ export default {
     height: 380px;
     width: 300px;
     position: relative;
-    input {
-      display: none;
-    }
+  }
+  &_ImageInput {
+    display: none;
   }
   &_CameraIcon {
     position: absolute;
