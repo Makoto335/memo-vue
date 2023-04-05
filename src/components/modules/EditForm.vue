@@ -2,7 +2,7 @@
   <div class="EditForm">
     <div class="EditForm_Overlay"></div>
     <div class="EditForm_Wrapper">
-      <form @submit.prevent="onClickEdit()">
+      <form class="EditForm_Form" @submit.prevent="onClickEdit()">
         <label>
           <div class="EditForm_Label">Title</div>
           <input
@@ -122,19 +122,12 @@ export default {
     border-radius: 4px;
     border: 1px solid #333;
   }
-  form {
+  &_Form {
     width: 100%;
     margin: 0 auto;
-    label {
-      display: block;
-    }
-    textarea {
-      padding: 0.5rem;
-      box-sizing: border-box;
-      height: 450px;
-    }
   }
   &_Label {
+    display: block;
     margin-top: 10px;
     font-size: 1.5rem;
   }
@@ -145,9 +138,11 @@ export default {
     box-sizing: border-box;
   }
   &_Content {
+    height: 450px;
     font-size: 1rem;
     width: 100%;
     padding: 0.5rem;
+    box-sizing: border-box;
   }
   &_BtnWrapper {
     margin: 5px auto 0 auto;
@@ -175,11 +170,8 @@ export default {
       width: 500px;
       height: 600px;
     }
-    form{
-      
-      textarea{
+    &_Content {
         height: 300px;
-      }
     }
   }
 }
@@ -193,13 +185,10 @@ export default {
       font-size: 1.5rem;
       display: block;
       width: 100%;
-      padding: 0.5rem 0;
+      padding: 0.5rem;
     }
-    form{
-      
-      textarea{
+    &_Content {
         height: 200px;
-      }
     }
   }
 }

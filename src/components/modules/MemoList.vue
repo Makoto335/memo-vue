@@ -1,22 +1,26 @@
 <template>
   <div v-for="memo in memos" :key="memo.id" class="MemoList">
     <div
-      class="MemoList_MemoWrapper"
       @click.prevent.stop="emitEditMemo(memo.id, memo.title, memo.content)"
     >
       <div class="MemoList_BtnWrapper">
         <a
+          class="MemoList_Btn"
           href="#"
           @click.prevent.stop="emitEditMemo(memo.id, memo.title, memo.content)"
         >
           <font-awesome-icon icon="fa-solid fa-pencil" class="fa-lg" />
         </a>
-        <a href="#" @click.prevent.stop="emitDeleteMemo(memo.id)">
+        <a
+          class="MemoList_Btn"
+          href="#"
+          @click.prevent.stop="emitDeleteMemo(memo.id)"
+        >
           <font-awesome-icon icon="fa-solid fa-trash-can" class="fa-lg" />
         </a>
       </div>
-      <h3>{{ memo.title }}</h3>
-      <p>{{ memo.content }}</p>
+      <h3 class="MemoList_Title">{{ memo.title }}</h3>
+      <p class="MemoList_Content">{{ memo.content }}</p>
       <div class="MemoList_CreateAt">
         {{ formatDate(memo.created_at) }}
       </div>
@@ -55,7 +59,7 @@ export default {
   height: 200px;
   color: black;
   cursor: pointer;
-  h3 {
+  &_Title {
     width: 180px;
     height: 58px;
     overflow: hidden;
@@ -64,7 +68,7 @@ export default {
     font-weight: bold;
     font-size: 1rem;
   }
-  p {
+  &_Content {
     width: 100%;
     height: 100px;
     overflow: hidden;
@@ -85,20 +89,26 @@ export default {
     top: 1rem;
     right: 1rem;
     display: flex;
-    a {
-      display: inline-block;
-      width: 5px;
-      color: black;
-      font-weight: bold;
-      border: 0;
-      border-radius: 3px;
-      padding: 2px;
-      cursor: pointer;
-      &:nth-child(2) {
-        margin-right: 20px;
-        margin-left: 40px;
-      }
+  }
+  &_Btn {
+    display: inline-block;
+    width: 5px;
+    color: black;
+    font-weight: bold;
+    border: 0;
+    border-radius: 3px;
+    padding: 2px;
+    cursor: pointer;
+    &:nth-child(2) {
+      margin-right: 20px;
+      margin-left: 40px;
     }
+  }
+}
+@media screen and (max-width: 400px) {
+  .MemoList {
+    width: 300px;
+    height: 160px;
   }
 }
 </style>

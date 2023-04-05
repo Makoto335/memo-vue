@@ -1,6 +1,3 @@
-// * {
-//   outline: 2px red solid;
-// }
 html {
   box-sizing: border-box;
   -ms-overflow-style: none;
@@ -64,11 +61,6 @@ a {
   padding: 10px 20px;
   cursor: pointer;
   line-height: 1.5rem;
-}
-@mixin box001 {
-  padding: 20px;
-  margin-top: 30px;
-  background-color: #ededed;
 }
 .pagination {
   display: flex;

@@ -7,7 +7,11 @@
           <SignupForm @redirectToMemoRoom="redirectToMemoRoom" />
           <div class="WelcomePage_Text">
             <p class="WelcomePage_ChangeForm">
-              <span @click="showSignUpForm = false">ログイン</span>
+              <span
+                class="WelcomePage_ChangeFormBtn"
+                @click="showSignUpForm = false"
+                >ログイン</span
+              >
             </p>
           </div>
         </div>
@@ -15,7 +19,11 @@
           <LoginForm @redirectToMemoRoom="redirectToMemoRoom" />
           <div class="WelcomePage_Text">
             <p class="WelcomePage_ChangeForm">
-              <span @click="showSignUpForm = true">アカウント登録はこちら</span>
+              <span
+                class="WelcomePage_ChangeFormBtn"
+                @click="showSignUpForm = true"
+                >アカウント登録はこちら</span
+              >
             </p>
           </div>
         </div>
@@ -46,12 +54,6 @@ export default {
 <style scoped lang="scss">
 .WelcomePage {
   margin: 0 auto;
-  span {
-    font-weight: bold;
-    text-decoration: underline;
-    cursor: pointer;
-    color: #166fe5;
-  }
   &_Wrapper {
     width: 600px;
     margin: 20px auto;
@@ -74,6 +76,12 @@ export default {
   &_ChangeForm {
     font-size: 16px;
     margin: 10px;
+  }
+  &_ChangeFormBtn {
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+    color: #166fe5;
   }
 }
 @media screen and (max-width: 600px) {

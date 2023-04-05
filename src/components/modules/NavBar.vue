@@ -2,7 +2,7 @@
   <div class="NavBar">
     <div class="NavBar_Wrapper">
       <div class="error">
-        <p>{{ error }}</p>
+        <p class="NavBar_Error">{{ error }}</p>
       </div>
       <div class="NavBar_User">
         <p>
@@ -129,14 +129,16 @@ export default {
   }
 }
 @media screen and (max-width: 800px) {
+  .NavBar {
+    &_Error {
+      margin: unset;
+    }
+  }
   .error {
     height: 100px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    p {
-      margin: unset;
-    }
   }
 }
 </style>

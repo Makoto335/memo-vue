@@ -1,6 +1,6 @@
 <template>
   <div class="SignupForm">
-    <h2>アカウントを登録</h2>
+    <h2 clas="SignupForm_Title">アカウントを登録</h2>
     <form @submit.prevent="signUp">
       <AvatarUploader
         @imageSelected="imageSelected"
@@ -231,7 +231,7 @@ export default {
   margin: 0 auto;
   padding: 20px;
   box-sizing: border-box;
-  h2 {
+  &_Title {
     text-align: center;
   }
   &_BtnWrapper {

@@ -2,7 +2,12 @@
   <div class="AvatarUploader">
     <img class="AvatarUploader_Avatar" :src="preview" />
     <label class="AvatarUploader_CameraIcon">
-      <input type="file" name="image" @change="selectedImage" />
+      <input
+        class="AvatarUploader_ImageInput"
+        type="file"
+        name="image"
+        @change="selectedImage"
+      />
     </label>
   </div>
   <div class="error AvatarUploader_Error">{{ avatarError }}</div>
@@ -29,7 +34,7 @@ export default {
   height: 200px;
   width: 150px;
   position: relative;
-  input {
+  &_ImageInput {
     display: none;
   }
   &_Avatar {

@@ -1,20 +1,20 @@
 <template>
   <div class="LoginForm">
-    <h2>ログイン</h2>
+    <h2 class="LoginForm_Title">ログイン</h2>
     <form @submit.prevent="login">
-      <div class="input-field">
-        <label for="email">メールアドレス</label>
+      <div class="LoginForm_InputField">
+        <label class="LoginForm_Label" for="email">メールアドレス</label>
         <input
-          id="email"
+          class="LoginForm_Input"
           type="email"
           placeholder="メールアドレス"
           v-model="email"
         />
       </div>
-      <div class="input-field">
-        <label for="password">パスワード</label>
+      <div class="LoginForm_InputField">
+        <label class="LoginForm_Label" for="password">パスワード</label>
         <input
-          id="password"
+          class="LoginForm_Input"
           type="password"
           placeholder="パスワード"
           v-model="password"
@@ -68,26 +68,25 @@ export default {
   padding: 30px;
   box-sizing: border-box;
 
-  h2 {
+  &_Title {
     text-align: center;
   }
-  .input-field {
+  &_InputField {
     margin-bottom: 20px;
-
-    label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: bold;
-    }
-
-    input {
-      font-size: 1rem;
-      display: block;
-      width: 100%;
-      padding: 0.5rem;
-      box-sizing: border-box;
-    }
   }
+  &_Label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  &_Input {
+    font-size: 1rem;
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+    box-sizing: border-box;
+  }
+
   &_BtnWrapper {
     display: flex;
     justify-content: center;
