@@ -113,11 +113,9 @@ export default {
     position: absolute;
     top: 48%;
     left: 50%;
-    display: flex;
-    flex-direction: column;
     transform: translate(-50%, -50%);
     width: 800px;
-    height: 800px;
+    height: 700px;
     padding: 32px;
     box-sizing: border-box;
     background-color: #fff;
@@ -152,7 +150,7 @@ export default {
     padding: 0.5rem;
   }
   &_BtnWrapper {
-    margin: 20px auto 0 auto;
+    margin: 5px auto 0 auto;
     display: flex;
     width: 300px;
     font-size: 1rem;
@@ -175,6 +173,13 @@ export default {
   .EditForm {
     &_Wrapper {
       width: 500px;
+      height: 600px;
+    }
+    form{
+      
+      textarea{
+        height: 300px;
+      }
     }
   }
 }
@@ -182,12 +187,19 @@ export default {
   .EditForm {
     &_Wrapper {
       width: 380px;
+      height: 450px;
     }
     &_Title {
       font-size: 1.5rem;
       display: block;
       width: 100%;
       padding: 0.5rem 0;
+    }
+    form{
+      
+      textarea{
+        height: 200px;
+      }
     }
   }
 }
