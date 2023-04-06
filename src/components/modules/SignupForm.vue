@@ -1,6 +1,6 @@
 <template>
   <div class="SignupForm">
-    <h2 clas="SignupForm_Title">アカウントを登録</h2>
+    <h2 class="SignupForm_Title">アカウントを登録</h2>
     <form @submit.prevent="signUp">
       <AvatarUploader
         @imageSelected="imageSelected"
