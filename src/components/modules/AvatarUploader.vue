@@ -19,10 +19,11 @@ export default {
     preview: String,
     avatarError: String,
   },
+  emits:["selectedImage"],
   methods: {
     selectedImage(e) {
       e.preventDefault();
-      this.$emit("imageSelected", e.target.files[0]);
+      this.$emit("selectedImage", e.target.files[0]);
     },
   },
 };

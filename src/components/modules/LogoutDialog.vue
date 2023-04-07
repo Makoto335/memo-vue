@@ -23,6 +23,7 @@
 
 <script>
 export default {
+  emits: ["closeLogoutDialog", "logout"],
   data() {
     return {
       message: "ログアウトします。よろしいですか？",

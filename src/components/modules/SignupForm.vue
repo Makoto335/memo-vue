@@ -3,7 +3,7 @@
     <h2 class="SignupForm_Title">アカウントを登録</h2>
     <form @submit.prevent="signUp">
       <AvatarUploader
-        @imageSelected="imageSelected"
+        @selectedImage="selectedImage"
         :avatarError="avatarError"
         :preview="preview"
       />
@@ -170,7 +170,7 @@ export default {
         ? (this.passwordConfirmationError = "パスワードが一致していません")
         : (this.passwordConfirmationError = null);
     },
-    imageSelected(file) {
+    selectedImage(file) {
       this.avatar = file;
       this.avatarError = null;
       this.preview = URL.createObjectURL(this.avatar);

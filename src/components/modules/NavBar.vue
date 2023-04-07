@@ -44,6 +44,7 @@ export default {
   props: {
     avatar: String,
   },
+  emits:["reloadUserData"],
   components: { AvatarUpdater, LogoutDialog },
   data() {
     return {

@@ -52,6 +52,7 @@ export default {
     titleToEdit: String,
     contentToEdit: String,
   },
+  emits:["editMemo","closeEditForm"],
   data() {
     return {
       title: this.titleToEdit,

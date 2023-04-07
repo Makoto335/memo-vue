@@ -37,6 +37,7 @@ import axios from "axios";
 import errorHandler from "../../plugins/errorHandler";
 
 export default {
+  emits:["reloadUserData"],
   data() {
     return {
       title: "",
