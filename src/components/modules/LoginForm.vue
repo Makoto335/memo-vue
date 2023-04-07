@@ -37,8 +37,11 @@
 import axios from "axios";
 import setItem from "../../plugins/auth/setItem";
 import errorHandler from "../../plugins/errorHandler";
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/css/index.css";
 
 export default {
+  components:{Loading},
   emits: ["redirectToMemoRoom"],
   data() {
     return {

@@ -44,13 +44,15 @@ import removeItem from "../../plugins/auth/removeItem";
 import AvatarUpdater from "../../components/modules/AvatarUpdater";
 import errorHandler from "@/plugins/errorHandler";
 import LogoutDialog from "./LogoutDialog";
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/css/index.css";
 
 export default {
   props: {
     avatar: String,
   },
   emits: ["reloadUserData"],
-  components: { AvatarUpdater, LogoutDialog },
+  components: { AvatarUpdater, LogoutDialog, Loading },
   data() {
     return {
       name: window.localStorage.getItem("name"),

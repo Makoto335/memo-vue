@@ -55,9 +55,11 @@ import EditForm from "../modules/EditForm";
 import DeleteDialog from "../modules/DeleteDialog";
 import errorHandler from "@/plugins/errorHandler";
 import dayjs from "dayjs";
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/css/index.css";
 
 export default {
-  components: { Navbar, MemoForm, Paginate, EditForm, DeleteDialog, MemoList },
+  components: { Navbar, MemoForm, Paginate, EditForm, DeleteDialog, MemoList, Loading },
   data() {
     return {
       memos: [],

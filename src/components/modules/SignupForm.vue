@@ -86,12 +86,15 @@ import TextInput from "./TextInput.vue";
 import errorHandler from "../../plugins/errorHandler";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 dayjs.extend(customParseFormat);
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/css/index.css";
 
 export default {
   components: {
     AvatarUploader,
     TextInput,
     DateOfBirthSelector,
+    Loading
   },
   emits: ["redirectToMemoRoom"],
   data() {
