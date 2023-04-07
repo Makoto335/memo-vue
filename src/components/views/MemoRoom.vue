@@ -59,7 +59,15 @@ import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/css/index.css";
 
 export default {
-  components: { Navbar, MemoForm, Paginate, EditForm, DeleteDialog, MemoList, Loading },
+  components: {
+    Navbar,
+    MemoForm,
+    Paginate,
+    EditForm,
+    DeleteDialog,
+    MemoList,
+    Loading,
+  },
   data() {
     return {
       memos: [],
@@ -79,7 +87,6 @@ export default {
   methods: {
     async reloadUserData() {
       this.error = null;
-      this.isLoading = true;
       try {
         const res = await axios.get("/api/v1/user", {
           headers: {
@@ -93,8 +100,6 @@ export default {
       } catch (err) {
         errorHandler(err);
         this.error = "正しくデータを取得できませんでした";
-      } finally {
-        this.isLoading = false;
       }
     },
     async editMemo(editedTitle, editedContent) {
