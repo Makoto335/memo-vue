@@ -23,6 +23,7 @@
 
 <script>
 export default {
+  emits: ["closeDeleteDialog", "deleteMemo"],
   data() {
     return {
       message: "メモを削除します。よろしいですか？",

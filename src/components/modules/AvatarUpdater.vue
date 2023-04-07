@@ -40,6 +40,7 @@ export default {
   props: {
     avatarInNav: String,
   },
+  emits: ["closeAvatarUpdater", "reloadUserData"],
   data() {
     return {
       error: "",

@@ -1,8 +1,6 @@
 <template>
   <div v-for="memo in memos" :key="memo.id" class="MemoList">
-    <div
-      @click.prevent.stop="emitEditMemo(memo.id, memo.title, memo.content)"
-    >
+    <div @click.prevent.stop="emitEditMemo(memo.id, memo.title, memo.content)">
       <div class="MemoList_BtnWrapper">
         <a
           class="MemoList_Btn"
@@ -35,6 +33,7 @@ export default {
   props: {
     memos: Array,
   },
+  emits: ["open-delete-dialog", "open-edit-form"],
   methods: {
     formatDate(date) {
       return dayjs(date).format("YYYY-MM-DD HH:mm:ss");

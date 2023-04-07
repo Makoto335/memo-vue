@@ -25,7 +25,7 @@ export default {
     modelValue: String,
     error: String,
   },
-  emits: ["update:modelValue"],
+  emits: ["update:modelValue", "blur", "keyup"],
 };
 </script>
 
