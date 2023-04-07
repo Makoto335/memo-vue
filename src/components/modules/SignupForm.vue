@@ -68,10 +68,17 @@
         </button>
       </div>
     </form>
+    <loading
+      :active="isLoading"
+      :can-cancel="false"
+      :is-full-page="true"
+    ></loading>
   </div>
 </template>
 
 <script>
+import Loading from "vue-loading-overlay";
+import 'vue-loading-overlay/dist/css/index.css';
 import dayjs from "dayjs";
 import axios from "axios";
 import setItem from "../../plugins/auth/setItem";
@@ -83,7 +90,12 @@ import customParseFormat from "dayjs/plugin/customParseFormat";
 dayjs.extend(customParseFormat);
 
 export default {
-  components: { AvatarUploader, TextInput, DateOfBirthSelector },
+  components: {
+    AvatarUploader,
+    TextInput,
+    DateOfBirthSelector,
+    loading: Loading,
+  },
   emits: ["redirectToMemoRoom"],
   data() {
     return {
@@ -101,6 +113,7 @@ export default {
       avatar: null,
       avatarError: null,
       preview: require("../../assets/images/blank-profile-picture_640.png"),
+      isLoading: false,
     };
   },
   computed: {
@@ -196,6 +209,7 @@ export default {
     },
     async signUp() {
       this.error = null;
+      this.isLoading = true;
       let formData = new FormData();
       formData.append("registration[name]", this.name);
       formData.append("registration[email]", this.email);
@@ -219,6 +233,8 @@ export default {
       } catch (err) {
         errorHandler(err);
         this.error = "アカウントを登録できませんでした";
+      } finally {
+        this.isLoading = false;
       }
     },
   },
