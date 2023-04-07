@@ -30,6 +30,11 @@
         <LogoutDialog @closeLogoutDialog="closeLogoutDialog" @logout="logout" />
       </div>
     </div>
+    <loading
+      :active="isLoading"
+      :can-cancel="false"
+      :is-full-page="true"
+    ></loading>
   </div>
 </template>
 
@@ -44,7 +49,7 @@ export default {
   props: {
     avatar: String,
   },
-  emits:["reloadUserData"],
+  emits: ["reloadUserData"],
   components: { AvatarUpdater, LogoutDialog },
   data() {
     return {
@@ -52,6 +57,7 @@ export default {
       showModal: false,
       error: null,
       showLogoutDialog: false,
+      isLoading: false,
     };
   },
   computed: {
@@ -62,6 +68,7 @@ export default {
   methods: {
     async logout() {
       this.error = null;
+      this.isLoading = true;
       try {
         await axios.delete("/api/v1/auth/sign_out", {
           headers: {
@@ -76,6 +83,8 @@ export default {
         errorHandler(err);
         this.error = "ログアウトできませんでした";
         this.closeLogoutDialog();
+      } finally {
+        this.isLoading = false;
       }
     },
     closeAvatarUpdater() {

@@ -29,6 +29,11 @@
       <div class="error">{{ titleError }}</div>
       <div class="error">{{ contentError }}</div>
     </form>
+    <loading
+      :active="isLoading"
+      :can-cancel="false"
+      :is-full-page="true"
+    ></loading>
   </div>
 </template>
 
@@ -37,7 +42,7 @@ import axios from "axios";
 import errorHandler from "../../plugins/errorHandler";
 
 export default {
-  emits:["reloadUserData"],
+  emits: ["reloadUserData"],
   data() {
     return {
       title: "",
@@ -45,6 +50,7 @@ export default {
       content: "",
       contentError: "",
       error: null,
+      isLoading: false,
     };
   },
   computed: {
@@ -72,7 +78,7 @@ export default {
     async handleCreate() {
       try {
         this.error = null;
-
+        this.isLoading = true;
         await axios.post(
           "/api/v1/memos",
           {
@@ -94,6 +100,8 @@ export default {
       } catch (err) {
         errorHandler(err);
         this.error = "メモを保存できませんでした";
+      } finally {
+        this.isLoading = false;
       }
     },
   },

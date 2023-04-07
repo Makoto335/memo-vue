@@ -29,6 +29,11 @@
         <div class="error">{{ error }}</div>
       </form>
     </div>
+    <loading
+      :active="isLoading"
+      :can-cancel="false"
+      :is-full-page="true"
+    ></loading>
   </div>
 </template>
 
@@ -46,6 +51,7 @@ export default {
       error: "",
       avatar: null,
       previewAvatar: this.avatarInNav,
+      isLoading: false,
     };
   },
   methods: {
@@ -78,6 +84,7 @@ export default {
     },
     async updateAvatar() {
       this.error = null;
+      this.isLoading = true;
       let formData = new FormData();
       formData.append("user[avatar]", this.avatar);
       try {
@@ -94,6 +101,8 @@ export default {
       } catch (err) {
         errorHandler(err);
         this.error = "画像を変更できませんでした";
+      } finally {
+        this.isLoading = false;
       }
     },
   },

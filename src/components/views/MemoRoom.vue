@@ -37,6 +37,11 @@
         @deleteMemo="deleteMemo(idToDelete)"
       />
     </div>
+    <loading
+      :active="isLoading"
+      :can-cancel="false"
+      :is-full-page="true"
+    ></loading>
   </div>
 </template>
 
@@ -66,11 +71,13 @@ export default {
       idToDelete: "",
       showDeleteDialog: false,
       avatar: "",
+      isLoading: false,
     };
   },
   methods: {
     async reloadUserData() {
       this.error = null;
+      this.isLoading = true;
       try {
         const res = await axios.get("/api/v1/user", {
           headers: {
@@ -84,10 +91,13 @@ export default {
       } catch (err) {
         errorHandler(err);
         this.error = "正しくデータを取得できませんでした";
+      } finally {
+        this.isLoading = false;
       }
     },
     async editMemo(editedTitle, editedContent) {
       this.error = null;
+      this.isLoading = true;
       try {
         await axios.put(
           `/api/v1//memos/${this.idToEdit}`,
@@ -110,6 +120,7 @@ export default {
       } finally {
         this.closeEditForm();
         this.idToEdit = "";
+        this.isLoading = false;
       }
     },
     openEditForm({ id, title, content }) {
@@ -124,6 +135,7 @@ export default {
     },
     async deleteMemo(id) {
       this.error = null;
+      this.isLoading = true;
       try {
         await axios.delete(`/api/v1/memos/${id}`, {
           headers: {
@@ -140,6 +152,7 @@ export default {
       } finally {
         this.closeDeleteDialog();
         this.idToDelete = "";
+        this.isLoading = false;
       }
     },
     openDeleteDialog(id) {

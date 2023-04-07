@@ -77,8 +77,6 @@
 </template>
 
 <script>
-import Loading from "vue-loading-overlay";
-import 'vue-loading-overlay/dist/css/index.css';
 import dayjs from "dayjs";
 import axios from "axios";
 import setItem from "../../plugins/auth/setItem";
@@ -94,7 +92,6 @@ export default {
     AvatarUploader,
     TextInput,
     DateOfBirthSelector,
-    loading: Loading,
   },
   emits: ["redirectToMemoRoom"],
   data() {

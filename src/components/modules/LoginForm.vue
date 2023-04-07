@@ -25,6 +25,11 @@
         <button class="LoginForm_Btn btn">Login</button>
       </div>
     </form>
+    <loading
+      :active="isLoading"
+      :can-cancel="false"
+      :is-full-page="true"
+    ></loading>
   </div>
 </template>
 
@@ -40,11 +45,13 @@ export default {
       email: "",
       password: "",
       error: null,
+      isLoading: false,
     };
   },
   methods: {
     async login() {
       this.error = null;
+      this.isLoading = true;
       try {
         const res = await axios.post("/api/v1/auth/sign_in", {
           email: this.email,
@@ -55,6 +62,8 @@ export default {
       } catch (err) {
         errorHandler(err);
         this.error = "メールアドレスかパスワードが違います";
+      } finally {
+        this.isLoading = false;
       }
     },
   },

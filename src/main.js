@@ -6,11 +6,13 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faTrashCan, faPencil } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/css/index.css";
 
 axios.defaults.baseURL = process.env.VUE_APP_API_BASE_URL;
 
 library.add(faTrashCan, faPencil);
 createApp(App)
   .use(router)
-  .component("font-awesome-icon", FontAwesomeIcon)
+  .component("font-awesome-icon", FontAwesomeIcon, Loading)
   .mount("#app");
