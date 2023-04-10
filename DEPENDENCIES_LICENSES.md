@@ -3166,6 +3166,10 @@ yarn licenses v1.22.19
 │  ├─ vue-loader@17.0.1
 │  │  ├─ URL: https://github.com/vuejs/vue-loader.git
 │  │  └─ VendorName: Evan You
+│  ├─ vue-loading-overlay@6.0.3
+│  │  ├─ URL: git+https://github.com/ankurk91/vue-loading-overlay.git
+│  │  ├─ VendorName: ankurk91
+│  │  └─ VendorUrl: https://github.com/ankurk91/vue-loading-overlay
 │  ├─ vue-router@4.1.6
 │  │  ├─ URL: git+https://github.com/vuejs/router.git
 │  │  └─ VendorUrl: https://github.com/vuejs/router#readme
@@ -3278,4 +3282,4 @@ yarn licenses v1.22.19
    │  └─ URL: https://github.com/streamich/fs-monkey.git
    └─ memfs@3.4.12
       └─ URL: https://github.com/streamich/memfs.git
-Done in 0.35s.
+Done in 0.37s.
