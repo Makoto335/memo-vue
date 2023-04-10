@@ -26,7 +26,8 @@
           </a>
           <button class="AvatarUpdater_SaveBtn btn">Save</button>
         </div>
-        <div class="error">{{ error }}</div>
+        <div class="error">{{ backendError }}</div>
+        <div class="error">{{ frontendError }}</div>
       </form>
     </div>
     <loading
@@ -51,7 +52,8 @@ export default {
   emits: ["closeAvatarUpdater", "reloadUserData"],
   data() {
     return {
-      error: "",
+      frontendError:"",
+      backendError: "",
       avatar: null,
       previewAvatar: this.avatarInNav,
       isLoading: false,
@@ -78,7 +80,7 @@ export default {
           ".jpg、.gif、.png、.pdfのいずれかのファイルのみ許可されています\n";
       }
       if (errors) {
-        alert(errors);
+        this.frontendError = errors;
         this.avatar = null;
       }
     },
@@ -103,7 +105,7 @@ export default {
         this.onClickCancel();
       } catch (err) {
         errorHandler(err);
-        this.error = "画像を変更できませんでした";
+        this.backendError = "画像を変更できませんでした";
       } finally {
         this.isLoading = false;
       }
@@ -134,7 +136,7 @@ export default {
     flex-direction: column;
     transform: translate(-50%, -50%);
     width: 400px;
-    height: 500px;
+    height: 560px;
     padding: 32px;
     box-sizing: border-box;
     background-color: #fff;
