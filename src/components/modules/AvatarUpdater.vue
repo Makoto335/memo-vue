@@ -61,6 +61,7 @@ export default {
   },
   methods: {
     selectedImage(e) {
+      this.frontendError = "";
       e.preventDefault();
       this.avatar = e.target.files[0];
       this.previewAvatar = URL.createObjectURL(this.avatar);
