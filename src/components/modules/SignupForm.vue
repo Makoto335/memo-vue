@@ -57,6 +57,11 @@
         :error="dateOfBirthError"
         label="生年月日"
       />
+      <TermsAgreement
+        @setAgreementProperty="setAgreementProperty"
+        :error="agreementPropertyError"
+        label="利用規約"
+      />
       <div class="error">{{ error }}</div>
       <div class="SignupForm_BtnWrapper">
         <button
@@ -83,6 +88,7 @@ import setItem from "../../plugins/auth/setItem";
 import DateOfBirthSelector from "./DateOfBirthSelector.vue";
 import AvatarUploader from "./AvatarUploader.vue";
 import TextInput from "./TextInput.vue";
+import TermsAgreement from "./TermsAgreement.vue";
 import errorHandler from "../../plugins/errorHandler";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 dayjs.extend(customParseFormat);
@@ -94,7 +100,8 @@ export default {
     AvatarUploader,
     TextInput,
     DateOfBirthSelector,
-    Loading
+    Loading,
+    TermsAgreement,
   },
   emits: ["redirectToMemoRoom"],
   data() {
@@ -114,6 +121,8 @@ export default {
       avatarError: null,
       preview: require("../../assets/images/blank-profile-picture_640.png"),
       isLoading: false,
+      agreementProperty: false,
+      agreementPropertyError: null,
     };
   },
   computed: {
@@ -128,7 +137,9 @@ export default {
         this.passwordConfirmation &&
         !this.passwordConfirmationError &&
         this.dateOfBirth &&
-        !this.dateOfBirthError
+        !this.dateOfBirthError &&
+        this.agreementProperty &&
+        !this.agreementPropertyError
       );
     },
   },
@@ -145,6 +156,9 @@ export default {
     },
   },
   methods: {
+    setAgreementProperty(value) {
+      this.agreementProperty = value;
+    },
     setDateOfBirth(value) {
       this.dateOfBirth = value;
     },
