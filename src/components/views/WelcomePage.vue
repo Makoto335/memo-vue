@@ -10,7 +10,7 @@
               <span
                 class="WelcomePage_ChangeFormBtn"
                 @click="showSignUpForm = false"
-                >ログイン</span
+                >アカウントをお持ちの方はこちら</span
               >
             </p>
           </div>
@@ -40,7 +40,7 @@ export default {
   components: { SignupForm, LoginForm },
   data() {
     return {
-      showSignUpForm: false,
+      showSignUpForm: true,
     };
   },
   methods: {
